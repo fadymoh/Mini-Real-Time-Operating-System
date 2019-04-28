@@ -1,0 +1,9 @@
+﻿  taskList.cpp
+  task.cpp
+  semaphore.cpp
+  mutex.cpp
+  messageQueue.cpp
+  main.cpp
+  mailbox.cpp
+  Generating Code...
+LINK : fatal error LNK1561: entry point must be defined
