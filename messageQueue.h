@@ -1,6 +1,6 @@
 #ifndef MESSAGEQUEUE_H
 #define MESSAGEQUEUE_H
-#include "common.h"
+#include "OS_CONF.h"
 struct node
 {
 	message* data;

@@ -3,9 +3,9 @@
 
 class message
 {
-public:
+	public:
 
-private:
+	private:
 };
 
 #endif

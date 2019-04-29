@@ -1,6 +1,5 @@
 #ifndef SEMAPHORE_H
 #define SEMAPHORE_H
-#include "common.h"
 class semaphore
 {
 	public:

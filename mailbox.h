@@ -1,7 +1,6 @@
 #ifndef MAILBOX_H
 #define MAILBOX_H
-#include "common.h"
-
+#include "OS_CONF.h"
 class mailBox
 {
 	public:

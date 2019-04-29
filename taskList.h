@@ -1,6 +1,6 @@
 #ifndef TASKLIST_H
 #define TASKLIST_H
-#include "common.h"
+#include "OS_CONF.h"
 class taskList
 {
 	public:
