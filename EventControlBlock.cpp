@@ -42,9 +42,9 @@ __int8 EventControlBlock::EventTaskRdy(void* msg, __int8 msk)
 	prio = (__int8)((y << 3) + x);
 	if ((OSEventTbl[y] &= ~bitx) == 0x00)
 		OSEventGrp &= ~bity;
-	//ptcb = OSTCBPrioTbl[prio]; // not declared yet
+	/*ptcb = OSTCBPrioTbl[prio]; // not declared yet
 	ptcb->OSTCBEventPtr = (EventControlBlock *)0;
-	ptcb->OSTCBMsg = static_cast<message*> (msg);
+	ptcb->OSTCBMsg = static_cast<message*> (msg);*/
 	/*
 		The mask argument contains the apprioriate bit mask
 		to clear the bit in OSTCBStat, which corresponds

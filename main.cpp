@@ -1,22 +1,12 @@
 #include "OS_CONF.h"
 #include <iostream>
 #include <random>
-EventControlBlock* OSEventFreeList = nullptr;
 
-void OS_EventWaitListInit()
-{
-	OSEventFreeList = new EventControlBlock();
-	EventControlBlock* curr = OSEventFreeList;
-	for (__int8 i = 0; i < OS_MAX_EVENTS; ++i)
-	{
-		curr->OSEventPtr = new EventControlBlock();
-		curr = static_cast<EventControlBlock*> (curr->OSEventPtr);
-	}
-}
 int main()
 {
-	OS_EventWaitListInit();
-	EventControlBlock* curr = OSEventFreeList;
+	OS* myRTOS = new OS();
+
+	EventControlBlock* curr = myRTOS->OSEventFreeList;
 
 	int counter = 1;
 	while (curr->OSEventPtr != nullptr)
@@ -28,7 +18,7 @@ int main()
 		curr = static_cast<EventControlBlock*> (curr->OSEventPtr);
 		printf("End initializing ECB #%d:\n", counter++);
 	}
-	curr = OSEventFreeList;
+	curr = myRTOS->OSEventFreeList;
 	counter = 1;
 	while (curr->OSEventPtr != nullptr)
 	{

@@ -4,15 +4,15 @@ taskList::taskList()
 {
 }
 
-void taskList::insert(task *)
+void taskList::insert(TaskControlBlock *)
 {
 }
 
-void taskList::erase(task *)
+void taskList::erase(TaskControlBlock *)
 {
 }
 
-task * taskList::run()
+TaskControlBlock * taskList::run()
 {
 	return nullptr;
 }
