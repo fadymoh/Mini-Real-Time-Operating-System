@@ -53,7 +53,7 @@ void TCB_INIT_FreeList(OS_TCB* head, int n){
 
 
 
-INT8U OS_TCBInit (INT8U prio, OS_STK *ptos){
+INT8 OS_TCBInit (INT8 prio, OS_STK *ptos){
 
   OS_TCB *ptcb;
   OS_ENTER_CRITICAL();
@@ -102,10 +102,10 @@ INT8U OS_TCBInit (INT8U prio, OS_STK *ptos){
 
 
 
-INT8U OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio){
+INT8 OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio){
 
   void *psp;
-  INT8U err;
+  INT8 err;
 
   if (prio > OS_LOWEST_PRIO)
     return (OS_PRIO_INVALID);
@@ -147,7 +147,7 @@ INT8U OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio
 
 
 
-INT8U OSTaskSuspend (INT8U prio){
+INT8 OSTaskSuspend (INT8 prio){
   BOOLEAN self; // MUST DEFINE BOOLEAN
   OS_TCB *ptcb;
 
@@ -195,7 +195,7 @@ INT8U OSTaskSuspend (INT8U prio){
 
 
 
-INT8U OSTaskResume (INT8U prio){
+INT8 OSTaskResume (INT8 prio){
   OS_TCB *ptcb;
 
   if (prio >= OS_LOWEST_PRIO)

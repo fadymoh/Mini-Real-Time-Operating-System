@@ -3,11 +3,11 @@
 #include "OS_CONF.h"
 
 
-EventControlBlock * OSEventFreeList = NULL;
+static struct EventControlBlock * OSEventFreeList = NULL;
 void OS_Init();
 void OS_Start();
 void OS_EventWaitListInit();
-EventControlBlock* OSCreateSemaphore();
+struct EventControlBlock* OSCreateSemaphore();
 void OS_TaskWaitListInit();
 
 #endif

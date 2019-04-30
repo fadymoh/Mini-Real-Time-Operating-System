@@ -28,7 +28,7 @@ void eraseFromWaitingList(EventControlBlock* pevent)
 
 INT8 EventTaskRdy(EventControlBlock* pevent, void* msg, INT8 msk)
 {
-	/*OS_TCB* ptcb;
+	OS_TCB* ptcb;
 	INT8 x;
 	INT8 y;
 	INT8 bitx;
@@ -41,10 +41,10 @@ INT8 EventTaskRdy(EventControlBlock* pevent, void* msg, INT8 msk)
 	bitx = OSMapTbl[x];
 	prio = (INT8)((y << 3) + x);
 	if ((pevent->OSEventTbl[y] &= ~bitx) == 0x00)
-		pevent->OSEventGrp &= ~bity;*/
-	/*ptcb = OSTCBPrioTbl[prio]; // not declared yet
+		pevent->OSEventGrp &= ~bity;
+	ptcb = OSTCBPrioTbl[prio]; // not declared yet
 	ptcb->OSTCBEventPtr = (EventControlBlock *)0;
-	ptcb->OSTCBMsg = static_cast<message*> (msg);*/
+	ptcb->OSTCBMsg = static_cast<message*> (msg);
 	/*
 		The mask argument contains the apprioriate bit mask
 		to clear the bit in OSTCBStat, which corresponds
@@ -57,14 +57,22 @@ INT8 EventTaskRdy(EventControlBlock* pevent, void* msg, INT8 msk)
 		suspended using the Suspending a Task and 
 		Resuming a task functions.
 	*/
-	/*ptcb->OSTCBStat &= ~msk;
+	ptcb->OSTCBStat &= ~msk;
 	if (ptcb->OSTCBStat == OS_STAT_RDY)
 	{
 		OSRdyGrp |= bity;
 		OSRdyTbl[y] |= bitx;
-	}*/
-	//return prio;
-	return 0;
+	}
+	return (prio);
+}
+
+void OS_EventTaskWait(EventControlBlock* pevent)
+{
+	OSTCBCur->OSTCBEventPtr = pevent;
+	if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitxX) == 0x00)
+		OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
+	pevent->OSEventTbl[PSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;
+	pevent->OSEventGrp 					 |= OSTCBCur->OSTCBBitY;
 }
 
 INT8 getHighestPriority(EventControlBlock* pevent)
