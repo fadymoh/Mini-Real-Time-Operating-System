@@ -1,47 +1,47 @@
 #include "EventControlBlock.h"
 
-EventControlBlock::EventControlBlock()
+void OSEventInit(EventControlBlock* pevent)
 {
-	OSEventType = 'm';
-	OSEventGrp = 0;
-	OSEventPtr = nullptr;
+	pevent->OSEventType = 'm';
+	pevent->OSEventGrp = 0;
+	pevent->OSEventPtr = nullptr;
 	for (int i = 0; i < OS_EVENT_TBL_SIZE; ++i)
-		OSEventTbl[i] = 0;
+		pevent->OSEventTbl[i] = 0;
 }
 
-void EventControlBlock::appendToWaitingList(INT8 priority)
+void appendToWaitingList(EventControlBlock* pevent, INT8 priority)
 {
 	printf("Appending task %d to waiting list\n", priority);
-	OSEventGrp |= OSMapTbl[priority >> 3];
-	OSEventTbl[priority >> 3] |= OSMapTbl[priority & 0x07];
+	pevent->OSEventGrp |= OSMapTbl[priority >> 3];
+	pevent->OSEventTbl[priority >> 3] |= OSMapTbl[priority & 0x07];
 	printf("Finished appending task %d to waiting list\n", priority);
 }
 
-void EventControlBlock::eraseFromWaitingList()
+void eraseFromWaitingList(EventControlBlock* pevent)
 {
-	INT8 highestPriority = getHighestPriority();
+	INT8 highestPriority = getHighestPriority(pevent);
 	printf("Erasing task %d to waiting list\n", highestPriority);
-	if ((OSEventTbl[highestPriority >> 3] &= ~OSMapTbl[highestPriority & 0x07]) == 0)
-		OSEventGrp &= ~OSMapTbl[highestPriority >> 3];
+	if ((pevent->OSEventTbl[highestPriority >> 3] &= ~OSMapTbl[highestPriority & 0x07]) == 0)
+		pevent->OSEventGrp &= ~OSMapTbl[highestPriority >> 3];
 	printf("Finished Erasing task %d to waiting list\n", highestPriority);
 }
 
-INT8 EventControlBlock::EventTaskRdy(void* msg, INT8 msk)
+INT8 EventTaskRdy(EventControlBlock* pevent, void* msg, INT8 msk)
 {
-	TaskControlBlock* ptcb;
+	/*OS_TCB* ptcb;
 	INT8 x;
 	INT8 y;
 	INT8 bitx;
 	INT8 bity;
 	INT8 prio;
 
-	y = OSUnMapTbl[OSEventGrp];
+	y = OSUnMapTbl[pevent->OSEventGrp];
 	bity = OSMapTbl[y];
-	x = OSUnMapTbl[OSEventTbl[y]];
+	x = OSUnMapTbl[pevent->OSEventTbl[y]];
 	bitx = OSMapTbl[x];
 	prio = (INT8)((y << 3) + x);
-	if ((OSEventTbl[y] &= ~bitx) == 0x00)
-		OSEventGrp &= ~bity;
+	if ((pevent->OSEventTbl[y] &= ~bitx) == 0x00)
+		pevent->OSEventGrp &= ~bity;*/
 	/*ptcb = OSTCBPrioTbl[prio]; // not declared yet
 	ptcb->OSTCBEventPtr = (EventControlBlock *)0;
 	ptcb->OSTCBMsg = static_cast<message*> (msg);*/
@@ -63,19 +63,15 @@ INT8 EventControlBlock::EventTaskRdy(void* msg, INT8 msk)
 		OSRdyGrp |= bity;
 		OSRdyTbl[y] |= bitx;
 	}*/
-	return prio;
+	//return prio;
+	return 0;
 }
 
-EventControlBlock::~EventControlBlock()
-{
-
-}
-
-INT8 EventControlBlock::getHighestPriority() const
+INT8 getHighestPriority(EventControlBlock* pevent)
 {
 	printf("Getting highest priority task from waiting list\n");
-	INT8 y = OSUnMapTbl[OSEventGrp];
-	INT8 x = OSUnMapTbl[OSEventTbl[y]];
+	INT8 y = OSUnMapTbl[pevent->OSEventGrp];
+	INT8 x = OSUnMapTbl[pevent->OSEventTbl[y]];
 	INT8 prio = (y << 3) + x;
 	printf("Finished getting task %d: This is the highest priority now\n", prio);
 	return prio;

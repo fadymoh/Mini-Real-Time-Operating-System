@@ -10,11 +10,11 @@ struct EventControlBlock
 	INT8 OSEventGrp;	// Group for wait list
 	INT16 OSEventCnt; // when event is a semaphore
 	INT8 OSEventTbl[OS_EVENT_TBL_SIZE];
-};
+} ;
 void OSEventInit(EventControlBlock*);
-void appendToWaitingList(INT8);
-void eraseFromWaitingList();
-INT8 EventTaskRdy(void*, INT8);
-INT8 getHighestPriority();
+void appendToWaitingList(EventControlBlock*,INT8);
+void eraseFromWaitingList(EventControlBlock*);
+INT8 EventTaskRdy(EventControlBlock*, void*, INT8);
+INT8 getHighestPriority(EventControlBlock*);
 
 #endif
