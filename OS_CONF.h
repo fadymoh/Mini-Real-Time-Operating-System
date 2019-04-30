@@ -2,13 +2,17 @@
 #ifndef OS_CONF_H
 #define OS_CONF_H
 typedef unsigned long OS_STK;
-const __int8 maxNameSize = 15;
-const __int8 OS_EVENT_TBL_SIZE = 30;
-const __int8 OS_MAX_EVENTS = 20;
-const __int8 OS_MAX_QS = 10;
-const __int8 OS_MAX_TASKS = 63;
-const __int8 OSMapTbl[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
-const __int8 OSUnMapTbl[16 * 16] = {
+#include <stdint.h>
+typedef unsigned char INT8;
+typedef signed short INT16;
+typedef signed int INT32;
+const INT8 maxNameSize = 15;
+const INT8 OS_EVENT_TBL_SIZE = 30;
+const INT8 OS_MAX_EVENTS = 20;
+const INT8 OS_MAX_QS = 10;
+const INT8 OS_MAX_TASKS = 63;
+const INT8 OSMapTbl[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+const INT8 OSUnMapTbl[16 * 16] = {
 	0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x00 to 0x0F */
 	4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x10 to 0x1F */
 	5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x20 to 0x2F */
@@ -26,14 +30,11 @@ const __int8 OSUnMapTbl[16 * 16] = {
 	5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0xE0 to 0xEF */
 	4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0  /* 0xF0 to 0xFF */
 };
+#include <stdio.h>
+#include <stdlib.h>
 #include "message.h"
 #include "EventControlBlock.h"
 #include "TaskControlBlock.h"
-#include "mailbox.h"
-#include "messageQueue.h"
-#include "mutex.h"
-#include "semaphore.h"
-#include "taskList.h"
 #include "OS.h"
 
 #endif

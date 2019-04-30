@@ -34,6 +34,6 @@ int main()
 	myEvent->appendToWaitingList(40);
 	myEvent->eraseFromWaitingList();
 	myEvent->eraseFromWaitingList();*/
-	system("pause");
+	//system("pause");
 	return 0;
 }

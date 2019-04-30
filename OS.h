@@ -1,19 +1,19 @@
 #ifndef OS_H
 #define OS_H
 #include "OS_CONF.h"
-class OS
+struct TaskControlBlock;
+struct EventControlBlock;
+struct OS
 {
-	public:
-		OS();
-		EventControlBlock * OSEventFreeList = nullptr;
-		__int8 OSTaskCreate(void (*TaskControlBlock)(void *pd), void* , OS_STK*, __int8);
-		~OS();
-	private:
-		TaskControlBlock * OSTaskFreeList = nullptr;
-		void OS_EventWaitListInit();
-		void OS_TaskWaitListInit();
-		__int8 OSTaskCtr;
+	EventControlBlock * OSEventFreeList = NULL;
+	TaskControlBlock * OSTaskFreeList = NULL;
+	INT8 OSTaskCtr;
 };
 
+void OS_Init();
+void OS_Start();
+void OS_EventWaitListInit(EventControlBlock*);
+void OS_TaskWaitListInit();
+INT8 OSTaskCreate(void (*TaskControlBlock)(void *pd), void* , OS_STK*, INT8);
 
 #endif

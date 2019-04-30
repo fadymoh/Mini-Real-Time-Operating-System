@@ -1,31 +1,24 @@
 #include "OS.h"
 
-OS::OS()
-{
-	OSTaskCtr = 0;
-	OS_EventWaitListInit();
-}
-
-__int8 OS::OSTaskCreate(void(*TaskControlBlock)(void *pd), void *pdata, OS_STK *ptos, __int8 prio)
+INT8 OSTaskCreate(void(*TaskControlBlock)(void *pd), void *pdata, OS_STK *ptos, INT8 prio)
 {
 	return 0;
 }
 
-OS::~OS()
-{
-}
 
-void OS::OS_EventWaitListInit()
+void OS_EventWaitListInit(EventControlBlock* OSEventFreeList)
 {
-	OSEventFreeList = new EventControlBlock();
+	OSEventFreeList = (EventControlBlock*)malloc(sizeof (EventControlBlock));
+	OSEventInit(OSEvenFreeList);
 	EventControlBlock* curr = OSEventFreeList;
-	for (__int8 i = 0; i < OS_MAX_EVENTS; ++i)
+	for (INT8 i = 0; i < OS_MAX_EVENTS; ++i)
 	{
-		curr->OSEventPtr = new EventControlBlock();
+		curr->OSEventPtr = (EventControlBlock*)malloc(sizeof (EventControlBlock));
 		curr = static_cast<EventControlBlock*> (curr->OSEventPtr);
+		OSEventInit(curr);
 	}
 }
 
-void OS::OS_TaskWaitListInit()
+void OS_TaskWaitListInit()
 {
 }
