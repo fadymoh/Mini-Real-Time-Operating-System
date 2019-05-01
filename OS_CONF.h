@@ -3,7 +3,7 @@
 #define OS_CONF_H
 typedef unsigned long OS_STK;
 #include <stdint.h>
-typedef unsigned char INT8;
+typedef signed char INT8;
 typedef unsigned char INT8U;
 typedef unsigned short INT16U;
 typedef unsigned int INT32U;
