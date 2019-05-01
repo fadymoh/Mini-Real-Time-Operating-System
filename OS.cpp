@@ -1,20 +1,52 @@
 #include "OS_CONF.h"
 
-void OS_Init()
+
+void OS_ENTER_CRITICAL() {}
+void OS_EXIT_CRITICAL() {}
+OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt) {return ptos;}
+void OSTaskCreateHook() {}
+void OS_TASK_SW(){}
+void OS_Sched() 
 {
-	OS_EventWaitListInit();
-	OS_TaskFreePool(OSTCBFreeList);
+	INT8U y;
+	OS_ENTER_CRITICAL();
+	y = OSUnMapTbl[OSRdyGrp];
+	OSPrioHighRdy = (INT8U) ((y << 3) + OSUnMapTbl[OSRdyTbl[y]]);
+	printf("scheduling\n");
+	if (OSPrioHighRdy != OSPrioCur)
+	{
+		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
+		OS_TASK_SW();
+		/*
+			PUSH R1, R2, R3 and R4 onto the current stack; See F3.6(2)
+			OSTCBCur->OSTCBStkPtr = SP; See F3.6(3)
+			OSTCBCur = OSTCBHighRdy; See F3.7(1)
+			SP = OSTCBHighRdy->OSTCBStkPtr; See F3.7(2)
+			POP R4, R3, R2 and R1 from the new stack; See F3.7(3)
+			Execute a return from interrupt instruction; See F3.7(4)
+		*/
+	}
+	OS_EXIT_CRITICAL();
 }
 
 
-void OS_TaskFreePool(OS_TCB* head){
+void OS_Init()
+{
+	OS_EventWaitListInit();
+	printf("tcbhead before: %d\n",OSTCBFreeList);
+	OS_TaskFreePool();
+	printf("tcbhead after: %d\n",OSTCBFreeList);
+}
 
-  head = (OS_TCB*) malloc(sizeof(OS_TCB));
-  OS_TCB* temp = head;
 
-  for(int i = 1; i < OS_MAX_TASKS; i++){
+void OS_TaskFreePool(){
+
+  OSTCBFreeList = (OS_TCB*) malloc(sizeof(OS_TCB));
+  OS_TCB* temp = OSTCBFreeList;
+
+  for(int i = 0; i < OS_MAX_TASKS; i++){
     temp->OSTCBNext = (OS_TCB*) malloc(sizeof(OS_TCB));
-    temp = temp->OSTCBNext;
+    temp = static_cast<OS_TCB*> (temp->OSTCBNext);
   }
 
 }
@@ -44,4 +76,25 @@ EventControlBlock* OSCreateSemaphore()
 	}
 	return pevent;
 }
-
+void OSStartHighRdy()
+{
+	OSRunning = TRUE;
+	asm volatile( "mov %%rsp, %0;\n\t": "=m" (OSTCBHighRdy->OSTCBStkPtr));
+}
+void OS_Start(void)
+{
+	INT8U y;
+	INT8U x;
+	if (OSRunning == FALSE)
+	{
+		printf("y before: %d\n", y);
+		y = OSUnMapTbl[OSRdyGrp];
+		printf("y after: %d\n", y);
+		x = OSUnMapTbl[OSRdyTbl[y]];
+		OSPrioHighRdy = (INT8U)((y << 3) + x);
+		OSPrioCur = OSPrioHighRdy;
+		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
+		OSTCBCur = OSTCBHighRdy;
+		//OSStartHighRdy();
+	}
+}

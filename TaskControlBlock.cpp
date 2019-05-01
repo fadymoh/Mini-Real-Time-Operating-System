@@ -1,7 +1,18 @@
 #include "OS_CONF.h"
 
 
-
+ struct OS_TCB* OSTCBFreeList = NULL; 
+ struct OS_TCB* OSTCBList = NULL;
+ struct OS_TCB* OSTCBPrioTbl[OS_MAX_TASKS];
+ struct OS_TCB* OSTCBCur = NULL;
+ struct OS_TCB* OSTCBHighRdy = NULL;
+ 
+ BOOLEAN OSRunning ;
+ INT8U OSRdyGrp = 0x00;
+ INT8U OSRdyTbl[8] = {0};
+ INT8U OSPrioCur = 63;
+ INT8U OSPrioHighRdy = 63;
+ INT8U OSTaskCtr = 0;
 /*
 
   Constants:
@@ -46,8 +57,9 @@ INT8U OS_TCBInit (INT8U prio, OS_STK *ptos){
   OS_TCB *ptcb;
   OS_ENTER_CRITICAL();
   ptcb = OSTCBFreeList;
-
   if (ptcb != (OS_TCB *)0) {
+  printf("initializing TCB\n");
+
      OSTCBFreeList = ptcb->OSTCBNext;
      OS_EXIT_CRITICAL();
      ptcb->OSTCBStkPtr  = ptos;
@@ -90,11 +102,10 @@ INT8U OS_TCBInit (INT8U prio, OS_STK *ptos){
 
 
 
-INT8U OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio){
+INT8U OSTaskCreate(void (*mtask)(void *pd), void *pdata, OS_STK *ptos, INT8U prio){
 
   void *psp;
   INT8U err;
-
   if (prio > OS_LOWEST_PRIO)
     return (OS_PRIO_INVALID);
 
@@ -103,18 +114,20 @@ INT8U OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio
 
   if (OSTCBPrioTbl[prio] == (OS_TCB *)0){
     OSTCBPrioTbl[prio] = (OS_TCB *)1;
-
+    
+   
     OS_EXIT_CRITICAL();
 
 
-    psp = (void *)OSTaskStkInit(task, pdata, ptos, 0);
+    psp = (void *)OSTaskStkInit(mtask, pdata, ptos, 0);
     err = OS_TCBInit(prio, (OS_STK*)psp);
-
+    printf("error: %d\n", err);
     if (err == OS_NO_ERR) {
       OS_ENTER_CRITICAL();
       OSTaskCtr++;
       OS_EXIT_CRITICAL();
-
+      printf("creating prio: %d\n", prio);
+     OSTCBPrioTbl[prio]->task = mtask;
       if (OSRunning == TRUE)
         OS_Sched();
 

@@ -1,4 +1,5 @@
 #include "OS_CONF.h"
+struct EventControlBlock * OSEventFreeList = NULL;
 
 void OSEventInit(EventControlBlock* pevent, INT8U type)
 {

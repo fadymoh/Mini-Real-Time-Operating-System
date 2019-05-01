@@ -95,47 +95,41 @@ struct OS_TCB
 		INT8U OSTCBY;
 		INT8U OSTCBBitX;
 		INT8U OSTCBBitY;
-
+		void (*task)(void*);
 };
 struct message
 {
 	char* msg;
 };
-static struct EventControlBlock * OSEventFreeList = NULL;
-static struct OS_TCB* OSTCBFreeList = NULL; 
-static struct OS_TCB* OSTCBList = NULL;
-static struct OS_TCB* OSTCBPrioTbl[OS_MAX_TASKS];
-static struct OS_TCB* OSTCBCur = NULL;
-static struct OS_TCB* OSTCBHighRdy = NULL;
-static INT8U OSRdyGrp = 0x00;
-static INT8U OSRdyTbl[8] = {0};
-static INT8U OSPriorCur = 63;
-static INT8U OSPrioHighRdy = 63;
-static INT8U OSTaskCtr = 0;
-static BOOLEAN OSRunning = FALSE;
-static BOOLEAN OSStatRdy = FALSE;
+extern struct EventControlBlock * OSEventFreeList ;
+extern struct OS_TCB* OSTCBFreeList ; 
+extern struct OS_TCB* OSTCBList ;
+extern struct OS_TCB* OSTCBPrioTbl[OS_MAX_TASKS];
+extern struct OS_TCB* OSTCBCur ;
+extern struct OS_TCB* OSTCBHighRdy ;
+extern INT8U OSRdyGrp ;
+extern INT8U OSRdyTbl[8] ;
+extern INT8U OSPrioCur ;
+extern INT8U OSPrioHighRdy ;
+extern INT8U OSTaskCtr ;
+extern BOOLEAN OSRunning ;
+extern BOOLEAN OSStatRdy ;
 
 enum taskStatus {READY, RUNNING, WAITING};
 
 void OS_Init();
 void OS_Start();
 void OS_EventWaitListInit();
-void OS_TaskFreePool(struct OS_TCB*);
+void OS_TaskFreePool();
 
 struct EventControlBlock* OSCreateSemaphore();
 void OS_TaskWaitListInit();
 
-static void OS_ENTER_CRITICAL() {}
-static void OS_EXIT_CRITICAL() {}
-static OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt) {return ptos;}
-static void OSTaskCreateHook() {}
-static void OS_Sched() {}
-
-
-
-// extern struct OS_TCB* OSTCBPrioTbl[OS_MAX_TASKS];
-// extern struct OS_TCB* OSTCBCur;
-// extern struct OS_TCB* OSTCBFreeList; 
+extern void OS_ENTER_CRITICAL();
+extern void OS_EXIT_CRITICAL();
+extern OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt);
+extern void OSTaskCreateHook();
+extern void OS_Sched();
 
 void TCB_INIT_FreeList(OS_TCB*, int n);
 INT8U OS_TCBInit (INT8U prio, OS_STK *ptos, OS_STK *pbos, INT16U id, INT32U stk_size, void *pext, INT16U opt);
