@@ -12,14 +12,12 @@ int main()
 	for (int i = 0; i < 8; ++i)
 		printf("%d \n", OSRdyTbl[i]);
 	OS_Init();
-	OSTaskCreate(myTask, 0, 0, 10);
-	OSTaskCreate(myTask, 0, 0, 50);
-	OSTaskCreate(myTask, 0, 0, 60);
+	OS_STK Task1Stk[10]; /* stack table for task 1 */
 
+	OSTaskCreate(myTask, (void*)0, &Task1Stk[9], 10);
 	OS_Start();
-	OS_Sched();
-	for (int i = 0; i < 8; ++i)
-		printf("%d \n", OSRdyTbl[i]);
+	//for (int i = 0; i < 8; ++i)
+		//printf("%d \n", OSRdyTbl[i]);
 	/*EventControlBlock* mySemaphore = OSCreateSemaphore();
 	appendToWaitingList(mySemaphore, 10);
 	appendToWaitingList(mySemaphore, 20);

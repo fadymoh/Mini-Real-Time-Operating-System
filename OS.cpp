@@ -3,9 +3,51 @@
 
 void OS_ENTER_CRITICAL() {}
 void OS_EXIT_CRITICAL() {}
-OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt) {return ptos;}
+OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt)
+{
+	INT16U *stk;
+	
+	stk = (INT16U *)ptos;
+	printf("stk pointer: %d\n", stk);
+	*stk-- = (INT16U)0x0202;
+	*stk-- = (INT16U)0xAAAA;
+	*stk-- = (INT16U)0xCCCC;
+	*stk-- = (INT16U)0xDDDD;
+	*stk-- = (INT16U)0xBBBB;
+	*stk-- = (INT16U)0x0000;
+	*stk-- = (INT16U)0x1111;
+	*stk-- = (INT16U)0x2222;
+	*stk-- = (INT16U)0x3333;
+	*stk-- = (INT16U)0x4444;
+	//register int _DS asm("eds");
+	//*stk = _DS;
+	return ((OS_STK *)stk);
+}
 void OSTaskCreateHook() {}
-void OS_TASK_SW(){}
+void OS_TASK_SW(){
+	asm volatile
+	(
+		"pushq %%rbx;\n\t"
+		"pushq %%rbp;\n\t"
+		"pushq %%r12;\n\t"
+		"pushq %%r13;\n\t"
+		"pushq %%r14;\n\t"
+		"pushq %%r15;\n\t"
+
+		"movq %%rsp, %0;\n\t"
+
+		"movq %1, %%rsp;\n\t"
+
+		"popq %%r15;\n\t"
+		"popq %%r14;\n\t"
+		"popq %%r13;\n\t"
+		"popq %%r12;\n\t"
+		"popq %%rbp;\n\t"
+		"popq %%rbx;\n\t"
+		: "=m" (OSTCBCur->OSTCBStkPtr),
+		  "=m" (OSTCBHighRdy->OSTCBStkPtr)
+	);
+}
 void OS_Sched() 
 {
 	INT8U y;
@@ -79,7 +121,7 @@ EventControlBlock* OSCreateSemaphore()
 void OSStartHighRdy()
 {
 	OSRunning = TRUE;
-	asm volatile( "mov %%rsp, %0;\n\t": "=m" (OSTCBHighRdy->OSTCBStkPtr));
+	asm volatile( "mov %%rsp, %0;\n\t": "=m" (OSTCBCur->OSTCBStkPtr));
 }
 void OS_Start(void)
 {
@@ -87,14 +129,16 @@ void OS_Start(void)
 	INT8U x;
 	if (OSRunning == FALSE)
 	{
-		printf("y before: %d\n", y);
 		y = OSUnMapTbl[OSRdyGrp];
-		printf("y after: %d\n", y);
 		x = OSUnMapTbl[OSRdyTbl[y]];
+		printf("OSPrioHighRdy before: %d\n", OSPrioHighRdy);
+
 		OSPrioHighRdy = (INT8U)((y << 3) + x);
+		printf("OSPrioHighRdy after: %d\n", OSPrioHighRdy);
+
 		OSPrioCur = OSPrioHighRdy;
 		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
 		OSTCBCur = OSTCBHighRdy;
-		//OSStartHighRdy();
+		OSStartHighRdy();
 	}
 }

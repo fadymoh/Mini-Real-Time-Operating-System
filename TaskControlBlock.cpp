@@ -127,12 +127,13 @@ INT8U OSTaskCreate(void (*mtask)(void *pd), void *pdata, OS_STK *ptos, INT8U pri
       OSTaskCtr++;
       OS_EXIT_CRITICAL();
       printf("creating prio: %d\n", prio);
-     OSTCBPrioTbl[prio]->task = mtask;
-      if (OSRunning == TRUE)
+      //OSTCBPrioTbl[prio]->task = mtask;
+      if (OSRunning == TRUE){
+        printf("scheduling 2\n");
         OS_Sched();
+      }
 
     }else{
-
       OS_ENTER_CRITICAL();
       OSTCBPrioTbl[prio] = (OS_TCB *)0;
       OS_EXIT_CRITICAL();
