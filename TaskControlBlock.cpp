@@ -1,16 +1,4 @@
-#include "TaskControlBlock.h"
-
-void TCB_INIT_FreeList(OS_TCB* head, int n){
-
-  head = (OS_TCB*) calloc(sizeof(OS_TCB));
-  OS_TCB* temp = head;
-
-  for(int i = 1; i < n; i++){
-    temp->OSTCBNext = OS_TCB*) calloc(sizeof(OS_TCB));
-    temp = temp->OSTCBNext;
-  }
-
-}
+#include "OS_CONF.h"
 
 
 
@@ -34,11 +22,11 @@ void TCB_INIT_FreeList(OS_TCB* head, int n){
 
 
   Data Not Yet Defined:
-    - OSTCBPrioTbl
-    - OSTCBFreeList
-    - OSTCBList
-    - OSRdyGrp
-    - OSRdyTbl
+    - OSTCBPrioTbl (done)
+    - OSTCBFreeList (done)
+    - OSTCBList (done)
+    - OSRdyGrp (done)
+    - OSRdyTbl (done)
 
 
 
@@ -53,7 +41,7 @@ void TCB_INIT_FreeList(OS_TCB* head, int n){
 
 
 
-INT8 OS_TCBInit (INT8 prio, OS_STK *ptos){
+INT8U OS_TCBInit (INT8U prio, OS_STK *ptos){
 
   OS_TCB *ptcb;
   OS_ENTER_CRITICAL();
@@ -72,7 +60,7 @@ INT8 OS_TCBInit (INT8 prio, OS_STK *ptos){
      ptcb->OSTCBX       = prio & 0x07;
      ptcb->OSTCBBitX    = OSMapTbl[ptcb->OSTCBX];
 
-     ptcb->OSTCBEventPtr = (OS_EVENT *)0;
+     ptcb->OSTCBEventPtr = (EventControlBlock *)0;
      ptcb->OSTCBMsg = (void *)0;
 
 
@@ -102,10 +90,10 @@ INT8 OS_TCBInit (INT8 prio, OS_STK *ptos){
 
 
 
-INT8 OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio){
+INT8U OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio){
 
   void *psp;
-  INT8 err;
+  INT8U err;
 
   if (prio > OS_LOWEST_PRIO)
     return (OS_PRIO_INVALID);
@@ -120,7 +108,7 @@ INT8 OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio)
 
 
     psp = (void *)OSTaskStkInit(task, pdata, ptos, 0);
-    err = OS_TCBInit(prio, psp);
+    err = OS_TCBInit(prio, (OS_STK*)psp);
 
     if (err == OS_NO_ERR) {
       OS_ENTER_CRITICAL();

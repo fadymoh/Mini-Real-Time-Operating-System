@@ -1,8 +1,8 @@
-#include "EventControlBlock.h"
+#include "OS_CONF.h"
 
-void OSEventInit(EventControlBlock* pevent)
+void OSEventInit(EventControlBlock* pevent, INT8U type)
 {
-	pevent->OSEventType = 'm';
+	pevent->OSEventType = type;
 	pevent->OSEventGrp = 0;
 	pevent->OSEventPtr = nullptr;
 	for (INT8U i = 0; i < OS_EVENT_TBL_SIZE; ++i)
@@ -69,9 +69,9 @@ INT8U EventTaskRdy(EventControlBlock* pevent, void* msg, INT8U msk)
 void OS_EventTaskWait(EventControlBlock* pevent)
 {
 	OSTCBCur->OSTCBEventPtr = pevent;
-	if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitxX) == 0x00)
+	if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0x00)
 		OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
-	pevent->OSEventTbl[PSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;
+	pevent->OSEventTbl[OSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;
 	pevent->OSEventGrp 					 |= OSTCBCur->OSTCBBitY;
 }
 
