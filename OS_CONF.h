@@ -4,15 +4,18 @@
 typedef unsigned long OS_STK;
 #include <stdint.h>
 typedef unsigned char INT8;
+typedef unsigned char INT8U;
+typedef unsigned short INT16U;
+typedef unsigned int INT32U;
 typedef signed short INT16;
 typedef signed int INT32;
-const INT8 maxNameSize = 15;
-const INT8 OS_EVENT_TBL_SIZE = 30;
-const INT8 OS_MAX_EVENTS = 20;
-const INT8 OS_MAX_QS = 10;
-const INT8 OS_MAX_TASKS = 63;
-const INT8 OSMapTbl[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
-const INT8 OSUnMapTbl[16 * 16] = {
+const INT8U maxNameSize = 15;
+const INT8U OS_EVENT_TBL_SIZE = 30;
+const INT8U OS_MAX_EVENTS = 20;
+const INT8U OS_MAX_QS = 10;
+const INT8U OS_MAX_TASKS = 63;
+const INT8U OSMapTbl[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+const INT8U OSUnMapTbl[16 * 16] = {
 	0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x00 to 0x0F */
 	4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x10 to 0x1F */
 	5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x20 to 0x2F */
