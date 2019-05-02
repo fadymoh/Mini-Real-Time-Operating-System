@@ -97,6 +97,8 @@ struct OS_TCB
 		INT8U OSTCBY;
 		INT8U OSTCBBitX;
 		INT8U OSTCBBitY;
+		void (*functionAddress) (void*);
+		void* returnAddress;
 };
 struct message
 {

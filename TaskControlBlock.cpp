@@ -127,10 +127,14 @@ INT8U OSTaskCreate(void (*mtask)(void *pd), void *pdata, OS_STK *ptos, INT8U pri
       OSTaskCtr++;
       OS_EXIT_CRITICAL();
       printf("creating prio: %d\n", prio);
-      //OSTCBPrioTbl[prio]->task = mtask;
+
+      // calculate the address of the task
+      void (*taskAddress) (void*) = mtask;
+      OSTCBPrioTbl[prio]->returnAddress = (void*)taskAddress;
+
       if (OSRunning == TRUE){
         printf("scheduling 2\n");
-        OS_Sched();
+        // OS_Sched();
       }
 
     }else{
@@ -149,55 +153,8 @@ INT8U OSTaskCreate(void (*mtask)(void *pd), void *pdata, OS_STK *ptos, INT8U pri
 
 
 
-INT8 OSTaskSuspend (INT8 prio){
-  BOOLEAN self; // MUST DEFINE BOOLEAN
-  OS_TCB *ptcb;
 
-
-  // if (prio == OS_IDLE_PRIO)
-  //   return (OS_TASK_SUSPEND_IDLE);
-  //
-
-  if (prio >= OS_LOWEST_PRIO && prio != OS_PRIO_SELF)
-    return (OS_PRIO_INVALID);
-
-
-
-  OS_ENTER_CRITICAL();
-
-  if (prio == OS_PRIO_SELF) {
-    prio = OSTCBCur->OSTCBPrio;
-    self = TRUE;
-  } else if (prio == OSTCBCur->OSTCBPrio) {
-      self = TRUE;
-  }
-  else{
-    self = FALSE;
-  }
-
-  ptcb = OSTCBPrioTbl[prio];
-  if (ptcb == (OS_TCB *)0) {
-    OS_EXIT_CRITICAL();
-    return (OS_TASK_SUSPEND_PRIO);
-  }
-
-
-  if ((OSRdyTbl[ptcb->OSTCBY] &= ~ptcb->OSTCBBitX) == 0x00) {
-     OSRdyGrp &= ~ptcb->OSTCBBitY;
-   }
-
-   ptcb->OSTCBStat |= OS_STAT_SUSPEND;
-   OS_EXIT_CRITICAL();
-   if (self == TRUE) {
-     OS_Sched();
-  }
-
-  return (OS_NO_ERR);
-}
-
-
-
-INT8 OSTaskResume (INT8 prio){
+INT8U OSTaskResume (INT8U prio){
   OS_TCB *ptcb;
 
   if (prio >= OS_LOWEST_PRIO)
@@ -216,7 +173,7 @@ INT8 OSTaskResume (INT8 prio){
       OSRdyGrp |= ptcb->OSTCBBitY;
       OSRdyTbl[ptcb->OSTCBY] |= ptcb->OSTCBBitX;
       OS_EXIT_CRITICAL();
-      OS_Sched();
+      //OS_Sched();
 
     }else{
       OS_EXIT_CRITICAL();

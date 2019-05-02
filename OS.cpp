@@ -32,41 +32,79 @@ OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U o
 	return ((OS_STK *)stk);
 }
 void OSTaskCreateHook() {}
-void OS_TASK_SW(){
-	asm volatile
-	(
-		"pushq %%rbx;\n\t"
-		"pushq %%rbp;\n\t"
+void OS_TASK_SW()
+{
+	asm volatile( 
+		"pushq %%rbx;\n\t" 
+		"pushq %%rbp;\n\t" 
 		"pushq %%r12;\n\t"
 		"pushq %%r13;\n\t"
-		"pushq %%r14;\n\t"
+	  "pushq %%r14;\n\t" 
 		"pushq %%r15;\n\t"
 
 		"movq %%rsp, %0;\n\t"
-
 		"movq %1, %%rsp;\n\t"
 
-		"popq %%r15;\n\t"
-		"popq %%r14;\n\t"
-		"popq %%r13;\n\t"
-		"popq %%r12;\n\t"
-		"popq %%rbp;\n\t"
+		"popq %%r15;\n\t" 
+		"popq %%r14;\n\t" 
+		"popq %%r13;\n\t" 
+		"popq %%r12;\n\t" 
+		"popq %%rbp;\n\t" 
 		"popq %%rbx;\n\t"
-		: "=m" (OSTCBCur->OSTCBStkPtr),
-		  "=m" (OSTCBHighRdy->OSTCBStkPtr)
-	);
+		 : "=m" (OSTCBCur->OSTCBStkPtr),   "=m" (OSTCBHighRdy->OSTCBStkPtr));
+
 }
 void OS_Sched()
 {
+	void* return_address = __builtin_return_address(0);
+	OSTCBCur->returnAddress = return_address;
+
 	INT8U y;
 	OS_ENTER_CRITICAL();
 	y = OSUnMapTbl[OSRdyGrp];
 	OSPrioHighRdy = (INT8U) ((y << 3) + OSUnMapTbl[OSRdyTbl[y]]);
+	printf("Highest Priority: %d\n", OSPrioHighRdy);
 	printf("scheduling\n");
 	if (OSPrioHighRdy != OSPrioCur)
 	{
+		// DO all the pushes
+			asm volatile( 
+		"pushq %%rbx;\n\t" 
+		"pushq %%rbp;\n\t" 
+		"pushq %%r12;\n\t"
+		"pushq %%r13;\n\t"
+	  "pushq %%r14;\n\t" 
+		"pushq %%r15;\n\t"
+
+		"movq %%rsp, %0;\n\t":
+		"=m" (OSTCBCur->OSTCBStkPtr)
+			);
+		// Save the new stack pointer
+
+		OSPrioCur = OSPrioHighRdy;
 		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
-		OS_TASK_SW();
+		OSTCBCur = OSTCBHighRdy;
+
+
+		// Restore stack pointer
+		asm volatile(
+		
+		"movq %0, %%rsp;\n\t"
+
+		"popq %%r15;\n\t" 
+		"popq %%r14;\n\t" 
+		"popq %%r13;\n\t" 
+		"popq %%r12;\n\t" 
+		"popq %%rbp;\n\t" 
+		"popq %%rbx;\n\t":
+		"=m" (OSTCBCur->OSTCBStkPtr));
+		// Do all the pops then jump
+
+		asm volatile(		
+		"mov %0, %%rbp;\n\t"
+		"jmp %%rbp;\n\t": "=m" (OSTCBHighRdy->returnAddress));
+		//OSTCBCur->OSTCBStkPtr = 
+		//OS_TASK_SW();
 		/*
 			PUSH R1, R2, R3 and R4 onto the current stack; See F3.6(2)
 			OSTCBCur->OSTCBStkPtr = SP; See F3.6(3)
@@ -132,17 +170,13 @@ EventControlBlock* OSCreateSemaphore()
 void OSStartHighRdy()
 {
 	OSRunning = TRUE;
-	asm volatile( "mov %%rsp, %0;\n\t": "=m" (OSTCBCur->OSTCBStkPtr));
-	/*asm volatile
-	(
-		"popq %rdx;\n\t"
-		"popq %rdi;\n\t"
-		"popq %rsi;\n\t"
-		"popq %rbp;\n\t"
-		"popq %rsp;\n\t"
-		"popq %rdi;\n\t"
+	printf("Initiating the Operating System!\n");
+	asm volatile(
+		"mov %0, %%rsp;\n\t"
+		"mov %1, %%rbp;\n\t"
+		"jmp %%rbp;\n\t": "=m" (OSTCBHighRdy->OSTCBStkPtr) , "=m" (OSTCBHighRdy->returnAddress)
+	);
 
-	); */
 }
 void OS_Start(void)
 {
@@ -163,3 +197,49 @@ void OS_Start(void)
 		OSStartHighRdy();
 	}
 }
+INT8U OSTaskSuspend (INT8U prio){
+  BOOLEAN self; // MUST DEFINE BOOLEAN
+  OS_TCB *ptcb;
+
+
+  // if (prio == OS_IDLE_PRIO)
+  //   return (OS_TASK_SUSPEND_IDLE);
+  //
+
+  if (prio >= OS_LOWEST_PRIO && prio != OS_PRIO_SELF)
+    return (OS_PRIO_INVALID);
+
+
+
+  OS_ENTER_CRITICAL();
+
+  if (prio == OS_PRIO_SELF) {
+    prio = OSTCBCur->OSTCBPrio;
+    self = TRUE;
+  } else if (prio == OSTCBCur->OSTCBPrio) {
+      self = TRUE;
+  }
+  else{
+    self = FALSE;
+  }
+
+  ptcb = OSTCBPrioTbl[prio];
+  if (ptcb == (OS_TCB *)0) {
+    OS_EXIT_CRITICAL();
+    return (OS_TASK_SUSPEND_PRIO);
+  }
+
+
+  if ((OSRdyTbl[ptcb->OSTCBY] &= ~ptcb->OSTCBBitX) == 0x00) {
+     OSRdyGrp &= ~ptcb->OSTCBBitY;
+   }
+
+   ptcb->OSTCBStat |= OS_STAT_SUSPEND;
+   OS_EXIT_CRITICAL();
+  //  if (self == TRUE) {
+  //    OS_Sched();
+  // }
+
+  return (OS_NO_ERR);
+}
+
