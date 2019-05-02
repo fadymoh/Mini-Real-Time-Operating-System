@@ -8,8 +8,16 @@ OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U o
 	INT16U *stk;
 
 	stk = (INT16U *)ptos;
-	printf("stk pointer: %d\n", stk);
+	printf("stk pointer: %p\n", stk);
+	*stk-- = (INT16U)FP_SEG(pdata);
+	*stk-- = (INT16U)FP_OFF(pdata);
+	*stk-- = (INT16U)FP_SEG(task);
+	*stk-- = (INT16U)FP_OFF(task);
+
 	*stk-- = (INT16U)0x0202;
+	*stk-- = (INT16U)FP_SEG(task);
+	*stk-- = (INT16U)FP_OFF(task);
+
 	*stk-- = (INT16U)0xAAAA;
 	*stk-- = (INT16U)0xCCCC;
 	*stk-- = (INT16U)0xDDDD;
@@ -19,8 +27,8 @@ OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U o
 	*stk-- = (INT16U)0x2222;
 	*stk-- = (INT16U)0x3333;
 	*stk-- = (INT16U)0x4444;
-	//register int _DS asm("eds");
-	//*stk = _DS;
+	register int ds asm("dx");
+	*stk = ds;
 	return ((OS_STK *)stk);
 }
 void OSTaskCreateHook() {}
@@ -74,10 +82,12 @@ void OS_Sched()
 
 void OS_Init()
 {
+	printf("eventHead before: %p\n",OSEventFreeList);
 	OS_EventWaitListInit();
-	printf("tcbhead before: %d\n",OSTCBFreeList);
+	printf("eventHead after: %p\n",OSEventFreeList);
+	printf("tcbhead before: %p\n",OSTCBFreeList);
 	OS_TaskFreePool();
-	printf("tcbhead after: %d\n",OSTCBFreeList);
+	printf("tcbhead after: %p\n",OSTCBFreeList);
 }
 
 
@@ -123,6 +133,16 @@ void OSStartHighRdy()
 {
 	OSRunning = TRUE;
 	asm volatile( "mov %%rsp, %0;\n\t": "=m" (OSTCBCur->OSTCBStkPtr));
+	/*asm volatile
+	(
+		"popq %rdx;\n\t"
+		"popq %rdi;\n\t"
+		"popq %rsi;\n\t"
+		"popq %rbp;\n\t"
+		"popq %rsp;\n\t"
+		"popq %rdi;\n\t"
+
+	); */
 }
 void OS_Start(void)
 {

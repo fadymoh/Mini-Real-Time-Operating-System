@@ -14,6 +14,8 @@ typedef signed int INT32;
 
 #define TRUE 1
 #define FALSE 0
+#define FP_SEG(x) (uint16_t)((uint32_t)(x) >> 16) /* grab 16 most significant bits */ 
+#define FP_OFF(x) (uint16_t)((uint32_t)(x)) /* grab 16 least significant bits */
 
 const INT8U OS_LOWEST_PRIO = 63;
 const INT8U OS_EVENT_TBL_SIZE = 30;
