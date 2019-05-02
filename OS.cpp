@@ -6,7 +6,7 @@ void OS_EXIT_CRITICAL() {}
 OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt)
 {
 	INT16U *stk;
-	
+
 	stk = (INT16U *)ptos;
 	printf("stk pointer: %d\n", stk);
 	*stk-- = (INT16U)0x0202;
@@ -48,7 +48,7 @@ void OS_TASK_SW(){
 		  "=m" (OSTCBHighRdy->OSTCBStkPtr)
 	);
 }
-void OS_Sched() 
+void OS_Sched()
 {
 	INT8U y;
 	OS_ENTER_CRITICAL();
@@ -86,10 +86,11 @@ void OS_TaskFreePool(){
   OSTCBFreeList = (OS_TCB*) malloc(sizeof(OS_TCB));
   OS_TCB* temp = OSTCBFreeList;
 
-  for(int i = 0; i < OS_MAX_TASKS; i++){
+  for(int i = 1; i < OS_MAX_TASKS; i++){
     temp->OSTCBNext = (OS_TCB*) malloc(sizeof(OS_TCB));
     temp = static_cast<OS_TCB*> (temp->OSTCBNext);
   }
+
 
 }
 
@@ -98,7 +99,7 @@ void OS_EventWaitListInit()
 {
 	OSEventFreeList = (EventControlBlock*)malloc(sizeof (EventControlBlock));
 	EventControlBlock* curr = OSEventFreeList;
-	for (INT8 i = 0; i < OS_MAX_EVENTS; ++i)
+	for (INT8 i = 1; i < OS_MAX_EVENTS; ++i)
 	{
 		curr->OSEventPtr = (EventControlBlock*)malloc(sizeof (EventControlBlock));
 		curr = static_cast<EventControlBlock*> (curr->OSEventPtr);

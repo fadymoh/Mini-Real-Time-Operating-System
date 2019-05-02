@@ -5,7 +5,7 @@ void OSEventInit(EventControlBlock* pevent, INT8U type)
 {
 	pevent->OSEventType = type;
 	pevent->OSEventGrp = 0;
-	pevent->OSEventPtr = nullptr;
+	pevent->OSEventPtr = NULL;
 	for (INT8U i = 0; i < OS_EVENT_TBL_SIZE; ++i)
 		pevent->OSEventTbl[i] = 0;
 }
@@ -49,13 +49,13 @@ INT8U EventTaskRdy(EventControlBlock* pevent, void* msg, INT8U msk)
 	/*
 		The mask argument contains the apprioriate bit mask
 		to clear the bit in OSTCBStat, which corresponds
-		to the type of event signaled (OS_STAT_SEM, 
+		to the type of event signaled (OS_STAT_SEM,
 		OS_STAT_MUTEX, OS_STAT_MBOX, or OS_STATE_Q).
-		If the OSTCBSTAT indicated that the task is now ready 
+		If the OSTCBSTAT indicated that the task is now ready
 		to run, OS_EventTaskRdy() inserts this task in the
 		OS ready list. Note that the task might not be ready
-		to run because it could have been explicitly 
-		suspended using the Suspending a Task and 
+		to run because it could have been explicitly
+		suspended using the Suspending a Task and
 		Resuming a task functions.
 	*/
 	ptcb->OSTCBStat &= ~msk;

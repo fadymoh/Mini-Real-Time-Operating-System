@@ -12,9 +12,11 @@ int main()
 	for (int i = 0; i < 8; ++i)
 		printf("%d \n", OSRdyTbl[i]);
 	OS_Init();
-	OS_STK Task1Stk[10]; /* stack table for task 1 */
 
-	OSTaskCreate(myTask, (void*)0, &Task1Stk[9], 10);
+
+	OS_STK Task1Stk[512]; /* stack table for task 1 */
+
+	OSTaskCreate(myTask, (void*)0, &Task1Stk[511], 10);
 	OS_Start();
 	//for (int i = 0; i < 8; ++i)
 		//printf("%d \n", OSRdyTbl[i]);
