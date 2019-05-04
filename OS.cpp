@@ -56,9 +56,7 @@ void OS_TASK_SW()
 }
 void OS_Sched()
 {
-	void* return_address = __builtin_return_address(0);
-	OSTCBCur->returnAddress = return_address;
-
+	
 	INT8U y;
 	OS_ENTER_CRITICAL();
 	y = OSUnMapTbl[OSRdyGrp];
@@ -68,7 +66,9 @@ void OS_Sched()
 	if (OSPrioHighRdy != OSPrioCur)
 	{
 		// DO all the pushes
-			asm volatile( 
+		register int rsp asm("rsp");
+		printf("stk pointer before pushes: %x\n", rsp);
+			asm volatile(
 		"pushq %%rbx;\n\t" 
 		"pushq %%rbp;\n\t" 
 		"pushq %%r12;\n\t"
@@ -79,6 +79,8 @@ void OS_Sched()
 		"movq %%rsp, %0;\n\t":
 		"=m" (OSTCBCur->OSTCBStkPtr)
 			);
+		printf("stk pointer after pushes: %x\n", rsp);
+
 		// Save the new stack pointer
 
 		OSPrioCur = OSPrioHighRdy;
@@ -87,7 +89,7 @@ void OS_Sched()
 
 
 		// Restore stack pointer
-		asm volatile(
+	asm volatile(
 		
 		"movq %0, %%rsp;\n\t"
 
@@ -102,7 +104,8 @@ void OS_Sched()
 
 		asm volatile(		
 		"mov %0, %%rbp;\n\t"
-		"jmp %%rbp;\n\t": "=m" (OSTCBHighRdy->returnAddress));
+		"jmp %%rbp;\n\t"
+		 :"=m" (OSTCBHighRdy->returnAddress));
 		//OSTCBCur->OSTCBStkPtr = 
 		//OS_TASK_SW();
 		/*
@@ -131,11 +134,11 @@ void OS_Init()
 
 void OS_TaskFreePool(){
 
-  OSTCBFreeList = (OS_TCB*) malloc(sizeof(OS_TCB));
+  OSTCBFreeList = (OS_TCB*) calloc(1,sizeof(OS_TCB));
   OS_TCB* temp = OSTCBFreeList;
 
   for(int i = 1; i < OS_MAX_TASKS; i++){
-    temp->OSTCBNext = (OS_TCB*) malloc(sizeof(OS_TCB));
+    temp->OSTCBNext = (OS_TCB*) calloc(1,sizeof(OS_TCB));
     temp = static_cast<OS_TCB*> (temp->OSTCBNext);
   }
 
@@ -145,11 +148,11 @@ void OS_TaskFreePool(){
 
 void OS_EventWaitListInit()
 {
-	OSEventFreeList = (EventControlBlock*)malloc(sizeof (EventControlBlock));
+	OSEventFreeList = (EventControlBlock*)calloc(1, sizeof (EventControlBlock));
 	EventControlBlock* curr = OSEventFreeList;
 	for (INT8 i = 1; i < OS_MAX_EVENTS; ++i)
 	{
-		curr->OSEventPtr = (EventControlBlock*)malloc(sizeof (EventControlBlock));
+		curr->OSEventPtr = (EventControlBlock*)calloc(1, sizeof (EventControlBlock));
 		curr = static_cast<EventControlBlock*> (curr->OSEventPtr);
 	}
 }
@@ -161,11 +164,66 @@ EventControlBlock* OSCreateSemaphore()
 	if (pevent != (EventControlBlock*) 0)
 	{
 		pevent->OSEventType = OS_EVENT_TYPE_SEM;
-		pevent->OSEventCnt = 1;
+		pevent->OSEventCnt = 0;
 		pevent->OSEventPtr = (void*)0;
 		pevent->OSEventGrp = 0x00;
 	}
 	return pevent;
+}
+
+void OS_EventTaskWait(EventControlBlock* pevent)
+{
+	OSTCBCur->OSTCBEventPtr = pevent;
+	if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0x00)
+		OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
+	pevent->OSEventTbl[OSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;
+	pevent->OSEventGrp 					 |= OSTCBCur->OSTCBBitY;
+}
+
+INT8U OSSemPost(EventControlBlock* pevent)
+{
+	if (pevent->OSEventGrp != 0x00)
+	{
+		EventTaskRdy(pevent, (void*) 0, OS_STAT_SEM);
+		OS_Sched();
+		return OS_NO_ERR;
+	}
+	if(pevent->OSEventCnt < 65535) // do not overflow
+	{
+		pevent->OSEventCnt++;
+		return OS_NO_ERR;
+	}
+	return OS_SEM_OVERFLOW;
+}
+void OSSemPend(EventControlBlock* pevent, INT8U* err)
+{
+	void* return_address = __builtin_return_address(0);
+	OSTCBCur->returnAddress = return_address;
+
+	if (pevent == (EventControlBlock*) 0)
+	{
+		*err = OS_ERR_PEVENT_NULL;
+		return;
+	}
+	if (pevent->OSEventType != OS_EVENT_TYPE_SEM)
+	{
+		*err = OS_ERR_EVENT_TYPE;
+		return;
+	}
+	if (pevent->OSEventCnt > 0)
+	{
+		pevent->OSEventCnt--;
+		*err = OS_NO_ERR;
+		return;
+	}
+	OSTCBCur->OSTCBStat |= OS_STAT_SEM;
+	OS_EventTaskWait(pevent);
+	
+	OS_Sched();
+
+	OSTCBCur->OSTCBEventPtr = (EventControlBlock *)0;
+	*err = OS_NO_ERR;
+	printf("came here!\n");
 }
 void OSStartHighRdy()
 {
@@ -176,7 +234,6 @@ void OSStartHighRdy()
 		"mov %1, %%rbp;\n\t"
 		"jmp %%rbp;\n\t": "=m" (OSTCBHighRdy->OSTCBStkPtr) , "=m" (OSTCBHighRdy->returnAddress)
 	);
-
 }
 void OS_Start(void)
 {
@@ -197,6 +254,7 @@ void OS_Start(void)
 		OSStartHighRdy();
 	}
 }
+
 INT8U OSTaskSuspend (INT8U prio){
   BOOLEAN self; // MUST DEFINE BOOLEAN
   OS_TCB *ptcb;

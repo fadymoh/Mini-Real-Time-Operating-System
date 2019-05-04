@@ -67,14 +67,7 @@ INT8U EventTaskRdy(EventControlBlock* pevent, void* msg, INT8U msk)
 	return (prio);
 }
 
-void OS_EventTaskWait(EventControlBlock* pevent)
-{
-	OSTCBCur->OSTCBEventPtr = pevent;
-	if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0x00)
-		OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
-	pevent->OSEventTbl[OSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;
-	pevent->OSEventGrp 					 |= OSTCBCur->OSTCBBitY;
-}
+
 
 INT8U getHighestPriority(EventControlBlock* pevent)
 {

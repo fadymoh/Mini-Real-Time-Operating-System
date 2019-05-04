@@ -29,10 +29,14 @@ const INT8U OS_PRIO_SELF = 0;
 const INT8U OS_IDLE_PRIO = 1;
 
 const INT8U OS_STAT_RDY = 0;
+const INT8U OS_STAT_SEM = 10;
 
 const INT8U OS_NO_ERR =  0;
 const INT8U OS_NO_MORE_TCB = 1; 
 const INT8U OS_PRIO_INVALID =  2;
+const INT8U OS_ERR_PEVENT_NULL = 3;
+const INT8U OS_ERR_EVENT_TYPE = 4;
+const INT8U OS_SEM_OVERFLOW = 5;
 
 const INT8U OS_TASK_SUSPEND_IDLE = 2;
 const INT8U OS_STAT_SUSPEND = 3;
@@ -133,6 +137,8 @@ extern void OS_EXIT_CRITICAL();
 extern OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt);
 extern void OSTaskCreateHook();
 extern void OS_Sched();
+extern void OSSemPend(EventControlBlock* pevent, INT8U* err);
+extern INT8U OSSemPost(EventControlBlock* pevent);
 
 void TCB_INIT_FreeList(OS_TCB*, int n);
 INT8U OS_TCBInit (INT8U prio, OS_STK *ptos, OS_STK *pbos, INT16U id, INT32U stk_size, void *pext, INT16U opt);
