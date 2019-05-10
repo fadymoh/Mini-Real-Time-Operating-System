@@ -32,15 +32,30 @@ void printString(const char * str){
     ) ;
 }
 
+void printInteger(int x){
+	register int x10 asm("x10");
+	register int x17 asm("x17");
+	x17 = 1;
+	x10 = x;
+	 asm volatile(
+        "ECALL\n\t"
+    ) ;
+}
+
 void myTaskOther(void* pdata){
 	//printf("entered task2\n");
 	printString(s1);
 
 
 	int fx = 0;
-	for(int ll= 0;ll < 20; ll++)
+	for(int ll= 0;ll < 20; ll++){
+		printInteger(ll);
 		fx += ll;
-
+	}
+		
+	printString((const char*)"Sum in task2: ");
+	printInteger(fx);
+	printString("\n");
 
 	printString(s2);
 
@@ -56,19 +71,24 @@ void myTask(void* pdata)
 	printString(s3);
 
 	//printf("Entered first task\n");
-	for(int i= 0;i < 20; i++)
+	for(int i= 0;i < 20; i++){
 		if(i == 10) 
 		{
 			printString(s4);
 
 			OSSemPend(mySemaphore, err);
 			printString(s5);
-
+			printString((const char*) "returned from OSSemPend ");
+			printInteger(i);
+			printString("\n");
 			// if (err == OS_NO_ERR)
 			// 	printf("acquired with no error\n");
 			// else
 			// 	printf("got an error number: %d\n", err);			
 		}
+		printInteger(i);
+
+	}
 
 	printString(s6);
 

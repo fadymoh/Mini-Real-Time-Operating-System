@@ -838,7 +838,7 @@ void ECALL()
 }
 void printInteger()
 {
-    cout << dec << regs[10] << endl;
+    out << dec << regs[10] << endl;
 }
 void printString()
 {
