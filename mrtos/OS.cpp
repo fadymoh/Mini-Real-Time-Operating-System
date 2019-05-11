@@ -81,33 +81,33 @@ void OS_Sched()
 	OSPrioHighRdy = (INT8U) ((y << 3) + OSUnMapTbl[OSRdyTbl[y]]);
 	//printf("Highest Priority: %d\n", OSPrioHighRdy);
 	//printf("scheduling\n");
-	if (OSPrioHighRdy != OSPrioCur)
+	if (1)
 	{
 		// Do all the pushes for the current task
 		register int rsp asm("sp");
-		INT32U *stk;
-		stk = (INT32U *) rsp;
-		stk--;
-		*stk = (INT32U) OSTCBCur->returnAddress;
+		// INT32U *stk;
+		// stk = (INT32U *) rsp;
+		// stk--;
+		// *stk = (INT32U) OSTCBCur->returnAddress;
 		
-		asm volatile(
-			"addi sp, sp, -52;\n\t"
-			"sw x8, 44(sp);\n\t"
-			"sw x9, 40(sp);\n\t"
-			"sw x18, 36(sp);\n\t"
-			"sw x19, 32(sp);\n\t"
-			"sw x20, 28(sp);\n\t"
-			"sw x21, 24(sp);\n\t"
-			"sw x22, 20(sp);\n\t"
-			"sw x23, 16(sp);\n\t"
-			"sw x24, 12(sp);\n\t"
-			"sw x25, 8(sp);\n\t"
-			"sw x26, 4(sp);\n\t"
-			"sw x27, 0(sp);\n\t"
-		);
+		// asm volatile(
+		// 	"addi sp, sp, -52;\n\t"
+		// 	"sw x8, 44(sp);\n\t"
+		// 	"sw x9, 40(sp);\n\t"
+		// 	"sw x18, 36(sp);\n\t"
+		// 	"sw x19, 32(sp);\n\t"
+		// 	"sw x20, 28(sp);\n\t"
+		// 	"sw x21, 24(sp);\n\t"
+		// 	"sw x22, 20(sp);\n\t"
+		// 	"sw x23, 16(sp);\n\t"
+		// 	"sw x24, 12(sp);\n\t"
+		// 	"sw x25, 8(sp);\n\t"
+		// 	"sw x26, 4(sp);\n\t"
+		// 	"sw x27, 0(sp);\n\t"
+		// );
 
-		// save new stack pointer
-		OSTCBCur->OSTCBStkPtr = (OS_STK*)rsp;
+		// // save new stack pointer
+		// OSTCBCur->OSTCBStkPtr = (OS_STK*)rsp;
 
 
 		// Switch to new highest priority task
@@ -136,9 +136,17 @@ void OS_Sched()
 			"lw x26, 4(sp);\n\t"
 			"lw x27, 0(sp);\n\t"
 			"addi sp, sp, 52;\n\t"
-			"jalr x0, x28, 0 ;\n\t"
 		);
 
+
+		register int x28 asm("x28");
+		x28 = (int)OSTCBCur->returnAddress;
+		asm volatile(
+			 "jalr x0, x28, 0 ;\n\t"
+		);
+
+
+		
 
 
 
@@ -289,11 +297,36 @@ INT8U OSSemPost(EventControlBlock* pevent)
 void OSSemPend(EventControlBlock* pevent, INT8U* err)
 {
 
-	//void* return_address = __builtin_return_address(0);
-	//OSTCBCur->returnAddress = return_address;
 	
 	register int ra asm("x1");
 	OSTCBCur->returnAddress = (void *)ra;
+
+	// register int rsp asm("sp");
+	// INT32U *stk;
+	// stk = (INT32U *) rsp;
+	// stk--;
+	// *stk = (INT32U) OSTCBCur->returnAddress;
+		
+	// 	asm volatile(
+	// 		"addi sp, sp, -52;\n\t"
+	// 		"sw x8, 44(sp);\n\t"
+	// 		"sw x9, 40(sp);\n\t"
+	// 		"sw x18, 36(sp);\n\t"
+	// 		"sw x19, 32(sp);\n\t"
+	// 		"sw x20, 28(sp);\n\t"
+	// 		"sw x21, 24(sp);\n\t"
+	// 		"sw x22, 20(sp);\n\t"
+	// 		"sw x23, 16(sp);\n\t"
+	// 		"sw x24, 12(sp);\n\t"
+	// 		"sw x25, 8(sp);\n\t"
+	// 		"sw x26, 4(sp);\n\t"
+	// 		"sw x27, 0(sp);\n\t"
+	// 	);
+
+		// save new stack pointer
+		// OSTCBCur->OSTCBStkPtr = (OS_STK*)rsp;
+
+
 
 	if (pevent == (EventControlBlock*) 0)
 	{

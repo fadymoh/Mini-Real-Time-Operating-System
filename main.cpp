@@ -95,6 +95,8 @@ void printInteger();
 void printString();
 void readInteger();
 void terminateExecution();
+void save_context();
+
 
 ofstream out;
 
@@ -128,8 +130,12 @@ int main(int argc, char* argv[]) {
             // Last stack pointer is at: 0x013fff48
             // NEW PC (158) is saved at 0x013fff78
             // should have ra= 158
-            if(pc == 0x484){
+            if(pc == 0x1b4){
                 int ll = 3;
+            }
+            
+            if(pc == 0x1bc){
+                int ll =4;
             }
         }
         
@@ -829,12 +835,44 @@ void ECALL()
         case 5:
             readInteger();
             break;
+        case 7:
+            save_context();
+            break;
         case 10:
             terminateExecution();
             break;
         default:
             cout << "\tUnknown Environment Instruction" << endl;
     }
+}
+
+void save_context(){
+    unsigned int address = (unsigned int)regs[10];
+    
+    instDecExec(0xfcc10113);
+    instDecExec(0x02812623);
+    instDecExec(0x02912423);
+    instDecExec(0x03212223);
+    instDecExec(0x03312023);
+    instDecExec(0x01412e23);
+    instDecExec(0x01512c23);
+    instDecExec(0x01612a23);
+    instDecExec(0x01712823);
+    instDecExec(0x01812623);
+    instDecExec(0x01912423);
+    instDecExec(0x01a12223);
+    instDecExec(0x01b12023);
+    
+    
+    memory[address] = regs[2] & 0xFF;
+    memory[address + 1] = (regs[2] >> 8) & 0xFF;
+    memory[address + 2] = (regs[2] >> 16) & 0xFF;
+    memory[address + 3] = (regs[2] >> 24) & 0xFF;
+    
+    
+    regs[0] = 0;
+    
+
 }
 void printInteger()
 {

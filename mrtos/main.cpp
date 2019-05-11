@@ -76,6 +76,14 @@ void myTask(void* pdata)
 		{
 			printString(s4);
 
+			register int x10 asm("x10");
+			register int x17 asm("x17");
+			x17 = 7;
+			x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
+			asm volatile(
+				"ECALL\n\t"
+			) ;
+
 			OSSemPend(mySemaphore, err);
 			printString(s5);
 			printString((const char*) "returned from OSSemPend ");

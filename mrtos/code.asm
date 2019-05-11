@@ -7,7 +7,7 @@ Disassembly of section .text:
 00000000 <_start>:
        0:	01400137          	lui	sp,0x1400
        4:	ffc10113          	addi	sp,sp,-4 # 13ffffc <_fstack>
-       8:	240000ef          	jal	ra,248 <main>
+       8:	254000ef          	jal	ra,25c <main>
 
 0000000c <loop>:
        c:	00a00893          	li	a7,10
@@ -48,7 +48,7 @@ Disassembly of section .text:
       80:	03010413          	addi	s0,sp,48
       84:	fca42e23          	sw	a0,-36(s0)
       88:	000027b7          	lui	a5,0x2
-      8c:	3187a783          	lw	a5,792(a5) # 2318 <s1>
+      8c:	2b87a783          	lw	a5,696(a5) # 22b8 <s1>
       90:	00078513          	mv	a0,a5
       94:	00000097          	auipc	ra,0x0
       98:	f84080e7          	jalr	-124(ra) # 18 <_Z11printStringPKc>
@@ -69,26 +69,26 @@ Disassembly of section .text:
       d4:	fef42423          	sw	a5,-24(s0)
       d8:	fcdff06f          	j	a4 <_Z11myTaskOtherPv+0x30>
       dc:	000027b7          	lui	a5,0x2
-      e0:	8e878513          	addi	a0,a5,-1816 # 18e8 <_ZL10OSUnMapTbl+0x170>
+      e0:	88878513          	addi	a0,a5,-1912 # 1888 <_ZL10OSUnMapTbl+0x170>
       e4:	00000097          	auipc	ra,0x0
       e8:	f34080e7          	jalr	-204(ra) # 18 <_Z11printStringPKc>
       ec:	fec42503          	lw	a0,-20(s0)
       f0:	00000097          	auipc	ra,0x0
       f4:	f58080e7          	jalr	-168(ra) # 48 <_Z12printIntegeri>
       f8:	000027b7          	lui	a5,0x2
-      fc:	8f878513          	addi	a0,a5,-1800 # 18f8 <_ZL10OSUnMapTbl+0x180>
+      fc:	89878513          	addi	a0,a5,-1896 # 1898 <_ZL10OSUnMapTbl+0x180>
      100:	00000097          	auipc	ra,0x0
      104:	f18080e7          	jalr	-232(ra) # 18 <_Z11printStringPKc>
      108:	000027b7          	lui	a5,0x2
-     10c:	31c7a783          	lw	a5,796(a5) # 231c <s2>
+     10c:	2bc7a783          	lw	a5,700(a5) # 22bc <s2>
      110:	00078513          	mv	a0,a5
      114:	00000097          	auipc	ra,0x0
      118:	f04080e7          	jalr	-252(ra) # 18 <_Z11printStringPKc>
      11c:	000027b7          	lui	a5,0x2
-     120:	3707a783          	lw	a5,880(a5) # 2370 <_ZL11mySemaphore>
+     120:	3107a783          	lw	a5,784(a5) # 2310 <_ZL11mySemaphore>
      124:	00078513          	mv	a0,a5
      128:	00001097          	auipc	ra,0x1
-     12c:	864080e7          	jalr	-1948(ra) # 98c <_Z9OSSemPostP17EventControlBlock>
+     12c:	804080e7          	jalr	-2044(ra) # 92c <_Z9OSSemPostP17EventControlBlock>
      130:	00000013          	nop
      134:	02c12083          	lw	ra,44(sp)
      138:	02812403          	lw	s0,40(sp)
@@ -102,1468 +102,1444 @@ Disassembly of section .text:
      150:	03010413          	addi	s0,sp,48
      154:	fca42e23          	sw	a0,-36(s0)
      158:	000027b7          	lui	a5,0x2
-     15c:	3207a783          	lw	a5,800(a5) # 2320 <s3>
+     15c:	2c07a783          	lw	a5,704(a5) # 22c0 <s3>
      160:	00078513          	mv	a0,a5
      164:	00000097          	auipc	ra,0x0
      168:	eb4080e7          	jalr	-332(ra) # 18 <_Z11printStringPKc>
      16c:	fe042623          	sw	zero,-20(s0)
      170:	fec42703          	lw	a4,-20(s0)
      174:	01300793          	li	a5,19
-     178:	0ae7c063          	blt	a5,a4,218 <_Z6myTaskPv+0xd4>
+     178:	0ae7ca63          	blt	a5,a4,22c <_Z6myTaskPv+0xe8>
      17c:	fec42703          	lw	a4,-20(s0)
      180:	00a00793          	li	a5,10
-     184:	06f71c63          	bne	a4,a5,1fc <_Z6myTaskPv+0xb8>
+     184:	08f71663          	bne	a4,a5,210 <_Z6myTaskPv+0xcc>
      188:	000027b7          	lui	a5,0x2
-     18c:	3247a783          	lw	a5,804(a5) # 2324 <s4>
+     18c:	2c47a783          	lw	a5,708(a5) # 22c4 <s4>
      190:	00078513          	mv	a0,a5
      194:	00000097          	auipc	ra,0x0
      198:	e84080e7          	jalr	-380(ra) # 18 <_Z11printStringPKc>
-     19c:	000027b7          	lui	a5,0x2
-     1a0:	3707a703          	lw	a4,880(a5) # 2370 <_ZL11mySemaphore>
-     1a4:	000027b7          	lui	a5,0x2
-     1a8:	3387a783          	lw	a5,824(a5) # 2338 <err>
-     1ac:	00078593          	mv	a1,a5
-     1b0:	00070513          	mv	a0,a4
-     1b4:	00001097          	auipc	ra,0x1
-     1b8:	86c080e7          	jalr	-1940(ra) # a20 <_Z9OSSemPendP17EventControlBlockPh>
-     1bc:	000027b7          	lui	a5,0x2
-     1c0:	3287a783          	lw	a5,808(a5) # 2328 <s5>
-     1c4:	00078513          	mv	a0,a5
+     19c:	00700893          	li	a7,7
+     1a0:	000027b7          	lui	a5,0x2
+     1a4:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     1a8:	00078513          	mv	a0,a5
+     1ac:	00000073          	ecall
+     1b0:	000027b7          	lui	a5,0x2
+     1b4:	3107a703          	lw	a4,784(a5) # 2310 <_ZL11mySemaphore>
+     1b8:	000027b7          	lui	a5,0x2
+     1bc:	2d87a783          	lw	a5,728(a5) # 22d8 <err>
+     1c0:	00078593          	mv	a1,a5
+     1c4:	00070513          	mv	a0,a4
      1c8:	00000097          	auipc	ra,0x0
-     1cc:	e50080e7          	jalr	-432(ra) # 18 <_Z11printStringPKc>
+     1cc:	7f8080e7          	jalr	2040(ra) # 9c0 <_Z9OSSemPendP17EventControlBlockPh>
      1d0:	000027b7          	lui	a5,0x2
-     1d4:	8fc78513          	addi	a0,a5,-1796 # 18fc <_ZL10OSUnMapTbl+0x184>
-     1d8:	00000097          	auipc	ra,0x0
-     1dc:	e40080e7          	jalr	-448(ra) # 18 <_Z11printStringPKc>
-     1e0:	fec42503          	lw	a0,-20(s0)
-     1e4:	00000097          	auipc	ra,0x0
-     1e8:	e64080e7          	jalr	-412(ra) # 48 <_Z12printIntegeri>
-     1ec:	000027b7          	lui	a5,0x2
-     1f0:	8f878513          	addi	a0,a5,-1800 # 18f8 <_ZL10OSUnMapTbl+0x180>
-     1f4:	00000097          	auipc	ra,0x0
-     1f8:	e24080e7          	jalr	-476(ra) # 18 <_Z11printStringPKc>
-     1fc:	fec42503          	lw	a0,-20(s0)
-     200:	00000097          	auipc	ra,0x0
-     204:	e48080e7          	jalr	-440(ra) # 48 <_Z12printIntegeri>
-     208:	fec42783          	lw	a5,-20(s0)
-     20c:	00178793          	addi	a5,a5,1
-     210:	fef42623          	sw	a5,-20(s0)
-     214:	f5dff06f          	j	170 <_Z6myTaskPv+0x2c>
-     218:	000027b7          	lui	a5,0x2
-     21c:	32c7a783          	lw	a5,812(a5) # 232c <s6>
-     220:	00078513          	mv	a0,a5
-     224:	00000097          	auipc	ra,0x0
-     228:	df4080e7          	jalr	-524(ra) # 18 <_Z11printStringPKc>
-     22c:	00a00893          	li	a7,10
-     230:	00000073          	ecall
-     234:	00000013          	nop
-     238:	02c12083          	lw	ra,44(sp)
-     23c:	02812403          	lw	s0,40(sp)
-     240:	03010113          	addi	sp,sp,48
-     244:	00008067          	ret
+     1d4:	2c87a783          	lw	a5,712(a5) # 22c8 <s5>
+     1d8:	00078513          	mv	a0,a5
+     1dc:	00000097          	auipc	ra,0x0
+     1e0:	e3c080e7          	jalr	-452(ra) # 18 <_Z11printStringPKc>
+     1e4:	000027b7          	lui	a5,0x2
+     1e8:	89c78513          	addi	a0,a5,-1892 # 189c <_ZL10OSUnMapTbl+0x184>
+     1ec:	00000097          	auipc	ra,0x0
+     1f0:	e2c080e7          	jalr	-468(ra) # 18 <_Z11printStringPKc>
+     1f4:	fec42503          	lw	a0,-20(s0)
+     1f8:	00000097          	auipc	ra,0x0
+     1fc:	e50080e7          	jalr	-432(ra) # 48 <_Z12printIntegeri>
+     200:	000027b7          	lui	a5,0x2
+     204:	89878513          	addi	a0,a5,-1896 # 1898 <_ZL10OSUnMapTbl+0x180>
+     208:	00000097          	auipc	ra,0x0
+     20c:	e10080e7          	jalr	-496(ra) # 18 <_Z11printStringPKc>
+     210:	fec42503          	lw	a0,-20(s0)
+     214:	00000097          	auipc	ra,0x0
+     218:	e34080e7          	jalr	-460(ra) # 48 <_Z12printIntegeri>
+     21c:	fec42783          	lw	a5,-20(s0)
+     220:	00178793          	addi	a5,a5,1
+     224:	fef42623          	sw	a5,-20(s0)
+     228:	f49ff06f          	j	170 <_Z6myTaskPv+0x2c>
+     22c:	000027b7          	lui	a5,0x2
+     230:	2cc7a783          	lw	a5,716(a5) # 22cc <s6>
+     234:	00078513          	mv	a0,a5
+     238:	00000097          	auipc	ra,0x0
+     23c:	de0080e7          	jalr	-544(ra) # 18 <_Z11printStringPKc>
+     240:	00a00893          	li	a7,10
+     244:	00000073          	ecall
+     248:	00000013          	nop
+     24c:	02c12083          	lw	ra,44(sp)
+     250:	02812403          	lw	s0,40(sp)
+     254:	03010113          	addi	sp,sp,48
+     258:	00008067          	ret
 
-00000248 <main>:
-     248:	81010113          	addi	sp,sp,-2032
-     24c:	7e112623          	sw	ra,2028(sp)
-     250:	7e812423          	sw	s0,2024(sp)
-     254:	7f010413          	addi	s0,sp,2032
-     258:	fe010113          	addi	sp,sp,-32
-     25c:	00000097          	auipc	ra,0x0
-     260:	3dc080e7          	jalr	988(ra) # 638 <_Z7OS_Initv>
-     264:	000027b7          	lui	a5,0x2
-     268:	91878513          	addi	a0,a5,-1768 # 1918 <_ZL10OSUnMapTbl+0x1a0>
-     26c:	00000097          	auipc	ra,0x0
-     270:	dac080e7          	jalr	-596(ra) # 18 <_Z11printStringPKc>
-     274:	bf040793          	addi	a5,s0,-1040
-     278:	3fc78793          	addi	a5,a5,1020
-     27c:	00a00693          	li	a3,10
-     280:	00078613          	mv	a2,a5
-     284:	00000593          	li	a1,0
-     288:	000007b7          	lui	a5,0x0
-     28c:	14478513          	addi	a0,a5,324 # 144 <_Z6myTaskPv>
-     290:	00001097          	auipc	ra,0x1
-     294:	228080e7          	jalr	552(ra) # 14b8 <_Z12OSTaskCreatePFvPvES_Pmh>
-     298:	fffff7b7          	lui	a5,0xfffff
-     29c:	7f078793          	addi	a5,a5,2032 # fffff7f0 <_fstack+0xfebff7f4>
-     2a0:	00f407b3          	add	a5,s0,a5
-     2a4:	3fc78793          	addi	a5,a5,1020
-     2a8:	01400693          	li	a3,20
-     2ac:	00078613          	mv	a2,a5
-     2b0:	00000593          	li	a1,0
-     2b4:	000007b7          	lui	a5,0x0
-     2b8:	07478513          	addi	a0,a5,116 # 74 <_Z11myTaskOtherPv>
-     2bc:	00001097          	auipc	ra,0x1
-     2c0:	1fc080e7          	jalr	508(ra) # 14b8 <_Z12OSTaskCreatePFvPvES_Pmh>
-     2c4:	00000097          	auipc	ra,0x0
-     2c8:	4dc080e7          	jalr	1244(ra) # 7a0 <_Z17OSCreateSemaphorev>
-     2cc:	00050713          	mv	a4,a0
-     2d0:	000027b7          	lui	a5,0x2
-     2d4:	36e7a823          	sw	a4,880(a5) # 2370 <_ZL11mySemaphore>
-     2d8:	000027b7          	lui	a5,0x2
-     2dc:	3307a783          	lw	a5,816(a5) # 2330 <s7>
-     2e0:	00078513          	mv	a0,a5
-     2e4:	00000097          	auipc	ra,0x0
-     2e8:	d34080e7          	jalr	-716(ra) # 18 <_Z11printStringPKc>
-     2ec:	00001097          	auipc	ra,0x1
-     2f0:	868080e7          	jalr	-1944(ra) # b54 <_Z8OS_Startv>
-     2f4:	00000793          	li	a5,0
-     2f8:	00078513          	mv	a0,a5
-     2fc:	02010113          	addi	sp,sp,32
-     300:	7ec12083          	lw	ra,2028(sp)
-     304:	7e812403          	lw	s0,2024(sp)
-     308:	7f010113          	addi	sp,sp,2032
-     30c:	00008067          	ret
+0000025c <main>:
+     25c:	81010113          	addi	sp,sp,-2032
+     260:	7e112623          	sw	ra,2028(sp)
+     264:	7e812423          	sw	s0,2024(sp)
+     268:	7f010413          	addi	s0,sp,2032
+     26c:	fe010113          	addi	sp,sp,-32
+     270:	00000097          	auipc	ra,0x0
+     274:	368080e7          	jalr	872(ra) # 5d8 <_Z7OS_Initv>
+     278:	000027b7          	lui	a5,0x2
+     27c:	8b878513          	addi	a0,a5,-1864 # 18b8 <_ZL10OSUnMapTbl+0x1a0>
+     280:	00000097          	auipc	ra,0x0
+     284:	d98080e7          	jalr	-616(ra) # 18 <_Z11printStringPKc>
+     288:	bf040793          	addi	a5,s0,-1040
+     28c:	3fc78793          	addi	a5,a5,1020
+     290:	00a00693          	li	a3,10
+     294:	00078613          	mv	a2,a5
+     298:	00000593          	li	a1,0
+     29c:	000007b7          	lui	a5,0x0
+     2a0:	14478513          	addi	a0,a5,324 # 144 <_Z6myTaskPv>
+     2a4:	00001097          	auipc	ra,0x1
+     2a8:	1b4080e7          	jalr	436(ra) # 1458 <_Z12OSTaskCreatePFvPvES_Pmh>
+     2ac:	fffff7b7          	lui	a5,0xfffff
+     2b0:	7f078793          	addi	a5,a5,2032 # fffff7f0 <_fstack+0xfebff7f4>
+     2b4:	00f407b3          	add	a5,s0,a5
+     2b8:	3fc78793          	addi	a5,a5,1020
+     2bc:	01400693          	li	a3,20
+     2c0:	00078613          	mv	a2,a5
+     2c4:	00000593          	li	a1,0
+     2c8:	000007b7          	lui	a5,0x0
+     2cc:	07478513          	addi	a0,a5,116 # 74 <_Z11myTaskOtherPv>
+     2d0:	00001097          	auipc	ra,0x1
+     2d4:	188080e7          	jalr	392(ra) # 1458 <_Z12OSTaskCreatePFvPvES_Pmh>
+     2d8:	00000097          	auipc	ra,0x0
+     2dc:	468080e7          	jalr	1128(ra) # 740 <_Z17OSCreateSemaphorev>
+     2e0:	00050713          	mv	a4,a0
+     2e4:	000027b7          	lui	a5,0x2
+     2e8:	30e7a823          	sw	a4,784(a5) # 2310 <_ZL11mySemaphore>
+     2ec:	000027b7          	lui	a5,0x2
+     2f0:	2d07a783          	lw	a5,720(a5) # 22d0 <s7>
+     2f4:	00078513          	mv	a0,a5
+     2f8:	00000097          	auipc	ra,0x0
+     2fc:	d20080e7          	jalr	-736(ra) # 18 <_Z11printStringPKc>
+     300:	00000097          	auipc	ra,0x0
+     304:	7f4080e7          	jalr	2036(ra) # af4 <_Z8OS_Startv>
+     308:	00000793          	li	a5,0
+     30c:	00078513          	mv	a0,a5
+     310:	02010113          	addi	sp,sp,32
+     314:	7ec12083          	lw	ra,2028(sp)
+     318:	7e812403          	lw	s0,2024(sp)
+     31c:	7f010113          	addi	sp,sp,2032
+     320:	00008067          	ret
 
-00000310 <_Z17OS_ENTER_CRITICALv>:
-     310:	ff010113          	addi	sp,sp,-16
-     314:	00812623          	sw	s0,12(sp)
-     318:	01010413          	addi	s0,sp,16
-     31c:	00000013          	nop
-     320:	00c12403          	lw	s0,12(sp)
-     324:	01010113          	addi	sp,sp,16
-     328:	00008067          	ret
+00000324 <_Z17OS_ENTER_CRITICALv>:
+     324:	ff010113          	addi	sp,sp,-16
+     328:	00812623          	sw	s0,12(sp)
+     32c:	01010413          	addi	s0,sp,16
+     330:	00000013          	nop
+     334:	00c12403          	lw	s0,12(sp)
+     338:	01010113          	addi	sp,sp,16
+     33c:	00008067          	ret
 
-0000032c <_Z16OS_EXIT_CRITICALv>:
-     32c:	ff010113          	addi	sp,sp,-16
-     330:	00812623          	sw	s0,12(sp)
-     334:	01010413          	addi	s0,sp,16
-     338:	00000013          	nop
-     33c:	00c12403          	lw	s0,12(sp)
-     340:	01010113          	addi	sp,sp,16
-     344:	00008067          	ret
+00000340 <_Z16OS_EXIT_CRITICALv>:
+     340:	ff010113          	addi	sp,sp,-16
+     344:	00812623          	sw	s0,12(sp)
+     348:	01010413          	addi	s0,sp,16
+     34c:	00000013          	nop
+     350:	00c12403          	lw	s0,12(sp)
+     354:	01010113          	addi	sp,sp,16
+     358:	00008067          	ret
 
-00000348 <_Z13OSTaskStkInitPFvPvES_Pmt>:
-     348:	fd010113          	addi	sp,sp,-48
-     34c:	02812623          	sw	s0,44(sp)
-     350:	03010413          	addi	s0,sp,48
-     354:	fca42e23          	sw	a0,-36(s0)
-     358:	fcb42c23          	sw	a1,-40(s0)
-     35c:	fcc42a23          	sw	a2,-44(s0)
-     360:	00068793          	mv	a5,a3
-     364:	fcf41923          	sh	a5,-46(s0)
-     368:	fd442783          	lw	a5,-44(s0)
-     36c:	fef42623          	sw	a5,-20(s0)
-     370:	fec42783          	lw	a5,-20(s0)
-     374:	ffc78713          	addi	a4,a5,-4
-     378:	fee42623          	sw	a4,-20(s0)
-     37c:	fdc42703          	lw	a4,-36(s0)
-     380:	00e7a023          	sw	a4,0(a5)
+0000035c <_Z13OSTaskStkInitPFvPvES_Pmt>:
+     35c:	fd010113          	addi	sp,sp,-48
+     360:	02812623          	sw	s0,44(sp)
+     364:	03010413          	addi	s0,sp,48
+     368:	fca42e23          	sw	a0,-36(s0)
+     36c:	fcb42c23          	sw	a1,-40(s0)
+     370:	fcc42a23          	sw	a2,-44(s0)
+     374:	00068793          	mv	a5,a3
+     378:	fcf41923          	sh	a5,-46(s0)
+     37c:	fd442783          	lw	a5,-44(s0)
+     380:	fef42623          	sw	a5,-20(s0)
      384:	fec42783          	lw	a5,-20(s0)
      388:	ffc78713          	addi	a4,a5,-4
      38c:	fee42623          	sw	a4,-20(s0)
-     390:	0007a023          	sw	zero,0(a5)
-     394:	fec42783          	lw	a5,-20(s0)
-     398:	ffc78713          	addi	a4,a5,-4
-     39c:	fee42623          	sw	a4,-20(s0)
-     3a0:	0007a023          	sw	zero,0(a5)
-     3a4:	fec42783          	lw	a5,-20(s0)
-     3a8:	ffc78713          	addi	a4,a5,-4
-     3ac:	fee42623          	sw	a4,-20(s0)
-     3b0:	0007a023          	sw	zero,0(a5)
-     3b4:	fec42783          	lw	a5,-20(s0)
-     3b8:	ffc78713          	addi	a4,a5,-4
-     3bc:	fee42623          	sw	a4,-20(s0)
-     3c0:	0007a023          	sw	zero,0(a5)
-     3c4:	fec42783          	lw	a5,-20(s0)
-     3c8:	ffc78713          	addi	a4,a5,-4
-     3cc:	fee42623          	sw	a4,-20(s0)
-     3d0:	0007a023          	sw	zero,0(a5)
-     3d4:	fec42783          	lw	a5,-20(s0)
-     3d8:	ffc78713          	addi	a4,a5,-4
-     3dc:	fee42623          	sw	a4,-20(s0)
-     3e0:	0007a023          	sw	zero,0(a5)
-     3e4:	fec42783          	lw	a5,-20(s0)
-     3e8:	ffc78713          	addi	a4,a5,-4
-     3ec:	fee42623          	sw	a4,-20(s0)
-     3f0:	0007a023          	sw	zero,0(a5)
-     3f4:	fec42783          	lw	a5,-20(s0)
-     3f8:	ffc78713          	addi	a4,a5,-4
-     3fc:	fee42623          	sw	a4,-20(s0)
-     400:	0007a023          	sw	zero,0(a5)
-     404:	fec42783          	lw	a5,-20(s0)
-     408:	ffc78713          	addi	a4,a5,-4
-     40c:	fee42623          	sw	a4,-20(s0)
-     410:	0007a023          	sw	zero,0(a5)
-     414:	fec42783          	lw	a5,-20(s0)
-     418:	ffc78713          	addi	a4,a5,-4
-     41c:	fee42623          	sw	a4,-20(s0)
-     420:	0007a023          	sw	zero,0(a5)
-     424:	fec42783          	lw	a5,-20(s0)
-     428:	ffc78713          	addi	a4,a5,-4
-     42c:	fee42623          	sw	a4,-20(s0)
-     430:	0007a023          	sw	zero,0(a5)
-     434:	fec42783          	lw	a5,-20(s0)
-     438:	0007a023          	sw	zero,0(a5)
-     43c:	fec42783          	lw	a5,-20(s0)
-     440:	00078513          	mv	a0,a5
-     444:	02c12403          	lw	s0,44(sp)
-     448:	03010113          	addi	sp,sp,48
-     44c:	00008067          	ret
+     390:	fdc42703          	lw	a4,-36(s0)
+     394:	00e7a023          	sw	a4,0(a5)
+     398:	fec42783          	lw	a5,-20(s0)
+     39c:	ffc78713          	addi	a4,a5,-4
+     3a0:	fee42623          	sw	a4,-20(s0)
+     3a4:	0007a023          	sw	zero,0(a5)
+     3a8:	fec42783          	lw	a5,-20(s0)
+     3ac:	ffc78713          	addi	a4,a5,-4
+     3b0:	fee42623          	sw	a4,-20(s0)
+     3b4:	0007a023          	sw	zero,0(a5)
+     3b8:	fec42783          	lw	a5,-20(s0)
+     3bc:	ffc78713          	addi	a4,a5,-4
+     3c0:	fee42623          	sw	a4,-20(s0)
+     3c4:	0007a023          	sw	zero,0(a5)
+     3c8:	fec42783          	lw	a5,-20(s0)
+     3cc:	ffc78713          	addi	a4,a5,-4
+     3d0:	fee42623          	sw	a4,-20(s0)
+     3d4:	0007a023          	sw	zero,0(a5)
+     3d8:	fec42783          	lw	a5,-20(s0)
+     3dc:	ffc78713          	addi	a4,a5,-4
+     3e0:	fee42623          	sw	a4,-20(s0)
+     3e4:	0007a023          	sw	zero,0(a5)
+     3e8:	fec42783          	lw	a5,-20(s0)
+     3ec:	ffc78713          	addi	a4,a5,-4
+     3f0:	fee42623          	sw	a4,-20(s0)
+     3f4:	0007a023          	sw	zero,0(a5)
+     3f8:	fec42783          	lw	a5,-20(s0)
+     3fc:	ffc78713          	addi	a4,a5,-4
+     400:	fee42623          	sw	a4,-20(s0)
+     404:	0007a023          	sw	zero,0(a5)
+     408:	fec42783          	lw	a5,-20(s0)
+     40c:	ffc78713          	addi	a4,a5,-4
+     410:	fee42623          	sw	a4,-20(s0)
+     414:	0007a023          	sw	zero,0(a5)
+     418:	fec42783          	lw	a5,-20(s0)
+     41c:	ffc78713          	addi	a4,a5,-4
+     420:	fee42623          	sw	a4,-20(s0)
+     424:	0007a023          	sw	zero,0(a5)
+     428:	fec42783          	lw	a5,-20(s0)
+     42c:	ffc78713          	addi	a4,a5,-4
+     430:	fee42623          	sw	a4,-20(s0)
+     434:	0007a023          	sw	zero,0(a5)
+     438:	fec42783          	lw	a5,-20(s0)
+     43c:	ffc78713          	addi	a4,a5,-4
+     440:	fee42623          	sw	a4,-20(s0)
+     444:	0007a023          	sw	zero,0(a5)
+     448:	fec42783          	lw	a5,-20(s0)
+     44c:	0007a023          	sw	zero,0(a5)
+     450:	fec42783          	lw	a5,-20(s0)
+     454:	00078513          	mv	a0,a5
+     458:	02c12403          	lw	s0,44(sp)
+     45c:	03010113          	addi	sp,sp,48
+     460:	00008067          	ret
 
-00000450 <_Z16OSTaskCreateHookv>:
-     450:	ff010113          	addi	sp,sp,-16
-     454:	00812623          	sw	s0,12(sp)
-     458:	01010413          	addi	s0,sp,16
-     45c:	00000013          	nop
-     460:	00c12403          	lw	s0,12(sp)
-     464:	01010113          	addi	sp,sp,16
-     468:	00008067          	ret
+00000464 <_Z16OSTaskCreateHookv>:
+     464:	ff010113          	addi	sp,sp,-16
+     468:	00812623          	sw	s0,12(sp)
+     46c:	01010413          	addi	s0,sp,16
+     470:	00000013          	nop
+     474:	00c12403          	lw	s0,12(sp)
+     478:	01010113          	addi	sp,sp,16
+     47c:	00008067          	ret
 
-0000046c <_Z10OS_TASK_SWv>:
-     46c:	ff010113          	addi	sp,sp,-16
-     470:	00812623          	sw	s0,12(sp)
-     474:	01010413          	addi	s0,sp,16
-     478:	00000013          	nop
-     47c:	00c12403          	lw	s0,12(sp)
-     480:	01010113          	addi	sp,sp,16
-     484:	00008067          	ret
+00000480 <_Z10OS_TASK_SWv>:
+     480:	ff010113          	addi	sp,sp,-16
+     484:	00812623          	sw	s0,12(sp)
+     488:	01010413          	addi	s0,sp,16
+     48c:	00000013          	nop
+     490:	00c12403          	lw	s0,12(sp)
+     494:	01010113          	addi	sp,sp,16
+     498:	00008067          	ret
 
-00000488 <_Z8OS_Schedv>:
-     488:	fe010113          	addi	sp,sp,-32
-     48c:	00112e23          	sw	ra,28(sp)
-     490:	00812c23          	sw	s0,24(sp)
-     494:	02010413          	addi	s0,sp,32
-     498:	00000097          	auipc	ra,0x0
-     49c:	e78080e7          	jalr	-392(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-     4a0:	000027b7          	lui	a5,0x2
-     4a4:	3517c783          	lbu	a5,849(a5) # 2351 <OSRdyGrp>
-     4a8:	00078713          	mv	a4,a5
-     4ac:	000027b7          	lui	a5,0x2
-     4b0:	a3078793          	addi	a5,a5,-1488 # 1a30 <_ZL10OSUnMapTbl>
-     4b4:	00f707b3          	add	a5,a4,a5
-     4b8:	0007c783          	lbu	a5,0(a5)
-     4bc:	fef407a3          	sb	a5,-17(s0)
-     4c0:	fef44783          	lbu	a5,-17(s0)
-     4c4:	00379793          	slli	a5,a5,0x3
-     4c8:	0ff7f713          	andi	a4,a5,255
-     4cc:	fef44683          	lbu	a3,-17(s0)
-     4d0:	000027b7          	lui	a5,0x2
-     4d4:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-     4d8:	00f687b3          	add	a5,a3,a5
-     4dc:	0007c783          	lbu	a5,0(a5)
-     4e0:	00078693          	mv	a3,a5
+0000049c <_Z8OS_Schedv>:
+     49c:	fe010113          	addi	sp,sp,-32
+     4a0:	00112e23          	sw	ra,28(sp)
+     4a4:	00812c23          	sw	s0,24(sp)
+     4a8:	02010413          	addi	s0,sp,32
+     4ac:	00000097          	auipc	ra,0x0
+     4b0:	e78080e7          	jalr	-392(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+     4b4:	000027b7          	lui	a5,0x2
+     4b8:	2f17c783          	lbu	a5,753(a5) # 22f1 <OSRdyGrp>
+     4bc:	00078713          	mv	a4,a5
+     4c0:	000027b7          	lui	a5,0x2
+     4c4:	9d078793          	addi	a5,a5,-1584 # 19d0 <_ZL10OSUnMapTbl>
+     4c8:	00f707b3          	add	a5,a4,a5
+     4cc:	0007c783          	lbu	a5,0(a5)
+     4d0:	fef407a3          	sb	a5,-17(s0)
+     4d4:	fef44783          	lbu	a5,-17(s0)
+     4d8:	00379793          	slli	a5,a5,0x3
+     4dc:	0ff7f713          	andi	a4,a5,255
+     4e0:	fef44683          	lbu	a3,-17(s0)
      4e4:	000027b7          	lui	a5,0x2
-     4e8:	a3078793          	addi	a5,a5,-1488 # 1a30 <_ZL10OSUnMapTbl>
+     4e8:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
      4ec:	00f687b3          	add	a5,a3,a5
      4f0:	0007c783          	lbu	a5,0(a5)
-     4f4:	00f707b3          	add	a5,a4,a5
-     4f8:	0ff7f713          	andi	a4,a5,255
-     4fc:	000027b7          	lui	a5,0x2
-     500:	32e78aa3          	sb	a4,821(a5) # 2335 <OSPrioHighRdy>
-     504:	000027b7          	lui	a5,0x2
-     508:	3357c703          	lbu	a4,821(a5) # 2335 <OSPrioHighRdy>
-     50c:	000027b7          	lui	a5,0x2
-     510:	3347c783          	lbu	a5,820(a5) # 2334 <OSPrioCur>
-     514:	10f70463          	beq	a4,a5,61c <_Z8OS_Schedv+0x194>
-     518:	00010793          	mv	a5,sp
-     51c:	fef42423          	sw	a5,-24(s0)
-     520:	fe842783          	lw	a5,-24(s0)
-     524:	ffc78793          	addi	a5,a5,-4
-     528:	fef42423          	sw	a5,-24(s0)
-     52c:	000027b7          	lui	a5,0x2
-     530:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     534:	0207a783          	lw	a5,32(a5)
-     538:	00078713          	mv	a4,a5
-     53c:	fe842783          	lw	a5,-24(s0)
-     540:	00e7a023          	sw	a4,0(a5)
-     544:	fcc10113          	addi	sp,sp,-52
-     548:	02812623          	sw	s0,44(sp)
-     54c:	02912423          	sw	s1,40(sp)
-     550:	03212223          	sw	s2,36(sp)
-     554:	03312023          	sw	s3,32(sp)
-     558:	01412e23          	sw	s4,28(sp)
-     55c:	01512c23          	sw	s5,24(sp)
-     560:	01612a23          	sw	s6,20(sp)
-     564:	01712823          	sw	s7,16(sp)
-     568:	01812623          	sw	s8,12(sp)
-     56c:	01912423          	sw	s9,8(sp)
-     570:	01a12223          	sw	s10,4(sp)
-     574:	01b12023          	sw	s11,0(sp)
-     578:	00010713          	mv	a4,sp
-     57c:	000027b7          	lui	a5,0x2
-     580:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     584:	00e7a023          	sw	a4,0(a5)
-     588:	000027b7          	lui	a5,0x2
-     58c:	3357c703          	lbu	a4,821(a5) # 2335 <OSPrioHighRdy>
-     590:	000027b7          	lui	a5,0x2
-     594:	32e78a23          	sb	a4,820(a5) # 2334 <OSPrioCur>
-     598:	000027b7          	lui	a5,0x2
-     59c:	3357c783          	lbu	a5,821(a5) # 2335 <OSPrioHighRdy>
-     5a0:	00078713          	mv	a4,a5
-     5a4:	000037b7          	lui	a5,0x3
-     5a8:	00271713          	slli	a4,a4,0x2
-     5ac:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-     5b0:	00f707b3          	add	a5,a4,a5
-     5b4:	0007a703          	lw	a4,0(a5)
-     5b8:	000027b7          	lui	a5,0x2
-     5bc:	34e7a623          	sw	a4,844(a5) # 234c <OSTCBHighRdy>
-     5c0:	000027b7          	lui	a5,0x2
-     5c4:	34c7a703          	lw	a4,844(a5) # 234c <OSTCBHighRdy>
-     5c8:	000027b7          	lui	a5,0x2
-     5cc:	34e7a423          	sw	a4,840(a5) # 2348 <OSTCBCur>
-     5d0:	000027b7          	lui	a5,0x2
-     5d4:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     5d8:	0007a783          	lw	a5,0(a5)
-     5dc:	00078113          	mv	sp,a5
-     5e0:	03012e03          	lw	t3,48(sp)
-     5e4:	02c12403          	lw	s0,44(sp)
-     5e8:	02812483          	lw	s1,40(sp)
-     5ec:	02412903          	lw	s2,36(sp)
-     5f0:	02012983          	lw	s3,32(sp)
-     5f4:	01c12a03          	lw	s4,28(sp)
-     5f8:	01812a83          	lw	s5,24(sp)
-     5fc:	01412b03          	lw	s6,20(sp)
-     600:	01012b83          	lw	s7,16(sp)
-     604:	00c12c03          	lw	s8,12(sp)
-     608:	00812c83          	lw	s9,8(sp)
-     60c:	00412d03          	lw	s10,4(sp)
-     610:	00012d83          	lw	s11,0(sp)
-     614:	03410113          	addi	sp,sp,52
-     618:	000e0067          	jr	t3
-     61c:	00000097          	auipc	ra,0x0
-     620:	d10080e7          	jalr	-752(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-     624:	00000013          	nop
-     628:	01c12083          	lw	ra,28(sp)
-     62c:	01812403          	lw	s0,24(sp)
-     630:	02010113          	addi	sp,sp,32
-     634:	00008067          	ret
+     4f4:	00078693          	mv	a3,a5
+     4f8:	000027b7          	lui	a5,0x2
+     4fc:	9d078793          	addi	a5,a5,-1584 # 19d0 <_ZL10OSUnMapTbl>
+     500:	00f687b3          	add	a5,a3,a5
+     504:	0007c783          	lbu	a5,0(a5)
+     508:	00f707b3          	add	a5,a4,a5
+     50c:	0ff7f713          	andi	a4,a5,255
+     510:	000027b7          	lui	a5,0x2
+     514:	2ce78aa3          	sb	a4,725(a5) # 22d5 <OSPrioHighRdy>
+     518:	000027b7          	lui	a5,0x2
+     51c:	2d57c703          	lbu	a4,725(a5) # 22d5 <OSPrioHighRdy>
+     520:	000027b7          	lui	a5,0x2
+     524:	2ce78a23          	sb	a4,724(a5) # 22d4 <OSPrioCur>
+     528:	000027b7          	lui	a5,0x2
+     52c:	2d57c783          	lbu	a5,725(a5) # 22d5 <OSPrioHighRdy>
+     530:	00078713          	mv	a4,a5
+     534:	000037b7          	lui	a5,0x3
+     538:	00271713          	slli	a4,a4,0x2
+     53c:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+     540:	00f707b3          	add	a5,a4,a5
+     544:	0007a703          	lw	a4,0(a5)
+     548:	000027b7          	lui	a5,0x2
+     54c:	2ee7a623          	sw	a4,748(a5) # 22ec <OSTCBHighRdy>
+     550:	000027b7          	lui	a5,0x2
+     554:	2ec7a703          	lw	a4,748(a5) # 22ec <OSTCBHighRdy>
+     558:	000027b7          	lui	a5,0x2
+     55c:	2ee7a423          	sw	a4,744(a5) # 22e8 <OSTCBCur>
+     560:	000027b7          	lui	a5,0x2
+     564:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     568:	0007a783          	lw	a5,0(a5)
+     56c:	00078113          	mv	sp,a5
+     570:	03012e03          	lw	t3,48(sp)
+     574:	02c12403          	lw	s0,44(sp)
+     578:	02812483          	lw	s1,40(sp)
+     57c:	02412903          	lw	s2,36(sp)
+     580:	02012983          	lw	s3,32(sp)
+     584:	01c12a03          	lw	s4,28(sp)
+     588:	01812a83          	lw	s5,24(sp)
+     58c:	01412b03          	lw	s6,20(sp)
+     590:	01012b83          	lw	s7,16(sp)
+     594:	00c12c03          	lw	s8,12(sp)
+     598:	00812c83          	lw	s9,8(sp)
+     59c:	00412d03          	lw	s10,4(sp)
+     5a0:	00012d83          	lw	s11,0(sp)
+     5a4:	03410113          	addi	sp,sp,52
+     5a8:	000027b7          	lui	a5,0x2
+     5ac:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     5b0:	0207a783          	lw	a5,32(a5)
+     5b4:	00078e13          	mv	t3,a5
+     5b8:	000e0067          	jr	t3
+     5bc:	00000097          	auipc	ra,0x0
+     5c0:	d84080e7          	jalr	-636(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+     5c4:	00000013          	nop
+     5c8:	01c12083          	lw	ra,28(sp)
+     5cc:	01812403          	lw	s0,24(sp)
+     5d0:	02010113          	addi	sp,sp,32
+     5d4:	00008067          	ret
 
-00000638 <_Z7OS_Initv>:
-     638:	ff010113          	addi	sp,sp,-16
-     63c:	00112623          	sw	ra,12(sp)
-     640:	00812423          	sw	s0,8(sp)
-     644:	01010413          	addi	s0,sp,16
-     648:	00000097          	auipc	ra,0x0
-     64c:	0bc080e7          	jalr	188(ra) # 704 <_Z20OS_EventWaitListInitv>
-     650:	00000097          	auipc	ra,0x0
-     654:	01c080e7          	jalr	28(ra) # 66c <_Z15OS_TaskFreePoolv>
-     658:	00000013          	nop
-     65c:	00c12083          	lw	ra,12(sp)
-     660:	00812403          	lw	s0,8(sp)
-     664:	01010113          	addi	sp,sp,16
-     668:	00008067          	ret
+000005d8 <_Z7OS_Initv>:
+     5d8:	ff010113          	addi	sp,sp,-16
+     5dc:	00112623          	sw	ra,12(sp)
+     5e0:	00812423          	sw	s0,8(sp)
+     5e4:	01010413          	addi	s0,sp,16
+     5e8:	00000097          	auipc	ra,0x0
+     5ec:	0bc080e7          	jalr	188(ra) # 6a4 <_Z20OS_EventWaitListInitv>
+     5f0:	00000097          	auipc	ra,0x0
+     5f4:	01c080e7          	jalr	28(ra) # 60c <_Z15OS_TaskFreePoolv>
+     5f8:	00000013          	nop
+     5fc:	00c12083          	lw	ra,12(sp)
+     600:	00812403          	lw	s0,8(sp)
+     604:	01010113          	addi	sp,sp,16
+     608:	00008067          	ret
 
-0000066c <_Z15OS_TaskFreePoolv>:
-     66c:	fe010113          	addi	sp,sp,-32
-     670:	00812e23          	sw	s0,28(sp)
-     674:	02010413          	addi	s0,sp,32
-     678:	000027b7          	lui	a5,0x2
-     67c:	00002737          	lui	a4,0x2
-     680:	69470713          	addi	a4,a4,1684 # 2694 <freeTCBs>
-     684:	34e7a023          	sw	a4,832(a5) # 2340 <OSTCBFreeList>
-     688:	000027b7          	lui	a5,0x2
-     68c:	3407a783          	lw	a5,832(a5) # 2340 <OSTCBFreeList>
-     690:	fef42623          	sw	a5,-20(s0)
-     694:	00100793          	li	a5,1
-     698:	fef42423          	sw	a5,-24(s0)
-     69c:	fe842703          	lw	a4,-24(s0)
-     6a0:	03f00793          	li	a5,63
-     6a4:	04e7c463          	blt	a5,a4,6ec <_Z15OS_TaskFreePoolv+0x80>
-     6a8:	fe842703          	lw	a4,-24(s0)
-     6ac:	00070793          	mv	a5,a4
-     6b0:	00379793          	slli	a5,a5,0x3
-     6b4:	00e787b3          	add	a5,a5,a4
-     6b8:	00279793          	slli	a5,a5,0x2
-     6bc:	00002737          	lui	a4,0x2
-     6c0:	69470713          	addi	a4,a4,1684 # 2694 <freeTCBs>
-     6c4:	00e78733          	add	a4,a5,a4
-     6c8:	fec42783          	lw	a5,-20(s0)
-     6cc:	00e7a223          	sw	a4,4(a5)
-     6d0:	fec42783          	lw	a5,-20(s0)
-     6d4:	0047a783          	lw	a5,4(a5)
-     6d8:	fef42623          	sw	a5,-20(s0)
-     6dc:	fe842783          	lw	a5,-24(s0)
-     6e0:	00178793          	addi	a5,a5,1
-     6e4:	fef42423          	sw	a5,-24(s0)
-     6e8:	fb5ff06f          	j	69c <_Z15OS_TaskFreePoolv+0x30>
-     6ec:	fec42783          	lw	a5,-20(s0)
-     6f0:	0007a223          	sw	zero,4(a5)
-     6f4:	00000013          	nop
-     6f8:	01c12403          	lw	s0,28(sp)
-     6fc:	02010113          	addi	sp,sp,32
-     700:	00008067          	ret
+0000060c <_Z15OS_TaskFreePoolv>:
+     60c:	fe010113          	addi	sp,sp,-32
+     610:	00812e23          	sw	s0,28(sp)
+     614:	02010413          	addi	s0,sp,32
+     618:	000027b7          	lui	a5,0x2
+     61c:	00002737          	lui	a4,0x2
+     620:	63470713          	addi	a4,a4,1588 # 2634 <freeTCBs>
+     624:	2ee7a023          	sw	a4,736(a5) # 22e0 <OSTCBFreeList>
+     628:	000027b7          	lui	a5,0x2
+     62c:	2e07a783          	lw	a5,736(a5) # 22e0 <OSTCBFreeList>
+     630:	fef42623          	sw	a5,-20(s0)
+     634:	00100793          	li	a5,1
+     638:	fef42423          	sw	a5,-24(s0)
+     63c:	fe842703          	lw	a4,-24(s0)
+     640:	03f00793          	li	a5,63
+     644:	04e7c463          	blt	a5,a4,68c <_Z15OS_TaskFreePoolv+0x80>
+     648:	fe842703          	lw	a4,-24(s0)
+     64c:	00070793          	mv	a5,a4
+     650:	00379793          	slli	a5,a5,0x3
+     654:	00e787b3          	add	a5,a5,a4
+     658:	00279793          	slli	a5,a5,0x2
+     65c:	00002737          	lui	a4,0x2
+     660:	63470713          	addi	a4,a4,1588 # 2634 <freeTCBs>
+     664:	00e78733          	add	a4,a5,a4
+     668:	fec42783          	lw	a5,-20(s0)
+     66c:	00e7a223          	sw	a4,4(a5)
+     670:	fec42783          	lw	a5,-20(s0)
+     674:	0047a783          	lw	a5,4(a5)
+     678:	fef42623          	sw	a5,-20(s0)
+     67c:	fe842783          	lw	a5,-24(s0)
+     680:	00178793          	addi	a5,a5,1
+     684:	fef42423          	sw	a5,-24(s0)
+     688:	fb5ff06f          	j	63c <_Z15OS_TaskFreePoolv+0x30>
+     68c:	fec42783          	lw	a5,-20(s0)
+     690:	0007a223          	sw	zero,4(a5)
+     694:	00000013          	nop
+     698:	01c12403          	lw	s0,28(sp)
+     69c:	02010113          	addi	sp,sp,32
+     6a0:	00008067          	ret
 
-00000704 <_Z20OS_EventWaitListInitv>:
-     704:	fe010113          	addi	sp,sp,-32
-     708:	00812e23          	sw	s0,28(sp)
-     70c:	02010413          	addi	s0,sp,32
-     710:	000027b7          	lui	a5,0x2
-     714:	00002737          	lui	a4,0x2
-     718:	37470713          	addi	a4,a4,884 # 2374 <freeEvents>
-     71c:	32e7ae23          	sw	a4,828(a5) # 233c <OSEventFreeList>
-     720:	000027b7          	lui	a5,0x2
-     724:	33c7a783          	lw	a5,828(a5) # 233c <OSEventFreeList>
-     728:	fef42623          	sw	a5,-20(s0)
-     72c:	00100793          	li	a5,1
-     730:	fef405a3          	sb	a5,-21(s0)
-     734:	feb40703          	lb	a4,-21(s0)
-     738:	01300793          	li	a5,19
-     73c:	04e7c663          	blt	a5,a4,788 <_Z20OS_EventWaitListInitv+0x84>
-     740:	feb40703          	lb	a4,-21(s0)
-     744:	00070793          	mv	a5,a4
-     748:	00279793          	slli	a5,a5,0x2
-     74c:	00e787b3          	add	a5,a5,a4
-     750:	00379793          	slli	a5,a5,0x3
-     754:	00002737          	lui	a4,0x2
-     758:	37470713          	addi	a4,a4,884 # 2374 <freeEvents>
-     75c:	00e78733          	add	a4,a5,a4
-     760:	fec42783          	lw	a5,-20(s0)
-     764:	00e7a023          	sw	a4,0(a5)
-     768:	fec42783          	lw	a5,-20(s0)
-     76c:	0007a783          	lw	a5,0(a5)
-     770:	fef42623          	sw	a5,-20(s0)
-     774:	feb44783          	lbu	a5,-21(s0)
-     778:	00178793          	addi	a5,a5,1
-     77c:	0ff7f793          	andi	a5,a5,255
-     780:	fef405a3          	sb	a5,-21(s0)
-     784:	fb1ff06f          	j	734 <_Z20OS_EventWaitListInitv+0x30>
-     788:	fec42783          	lw	a5,-20(s0)
-     78c:	0007a023          	sw	zero,0(a5)
-     790:	00000013          	nop
-     794:	01c12403          	lw	s0,28(sp)
-     798:	02010113          	addi	sp,sp,32
-     79c:	00008067          	ret
+000006a4 <_Z20OS_EventWaitListInitv>:
+     6a4:	fe010113          	addi	sp,sp,-32
+     6a8:	00812e23          	sw	s0,28(sp)
+     6ac:	02010413          	addi	s0,sp,32
+     6b0:	000027b7          	lui	a5,0x2
+     6b4:	00002737          	lui	a4,0x2
+     6b8:	31470713          	addi	a4,a4,788 # 2314 <freeEvents>
+     6bc:	2ce7ae23          	sw	a4,732(a5) # 22dc <OSEventFreeList>
+     6c0:	000027b7          	lui	a5,0x2
+     6c4:	2dc7a783          	lw	a5,732(a5) # 22dc <OSEventFreeList>
+     6c8:	fef42623          	sw	a5,-20(s0)
+     6cc:	00100793          	li	a5,1
+     6d0:	fef405a3          	sb	a5,-21(s0)
+     6d4:	feb40703          	lb	a4,-21(s0)
+     6d8:	01300793          	li	a5,19
+     6dc:	04e7c663          	blt	a5,a4,728 <_Z20OS_EventWaitListInitv+0x84>
+     6e0:	feb40703          	lb	a4,-21(s0)
+     6e4:	00070793          	mv	a5,a4
+     6e8:	00279793          	slli	a5,a5,0x2
+     6ec:	00e787b3          	add	a5,a5,a4
+     6f0:	00379793          	slli	a5,a5,0x3
+     6f4:	00002737          	lui	a4,0x2
+     6f8:	31470713          	addi	a4,a4,788 # 2314 <freeEvents>
+     6fc:	00e78733          	add	a4,a5,a4
+     700:	fec42783          	lw	a5,-20(s0)
+     704:	00e7a023          	sw	a4,0(a5)
+     708:	fec42783          	lw	a5,-20(s0)
+     70c:	0007a783          	lw	a5,0(a5)
+     710:	fef42623          	sw	a5,-20(s0)
+     714:	feb44783          	lbu	a5,-21(s0)
+     718:	00178793          	addi	a5,a5,1
+     71c:	0ff7f793          	andi	a5,a5,255
+     720:	fef405a3          	sb	a5,-21(s0)
+     724:	fb1ff06f          	j	6d4 <_Z20OS_EventWaitListInitv+0x30>
+     728:	fec42783          	lw	a5,-20(s0)
+     72c:	0007a023          	sw	zero,0(a5)
+     730:	00000013          	nop
+     734:	01c12403          	lw	s0,28(sp)
+     738:	02010113          	addi	sp,sp,32
+     73c:	00008067          	ret
 
-000007a0 <_Z17OSCreateSemaphorev>:
-     7a0:	fe010113          	addi	sp,sp,-32
-     7a4:	00812e23          	sw	s0,28(sp)
-     7a8:	02010413          	addi	s0,sp,32
-     7ac:	000027b7          	lui	a5,0x2
-     7b0:	33c7a783          	lw	a5,828(a5) # 233c <OSEventFreeList>
-     7b4:	fef42623          	sw	a5,-20(s0)
-     7b8:	000027b7          	lui	a5,0x2
-     7bc:	33c7a783          	lw	a5,828(a5) # 233c <OSEventFreeList>
-     7c0:	00078c63          	beqz	a5,7d8 <_Z17OSCreateSemaphorev+0x38>
-     7c4:	000027b7          	lui	a5,0x2
-     7c8:	33c7a783          	lw	a5,828(a5) # 233c <OSEventFreeList>
-     7cc:	0007a703          	lw	a4,0(a5)
-     7d0:	000027b7          	lui	a5,0x2
-     7d4:	32e7ae23          	sw	a4,828(a5) # 233c <OSEventFreeList>
-     7d8:	fec42783          	lw	a5,-20(s0)
-     7dc:	02078463          	beqz	a5,804 <_Z17OSCreateSemaphorev+0x64>
-     7e0:	fec42783          	lw	a5,-20(s0)
-     7e4:	00800713          	li	a4,8
-     7e8:	00e78223          	sb	a4,4(a5)
-     7ec:	fec42783          	lw	a5,-20(s0)
-     7f0:	00079323          	sh	zero,6(a5)
-     7f4:	fec42783          	lw	a5,-20(s0)
-     7f8:	0007a023          	sw	zero,0(a5)
-     7fc:	fec42783          	lw	a5,-20(s0)
-     800:	000782a3          	sb	zero,5(a5)
-     804:	fec42783          	lw	a5,-20(s0)
-     808:	00078513          	mv	a0,a5
-     80c:	01c12403          	lw	s0,28(sp)
-     810:	02010113          	addi	sp,sp,32
-     814:	00008067          	ret
+00000740 <_Z17OSCreateSemaphorev>:
+     740:	fe010113          	addi	sp,sp,-32
+     744:	00812e23          	sw	s0,28(sp)
+     748:	02010413          	addi	s0,sp,32
+     74c:	000027b7          	lui	a5,0x2
+     750:	2dc7a783          	lw	a5,732(a5) # 22dc <OSEventFreeList>
+     754:	fef42623          	sw	a5,-20(s0)
+     758:	000027b7          	lui	a5,0x2
+     75c:	2dc7a783          	lw	a5,732(a5) # 22dc <OSEventFreeList>
+     760:	00078c63          	beqz	a5,778 <_Z17OSCreateSemaphorev+0x38>
+     764:	000027b7          	lui	a5,0x2
+     768:	2dc7a783          	lw	a5,732(a5) # 22dc <OSEventFreeList>
+     76c:	0007a703          	lw	a4,0(a5)
+     770:	000027b7          	lui	a5,0x2
+     774:	2ce7ae23          	sw	a4,732(a5) # 22dc <OSEventFreeList>
+     778:	fec42783          	lw	a5,-20(s0)
+     77c:	02078463          	beqz	a5,7a4 <_Z17OSCreateSemaphorev+0x64>
+     780:	fec42783          	lw	a5,-20(s0)
+     784:	00800713          	li	a4,8
+     788:	00e78223          	sb	a4,4(a5)
+     78c:	fec42783          	lw	a5,-20(s0)
+     790:	00079323          	sh	zero,6(a5)
+     794:	fec42783          	lw	a5,-20(s0)
+     798:	0007a023          	sw	zero,0(a5)
+     79c:	fec42783          	lw	a5,-20(s0)
+     7a0:	000782a3          	sb	zero,5(a5)
+     7a4:	fec42783          	lw	a5,-20(s0)
+     7a8:	00078513          	mv	a0,a5
+     7ac:	01c12403          	lw	s0,28(sp)
+     7b0:	02010113          	addi	sp,sp,32
+     7b4:	00008067          	ret
 
-00000818 <_Z16OS_EventTaskWaitP17EventControlBlock>:
-     818:	fe010113          	addi	sp,sp,-32
-     81c:	00812e23          	sw	s0,28(sp)
-     820:	02010413          	addi	s0,sp,32
-     824:	fea42623          	sw	a0,-20(s0)
-     828:	000027b7          	lui	a5,0x2
-     82c:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     830:	fec42703          	lw	a4,-20(s0)
-     834:	00e7a623          	sw	a4,12(a5)
-     838:	000027b7          	lui	a5,0x2
-     83c:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     840:	0197c783          	lbu	a5,25(a5)
-     844:	00078713          	mv	a4,a5
-     848:	000027b7          	lui	a5,0x2
-     84c:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-     850:	00f707b3          	add	a5,a4,a5
-     854:	0007c783          	lbu	a5,0(a5)
-     858:	01879713          	slli	a4,a5,0x18
-     85c:	41875713          	srai	a4,a4,0x18
-     860:	000027b7          	lui	a5,0x2
-     864:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     868:	01a7c783          	lbu	a5,26(a5)
-     86c:	01879793          	slli	a5,a5,0x18
-     870:	4187d793          	srai	a5,a5,0x18
-     874:	fff7c793          	not	a5,a5
-     878:	01879793          	slli	a5,a5,0x18
-     87c:	4187d793          	srai	a5,a5,0x18
-     880:	00f777b3          	and	a5,a4,a5
-     884:	01879713          	slli	a4,a5,0x18
-     888:	41875713          	srai	a4,a4,0x18
-     88c:	000027b7          	lui	a5,0x2
-     890:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     894:	0197c783          	lbu	a5,25(a5)
-     898:	0ff77693          	andi	a3,a4,255
-     89c:	00002737          	lui	a4,0x2
-     8a0:	35470713          	addi	a4,a4,852 # 2354 <OSRdyTbl>
-     8a4:	00e78733          	add	a4,a5,a4
-     8a8:	00d70023          	sb	a3,0(a4)
-     8ac:	00002737          	lui	a4,0x2
-     8b0:	35470713          	addi	a4,a4,852 # 2354 <OSRdyTbl>
-     8b4:	00e787b3          	add	a5,a5,a4
-     8b8:	0007c783          	lbu	a5,0(a5)
-     8bc:	0017b793          	seqz	a5,a5
-     8c0:	0ff7f793          	andi	a5,a5,255
-     8c4:	04078663          	beqz	a5,910 <_Z16OS_EventTaskWaitP17EventControlBlock+0xf8>
-     8c8:	000027b7          	lui	a5,0x2
-     8cc:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     8d0:	01b7c783          	lbu	a5,27(a5)
-     8d4:	01879793          	slli	a5,a5,0x18
-     8d8:	4187d793          	srai	a5,a5,0x18
-     8dc:	fff7c793          	not	a5,a5
-     8e0:	01879713          	slli	a4,a5,0x18
-     8e4:	41875713          	srai	a4,a4,0x18
-     8e8:	000027b7          	lui	a5,0x2
-     8ec:	3517c783          	lbu	a5,849(a5) # 2351 <OSRdyGrp>
-     8f0:	01879793          	slli	a5,a5,0x18
-     8f4:	4187d793          	srai	a5,a5,0x18
-     8f8:	00f777b3          	and	a5,a4,a5
-     8fc:	01879793          	slli	a5,a5,0x18
-     900:	4187d793          	srai	a5,a5,0x18
-     904:	0ff7f713          	andi	a4,a5,255
-     908:	000027b7          	lui	a5,0x2
-     90c:	34e788a3          	sb	a4,849(a5) # 2351 <OSRdyGrp>
-     910:	000027b7          	lui	a5,0x2
-     914:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     918:	0197c783          	lbu	a5,25(a5)
-     91c:	00078713          	mv	a4,a5
-     920:	fec42783          	lw	a5,-20(s0)
-     924:	00e787b3          	add	a5,a5,a4
-     928:	0087c703          	lbu	a4,8(a5)
-     92c:	000027b7          	lui	a5,0x2
-     930:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     934:	01a7c783          	lbu	a5,26(a5)
-     938:	000026b7          	lui	a3,0x2
-     93c:	3486a683          	lw	a3,840(a3) # 2348 <OSTCBCur>
-     940:	0196c683          	lbu	a3,25(a3)
-     944:	00f767b3          	or	a5,a4,a5
-     948:	0ff7f713          	andi	a4,a5,255
-     94c:	fec42783          	lw	a5,-20(s0)
-     950:	00d787b3          	add	a5,a5,a3
-     954:	00e78423          	sb	a4,8(a5)
-     958:	fec42783          	lw	a5,-20(s0)
-     95c:	0057c703          	lbu	a4,5(a5)
-     960:	000027b7          	lui	a5,0x2
-     964:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     968:	01b7c783          	lbu	a5,27(a5)
-     96c:	00f767b3          	or	a5,a4,a5
-     970:	0ff7f713          	andi	a4,a5,255
-     974:	fec42783          	lw	a5,-20(s0)
-     978:	00e782a3          	sb	a4,5(a5)
-     97c:	00000013          	nop
-     980:	01c12403          	lw	s0,28(sp)
-     984:	02010113          	addi	sp,sp,32
-     988:	00008067          	ret
+000007b8 <_Z16OS_EventTaskWaitP17EventControlBlock>:
+     7b8:	fe010113          	addi	sp,sp,-32
+     7bc:	00812e23          	sw	s0,28(sp)
+     7c0:	02010413          	addi	s0,sp,32
+     7c4:	fea42623          	sw	a0,-20(s0)
+     7c8:	000027b7          	lui	a5,0x2
+     7cc:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     7d0:	fec42703          	lw	a4,-20(s0)
+     7d4:	00e7a623          	sw	a4,12(a5)
+     7d8:	000027b7          	lui	a5,0x2
+     7dc:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     7e0:	0197c783          	lbu	a5,25(a5)
+     7e4:	00078713          	mv	a4,a5
+     7e8:	000027b7          	lui	a5,0x2
+     7ec:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+     7f0:	00f707b3          	add	a5,a4,a5
+     7f4:	0007c783          	lbu	a5,0(a5)
+     7f8:	01879713          	slli	a4,a5,0x18
+     7fc:	41875713          	srai	a4,a4,0x18
+     800:	000027b7          	lui	a5,0x2
+     804:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     808:	01a7c783          	lbu	a5,26(a5)
+     80c:	01879793          	slli	a5,a5,0x18
+     810:	4187d793          	srai	a5,a5,0x18
+     814:	fff7c793          	not	a5,a5
+     818:	01879793          	slli	a5,a5,0x18
+     81c:	4187d793          	srai	a5,a5,0x18
+     820:	00f777b3          	and	a5,a4,a5
+     824:	01879713          	slli	a4,a5,0x18
+     828:	41875713          	srai	a4,a4,0x18
+     82c:	000027b7          	lui	a5,0x2
+     830:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     834:	0197c783          	lbu	a5,25(a5)
+     838:	0ff77693          	andi	a3,a4,255
+     83c:	00002737          	lui	a4,0x2
+     840:	2f470713          	addi	a4,a4,756 # 22f4 <OSRdyTbl>
+     844:	00e78733          	add	a4,a5,a4
+     848:	00d70023          	sb	a3,0(a4)
+     84c:	00002737          	lui	a4,0x2
+     850:	2f470713          	addi	a4,a4,756 # 22f4 <OSRdyTbl>
+     854:	00e787b3          	add	a5,a5,a4
+     858:	0007c783          	lbu	a5,0(a5)
+     85c:	0017b793          	seqz	a5,a5
+     860:	0ff7f793          	andi	a5,a5,255
+     864:	04078663          	beqz	a5,8b0 <_Z16OS_EventTaskWaitP17EventControlBlock+0xf8>
+     868:	000027b7          	lui	a5,0x2
+     86c:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     870:	01b7c783          	lbu	a5,27(a5)
+     874:	01879793          	slli	a5,a5,0x18
+     878:	4187d793          	srai	a5,a5,0x18
+     87c:	fff7c793          	not	a5,a5
+     880:	01879713          	slli	a4,a5,0x18
+     884:	41875713          	srai	a4,a4,0x18
+     888:	000027b7          	lui	a5,0x2
+     88c:	2f17c783          	lbu	a5,753(a5) # 22f1 <OSRdyGrp>
+     890:	01879793          	slli	a5,a5,0x18
+     894:	4187d793          	srai	a5,a5,0x18
+     898:	00f777b3          	and	a5,a4,a5
+     89c:	01879793          	slli	a5,a5,0x18
+     8a0:	4187d793          	srai	a5,a5,0x18
+     8a4:	0ff7f713          	andi	a4,a5,255
+     8a8:	000027b7          	lui	a5,0x2
+     8ac:	2ee788a3          	sb	a4,753(a5) # 22f1 <OSRdyGrp>
+     8b0:	000027b7          	lui	a5,0x2
+     8b4:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     8b8:	0197c783          	lbu	a5,25(a5)
+     8bc:	00078713          	mv	a4,a5
+     8c0:	fec42783          	lw	a5,-20(s0)
+     8c4:	00e787b3          	add	a5,a5,a4
+     8c8:	0087c703          	lbu	a4,8(a5)
+     8cc:	000027b7          	lui	a5,0x2
+     8d0:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     8d4:	01a7c783          	lbu	a5,26(a5)
+     8d8:	000026b7          	lui	a3,0x2
+     8dc:	2e86a683          	lw	a3,744(a3) # 22e8 <OSTCBCur>
+     8e0:	0196c683          	lbu	a3,25(a3)
+     8e4:	00f767b3          	or	a5,a4,a5
+     8e8:	0ff7f713          	andi	a4,a5,255
+     8ec:	fec42783          	lw	a5,-20(s0)
+     8f0:	00d787b3          	add	a5,a5,a3
+     8f4:	00e78423          	sb	a4,8(a5)
+     8f8:	fec42783          	lw	a5,-20(s0)
+     8fc:	0057c703          	lbu	a4,5(a5)
+     900:	000027b7          	lui	a5,0x2
+     904:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     908:	01b7c783          	lbu	a5,27(a5)
+     90c:	00f767b3          	or	a5,a4,a5
+     910:	0ff7f713          	andi	a4,a5,255
+     914:	fec42783          	lw	a5,-20(s0)
+     918:	00e782a3          	sb	a4,5(a5)
+     91c:	00000013          	nop
+     920:	01c12403          	lw	s0,28(sp)
+     924:	02010113          	addi	sp,sp,32
+     928:	00008067          	ret
 
-0000098c <_Z9OSSemPostP17EventControlBlock>:
-     98c:	fe010113          	addi	sp,sp,-32
-     990:	00112e23          	sw	ra,28(sp)
-     994:	00812c23          	sw	s0,24(sp)
-     998:	02010413          	addi	s0,sp,32
-     99c:	fea42623          	sw	a0,-20(s0)
-     9a0:	fec42783          	lw	a5,-20(s0)
-     9a4:	0057c783          	lbu	a5,5(a5)
-     9a8:	02078463          	beqz	a5,9d0 <_Z9OSSemPostP17EventControlBlock+0x44>
-     9ac:	00a00613          	li	a2,10
-     9b0:	00000593          	li	a1,0
-     9b4:	fec42503          	lw	a0,-20(s0)
-     9b8:	00000097          	auipc	ra,0x0
-     9bc:	668080e7          	jalr	1640(ra) # 1020 <_Z12EventTaskRdyP17EventControlBlockPvh>
-     9c0:	00000097          	auipc	ra,0x0
-     9c4:	ac8080e7          	jalr	-1336(ra) # 488 <_Z8OS_Schedv>
-     9c8:	00000793          	li	a5,0
-     9cc:	0400006f          	j	a0c <_Z9OSSemPostP17EventControlBlock+0x80>
-     9d0:	fec42783          	lw	a5,-20(s0)
-     9d4:	0067d703          	lhu	a4,6(a5)
-     9d8:	000107b7          	lui	a5,0x10
-     9dc:	fff78793          	addi	a5,a5,-1 # ffff <__BSS_END__+0xcf6b>
-     9e0:	02f70463          	beq	a4,a5,a08 <_Z9OSSemPostP17EventControlBlock+0x7c>
-     9e4:	fec42783          	lw	a5,-20(s0)
-     9e8:	0067d783          	lhu	a5,6(a5)
-     9ec:	00178793          	addi	a5,a5,1
-     9f0:	01079713          	slli	a4,a5,0x10
-     9f4:	01075713          	srli	a4,a4,0x10
-     9f8:	fec42783          	lw	a5,-20(s0)
-     9fc:	00e79323          	sh	a4,6(a5)
-     a00:	00000793          	li	a5,0
-     a04:	0080006f          	j	a0c <_Z9OSSemPostP17EventControlBlock+0x80>
-     a08:	00500793          	li	a5,5
-     a0c:	00078513          	mv	a0,a5
-     a10:	01c12083          	lw	ra,28(sp)
-     a14:	01812403          	lw	s0,24(sp)
-     a18:	02010113          	addi	sp,sp,32
-     a1c:	00008067          	ret
+0000092c <_Z9OSSemPostP17EventControlBlock>:
+     92c:	fe010113          	addi	sp,sp,-32
+     930:	00112e23          	sw	ra,28(sp)
+     934:	00812c23          	sw	s0,24(sp)
+     938:	02010413          	addi	s0,sp,32
+     93c:	fea42623          	sw	a0,-20(s0)
+     940:	fec42783          	lw	a5,-20(s0)
+     944:	0057c783          	lbu	a5,5(a5)
+     948:	02078463          	beqz	a5,970 <_Z9OSSemPostP17EventControlBlock+0x44>
+     94c:	00a00613          	li	a2,10
+     950:	00000593          	li	a1,0
+     954:	fec42503          	lw	a0,-20(s0)
+     958:	00000097          	auipc	ra,0x0
+     95c:	668080e7          	jalr	1640(ra) # fc0 <_Z12EventTaskRdyP17EventControlBlockPvh>
+     960:	00000097          	auipc	ra,0x0
+     964:	b3c080e7          	jalr	-1220(ra) # 49c <_Z8OS_Schedv>
+     968:	00000793          	li	a5,0
+     96c:	0400006f          	j	9ac <_Z9OSSemPostP17EventControlBlock+0x80>
+     970:	fec42783          	lw	a5,-20(s0)
+     974:	0067d703          	lhu	a4,6(a5)
+     978:	000107b7          	lui	a5,0x10
+     97c:	fff78793          	addi	a5,a5,-1 # ffff <__BSS_END__+0xcfcb>
+     980:	02f70463          	beq	a4,a5,9a8 <_Z9OSSemPostP17EventControlBlock+0x7c>
+     984:	fec42783          	lw	a5,-20(s0)
+     988:	0067d783          	lhu	a5,6(a5)
+     98c:	00178793          	addi	a5,a5,1
+     990:	01079713          	slli	a4,a5,0x10
+     994:	01075713          	srli	a4,a4,0x10
+     998:	fec42783          	lw	a5,-20(s0)
+     99c:	00e79323          	sh	a4,6(a5)
+     9a0:	00000793          	li	a5,0
+     9a4:	0080006f          	j	9ac <_Z9OSSemPostP17EventControlBlock+0x80>
+     9a8:	00500793          	li	a5,5
+     9ac:	00078513          	mv	a0,a5
+     9b0:	01c12083          	lw	ra,28(sp)
+     9b4:	01812403          	lw	s0,24(sp)
+     9b8:	02010113          	addi	sp,sp,32
+     9bc:	00008067          	ret
 
-00000a20 <_Z9OSSemPendP17EventControlBlockPh>:
-     a20:	fe010113          	addi	sp,sp,-32
-     a24:	00112e23          	sw	ra,28(sp)
-     a28:	00812c23          	sw	s0,24(sp)
-     a2c:	02010413          	addi	s0,sp,32
-     a30:	fea42623          	sw	a0,-20(s0)
-     a34:	feb42423          	sw	a1,-24(s0)
-     a38:	00008713          	mv	a4,ra
-     a3c:	000027b7          	lui	a5,0x2
-     a40:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     a44:	02e7a023          	sw	a4,32(a5)
-     a48:	fec42783          	lw	a5,-20(s0)
-     a4c:	00079a63          	bnez	a5,a60 <_Z9OSSemPendP17EventControlBlockPh+0x40>
-     a50:	fe842783          	lw	a5,-24(s0)
-     a54:	00300713          	li	a4,3
-     a58:	00e78023          	sb	a4,0(a5)
-     a5c:	0a00006f          	j	afc <_Z9OSSemPendP17EventControlBlockPh+0xdc>
-     a60:	fec42783          	lw	a5,-20(s0)
-     a64:	0047c703          	lbu	a4,4(a5)
-     a68:	00800793          	li	a5,8
-     a6c:	00f70a63          	beq	a4,a5,a80 <_Z9OSSemPendP17EventControlBlockPh+0x60>
-     a70:	fe842783          	lw	a5,-24(s0)
-     a74:	00400713          	li	a4,4
-     a78:	00e78023          	sb	a4,0(a5)
-     a7c:	0800006f          	j	afc <_Z9OSSemPendP17EventControlBlockPh+0xdc>
-     a80:	fec42783          	lw	a5,-20(s0)
-     a84:	0067d783          	lhu	a5,6(a5)
-     a88:	02078663          	beqz	a5,ab4 <_Z9OSSemPendP17EventControlBlockPh+0x94>
-     a8c:	fec42783          	lw	a5,-20(s0)
-     a90:	0067d783          	lhu	a5,6(a5)
-     a94:	fff78793          	addi	a5,a5,-1
-     a98:	01079713          	slli	a4,a5,0x10
-     a9c:	01075713          	srli	a4,a4,0x10
-     aa0:	fec42783          	lw	a5,-20(s0)
-     aa4:	00e79323          	sh	a4,6(a5)
-     aa8:	fe842783          	lw	a5,-24(s0)
-     aac:	00078023          	sb	zero,0(a5)
-     ab0:	04c0006f          	j	afc <_Z9OSSemPendP17EventControlBlockPh+0xdc>
-     ab4:	000027b7          	lui	a5,0x2
-     ab8:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     abc:	0167c703          	lbu	a4,22(a5)
-     ac0:	000027b7          	lui	a5,0x2
-     ac4:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     ac8:	00a76713          	ori	a4,a4,10
-     acc:	0ff77713          	andi	a4,a4,255
-     ad0:	00e78b23          	sb	a4,22(a5)
-     ad4:	fec42503          	lw	a0,-20(s0)
-     ad8:	00000097          	auipc	ra,0x0
-     adc:	d40080e7          	jalr	-704(ra) # 818 <_Z16OS_EventTaskWaitP17EventControlBlock>
-     ae0:	00000097          	auipc	ra,0x0
-     ae4:	9a8080e7          	jalr	-1624(ra) # 488 <_Z8OS_Schedv>
-     ae8:	000027b7          	lui	a5,0x2
-     aec:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     af0:	0007a623          	sw	zero,12(a5)
-     af4:	fe842783          	lw	a5,-24(s0)
-     af8:	00078023          	sb	zero,0(a5)
-     afc:	01c12083          	lw	ra,28(sp)
-     b00:	01812403          	lw	s0,24(sp)
-     b04:	02010113          	addi	sp,sp,32
-     b08:	00008067          	ret
+000009c0 <_Z9OSSemPendP17EventControlBlockPh>:
+     9c0:	fe010113          	addi	sp,sp,-32
+     9c4:	00112e23          	sw	ra,28(sp)
+     9c8:	00812c23          	sw	s0,24(sp)
+     9cc:	02010413          	addi	s0,sp,32
+     9d0:	fea42623          	sw	a0,-20(s0)
+     9d4:	feb42423          	sw	a1,-24(s0)
+     9d8:	00008713          	mv	a4,ra
+     9dc:	000027b7          	lui	a5,0x2
+     9e0:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     9e4:	02e7a023          	sw	a4,32(a5)
+     9e8:	fec42783          	lw	a5,-20(s0)
+     9ec:	00079a63          	bnez	a5,a00 <_Z9OSSemPendP17EventControlBlockPh+0x40>
+     9f0:	fe842783          	lw	a5,-24(s0)
+     9f4:	00300713          	li	a4,3
+     9f8:	00e78023          	sb	a4,0(a5)
+     9fc:	0a00006f          	j	a9c <_Z9OSSemPendP17EventControlBlockPh+0xdc>
+     a00:	fec42783          	lw	a5,-20(s0)
+     a04:	0047c703          	lbu	a4,4(a5)
+     a08:	00800793          	li	a5,8
+     a0c:	00f70a63          	beq	a4,a5,a20 <_Z9OSSemPendP17EventControlBlockPh+0x60>
+     a10:	fe842783          	lw	a5,-24(s0)
+     a14:	00400713          	li	a4,4
+     a18:	00e78023          	sb	a4,0(a5)
+     a1c:	0800006f          	j	a9c <_Z9OSSemPendP17EventControlBlockPh+0xdc>
+     a20:	fec42783          	lw	a5,-20(s0)
+     a24:	0067d783          	lhu	a5,6(a5)
+     a28:	02078663          	beqz	a5,a54 <_Z9OSSemPendP17EventControlBlockPh+0x94>
+     a2c:	fec42783          	lw	a5,-20(s0)
+     a30:	0067d783          	lhu	a5,6(a5)
+     a34:	fff78793          	addi	a5,a5,-1
+     a38:	01079713          	slli	a4,a5,0x10
+     a3c:	01075713          	srli	a4,a4,0x10
+     a40:	fec42783          	lw	a5,-20(s0)
+     a44:	00e79323          	sh	a4,6(a5)
+     a48:	fe842783          	lw	a5,-24(s0)
+     a4c:	00078023          	sb	zero,0(a5)
+     a50:	04c0006f          	j	a9c <_Z9OSSemPendP17EventControlBlockPh+0xdc>
+     a54:	000027b7          	lui	a5,0x2
+     a58:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     a5c:	0167c703          	lbu	a4,22(a5)
+     a60:	000027b7          	lui	a5,0x2
+     a64:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     a68:	00a76713          	ori	a4,a4,10
+     a6c:	0ff77713          	andi	a4,a4,255
+     a70:	00e78b23          	sb	a4,22(a5)
+     a74:	fec42503          	lw	a0,-20(s0)
+     a78:	00000097          	auipc	ra,0x0
+     a7c:	d40080e7          	jalr	-704(ra) # 7b8 <_Z16OS_EventTaskWaitP17EventControlBlock>
+     a80:	00000097          	auipc	ra,0x0
+     a84:	a1c080e7          	jalr	-1508(ra) # 49c <_Z8OS_Schedv>
+     a88:	000027b7          	lui	a5,0x2
+     a8c:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     a90:	0007a623          	sw	zero,12(a5)
+     a94:	fe842783          	lw	a5,-24(s0)
+     a98:	00078023          	sb	zero,0(a5)
+     a9c:	01c12083          	lw	ra,28(sp)
+     aa0:	01812403          	lw	s0,24(sp)
+     aa4:	02010113          	addi	sp,sp,32
+     aa8:	00008067          	ret
 
-00000b0c <_Z14OSStartHighRdyv>:
-     b0c:	ff010113          	addi	sp,sp,-16
-     b10:	00812623          	sw	s0,12(sp)
-     b14:	01010413          	addi	s0,sp,16
-     b18:	000027b7          	lui	a5,0x2
-     b1c:	00100713          	li	a4,1
-     b20:	34e78823          	sb	a4,848(a5) # 2350 <OSRunning>
-     b24:	000027b7          	lui	a5,0x2
-     b28:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     b2c:	0007a783          	lw	a5,0(a5)
-     b30:	00078113          	mv	sp,a5
-     b34:	03010113          	addi	sp,sp,48
-     b38:	00012e03          	lw	t3,0(sp)
-     b3c:	00410113          	addi	sp,sp,4
-     b40:	000e0067          	jr	t3
-     b44:	00000013          	nop
-     b48:	00c12403          	lw	s0,12(sp)
-     b4c:	01010113          	addi	sp,sp,16
-     b50:	00008067          	ret
+00000aac <_Z14OSStartHighRdyv>:
+     aac:	ff010113          	addi	sp,sp,-16
+     ab0:	00812623          	sw	s0,12(sp)
+     ab4:	01010413          	addi	s0,sp,16
+     ab8:	000027b7          	lui	a5,0x2
+     abc:	00100713          	li	a4,1
+     ac0:	2ee78823          	sb	a4,752(a5) # 22f0 <OSRunning>
+     ac4:	000027b7          	lui	a5,0x2
+     ac8:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     acc:	0007a783          	lw	a5,0(a5)
+     ad0:	00078113          	mv	sp,a5
+     ad4:	03010113          	addi	sp,sp,48
+     ad8:	00012e03          	lw	t3,0(sp)
+     adc:	00410113          	addi	sp,sp,4
+     ae0:	000e0067          	jr	t3
+     ae4:	00000013          	nop
+     ae8:	00c12403          	lw	s0,12(sp)
+     aec:	01010113          	addi	sp,sp,16
+     af0:	00008067          	ret
 
-00000b54 <_Z8OS_Startv>:
-     b54:	fe010113          	addi	sp,sp,-32
-     b58:	00112e23          	sw	ra,28(sp)
-     b5c:	00812c23          	sw	s0,24(sp)
-     b60:	02010413          	addi	s0,sp,32
-     b64:	000027b7          	lui	a5,0x2
-     b68:	3507c783          	lbu	a5,848(a5) # 2350 <OSRunning>
-     b6c:	0c079063          	bnez	a5,c2c <_Z8OS_Startv+0xd8>
-     b70:	000027b7          	lui	a5,0x2
-     b74:	3517c783          	lbu	a5,849(a5) # 2351 <OSRdyGrp>
-     b78:	00078713          	mv	a4,a5
+00000af4 <_Z8OS_Startv>:
+     af4:	fe010113          	addi	sp,sp,-32
+     af8:	00112e23          	sw	ra,28(sp)
+     afc:	00812c23          	sw	s0,24(sp)
+     b00:	02010413          	addi	s0,sp,32
+     b04:	000027b7          	lui	a5,0x2
+     b08:	2f07c783          	lbu	a5,752(a5) # 22f0 <OSRunning>
+     b0c:	0c079063          	bnez	a5,bcc <_Z8OS_Startv+0xd8>
+     b10:	000027b7          	lui	a5,0x2
+     b14:	2f17c783          	lbu	a5,753(a5) # 22f1 <OSRdyGrp>
+     b18:	00078713          	mv	a4,a5
+     b1c:	000027b7          	lui	a5,0x2
+     b20:	9d078793          	addi	a5,a5,-1584 # 19d0 <_ZL10OSUnMapTbl>
+     b24:	00f707b3          	add	a5,a4,a5
+     b28:	0007c783          	lbu	a5,0(a5)
+     b2c:	fef407a3          	sb	a5,-17(s0)
+     b30:	fef44703          	lbu	a4,-17(s0)
+     b34:	000027b7          	lui	a5,0x2
+     b38:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+     b3c:	00f707b3          	add	a5,a4,a5
+     b40:	0007c783          	lbu	a5,0(a5)
+     b44:	00078713          	mv	a4,a5
+     b48:	000027b7          	lui	a5,0x2
+     b4c:	9d078793          	addi	a5,a5,-1584 # 19d0 <_ZL10OSUnMapTbl>
+     b50:	00f707b3          	add	a5,a4,a5
+     b54:	0007c783          	lbu	a5,0(a5)
+     b58:	fef40723          	sb	a5,-18(s0)
+     b5c:	fef44783          	lbu	a5,-17(s0)
+     b60:	00379793          	slli	a5,a5,0x3
+     b64:	0ff7f713          	andi	a4,a5,255
+     b68:	fee44783          	lbu	a5,-18(s0)
+     b6c:	00f707b3          	add	a5,a4,a5
+     b70:	0ff7f713          	andi	a4,a5,255
+     b74:	000027b7          	lui	a5,0x2
+     b78:	2ce78aa3          	sb	a4,725(a5) # 22d5 <OSPrioHighRdy>
      b7c:	000027b7          	lui	a5,0x2
-     b80:	a3078793          	addi	a5,a5,-1488 # 1a30 <_ZL10OSUnMapTbl>
-     b84:	00f707b3          	add	a5,a4,a5
-     b88:	0007c783          	lbu	a5,0(a5)
-     b8c:	fef407a3          	sb	a5,-17(s0)
-     b90:	fef44703          	lbu	a4,-17(s0)
-     b94:	000027b7          	lui	a5,0x2
-     b98:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-     b9c:	00f707b3          	add	a5,a4,a5
-     ba0:	0007c783          	lbu	a5,0(a5)
-     ba4:	00078713          	mv	a4,a5
-     ba8:	000027b7          	lui	a5,0x2
-     bac:	a3078793          	addi	a5,a5,-1488 # 1a30 <_ZL10OSUnMapTbl>
-     bb0:	00f707b3          	add	a5,a4,a5
-     bb4:	0007c783          	lbu	a5,0(a5)
-     bb8:	fef40723          	sb	a5,-18(s0)
-     bbc:	fef44783          	lbu	a5,-17(s0)
-     bc0:	00379793          	slli	a5,a5,0x3
-     bc4:	0ff7f713          	andi	a4,a5,255
-     bc8:	fee44783          	lbu	a5,-18(s0)
-     bcc:	00f707b3          	add	a5,a4,a5
-     bd0:	0ff7f713          	andi	a4,a5,255
-     bd4:	000027b7          	lui	a5,0x2
-     bd8:	32e78aa3          	sb	a4,821(a5) # 2335 <OSPrioHighRdy>
-     bdc:	000027b7          	lui	a5,0x2
-     be0:	3357c703          	lbu	a4,821(a5) # 2335 <OSPrioHighRdy>
-     be4:	000027b7          	lui	a5,0x2
-     be8:	32e78a23          	sb	a4,820(a5) # 2334 <OSPrioCur>
-     bec:	000027b7          	lui	a5,0x2
-     bf0:	3357c783          	lbu	a5,821(a5) # 2335 <OSPrioHighRdy>
-     bf4:	00078713          	mv	a4,a5
-     bf8:	000037b7          	lui	a5,0x3
-     bfc:	00271713          	slli	a4,a4,0x2
-     c00:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-     c04:	00f707b3          	add	a5,a4,a5
-     c08:	0007a703          	lw	a4,0(a5)
-     c0c:	000027b7          	lui	a5,0x2
-     c10:	34e7a623          	sw	a4,844(a5) # 234c <OSTCBHighRdy>
-     c14:	000027b7          	lui	a5,0x2
-     c18:	34c7a703          	lw	a4,844(a5) # 234c <OSTCBHighRdy>
-     c1c:	000027b7          	lui	a5,0x2
-     c20:	34e7a423          	sw	a4,840(a5) # 2348 <OSTCBCur>
-     c24:	00000097          	auipc	ra,0x0
-     c28:	ee8080e7          	jalr	-280(ra) # b0c <_Z14OSStartHighRdyv>
-     c2c:	00000013          	nop
-     c30:	01c12083          	lw	ra,28(sp)
-     c34:	01812403          	lw	s0,24(sp)
-     c38:	02010113          	addi	sp,sp,32
-     c3c:	00008067          	ret
+     b80:	2d57c703          	lbu	a4,725(a5) # 22d5 <OSPrioHighRdy>
+     b84:	000027b7          	lui	a5,0x2
+     b88:	2ce78a23          	sb	a4,724(a5) # 22d4 <OSPrioCur>
+     b8c:	000027b7          	lui	a5,0x2
+     b90:	2d57c783          	lbu	a5,725(a5) # 22d5 <OSPrioHighRdy>
+     b94:	00078713          	mv	a4,a5
+     b98:	000037b7          	lui	a5,0x3
+     b9c:	00271713          	slli	a4,a4,0x2
+     ba0:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+     ba4:	00f707b3          	add	a5,a4,a5
+     ba8:	0007a703          	lw	a4,0(a5)
+     bac:	000027b7          	lui	a5,0x2
+     bb0:	2ee7a623          	sw	a4,748(a5) # 22ec <OSTCBHighRdy>
+     bb4:	000027b7          	lui	a5,0x2
+     bb8:	2ec7a703          	lw	a4,748(a5) # 22ec <OSTCBHighRdy>
+     bbc:	000027b7          	lui	a5,0x2
+     bc0:	2ee7a423          	sw	a4,744(a5) # 22e8 <OSTCBCur>
+     bc4:	00000097          	auipc	ra,0x0
+     bc8:	ee8080e7          	jalr	-280(ra) # aac <_Z14OSStartHighRdyv>
+     bcc:	00000013          	nop
+     bd0:	01c12083          	lw	ra,28(sp)
+     bd4:	01812403          	lw	s0,24(sp)
+     bd8:	02010113          	addi	sp,sp,32
+     bdc:	00008067          	ret
 
-00000c40 <_Z13OSTaskSuspendh>:
-     c40:	fd010113          	addi	sp,sp,-48
-     c44:	02112623          	sw	ra,44(sp)
-     c48:	02812423          	sw	s0,40(sp)
-     c4c:	03010413          	addi	s0,sp,48
-     c50:	00050793          	mv	a5,a0
-     c54:	fcf40fa3          	sb	a5,-33(s0)
-     c58:	fdf44703          	lbu	a4,-33(s0)
-     c5c:	03e00793          	li	a5,62
-     c60:	00e7fa63          	bgeu	a5,a4,c74 <_Z13OSTaskSuspendh+0x34>
-     c64:	fdf44783          	lbu	a5,-33(s0)
-     c68:	00078663          	beqz	a5,c74 <_Z13OSTaskSuspendh+0x34>
-     c6c:	00200793          	li	a5,2
-     c70:	1740006f          	j	de4 <_Z13OSTaskSuspendh+0x1a4>
-     c74:	fffff097          	auipc	ra,0xfffff
-     c78:	69c080e7          	jalr	1692(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-     c7c:	fdf44783          	lbu	a5,-33(s0)
-     c80:	02079063          	bnez	a5,ca0 <_Z13OSTaskSuspendh+0x60>
-     c84:	000027b7          	lui	a5,0x2
-     c88:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     c8c:	0177c783          	lbu	a5,23(a5)
-     c90:	fcf40fa3          	sb	a5,-33(s0)
-     c94:	00100793          	li	a5,1
-     c98:	fef407a3          	sb	a5,-17(s0)
-     c9c:	0280006f          	j	cc4 <_Z13OSTaskSuspendh+0x84>
-     ca0:	000027b7          	lui	a5,0x2
-     ca4:	3487a783          	lw	a5,840(a5) # 2348 <OSTCBCur>
-     ca8:	0177c783          	lbu	a5,23(a5)
-     cac:	fdf44703          	lbu	a4,-33(s0)
-     cb0:	00f71863          	bne	a4,a5,cc0 <_Z13OSTaskSuspendh+0x80>
-     cb4:	00100793          	li	a5,1
-     cb8:	fef407a3          	sb	a5,-17(s0)
-     cbc:	0080006f          	j	cc4 <_Z13OSTaskSuspendh+0x84>
-     cc0:	fe0407a3          	sb	zero,-17(s0)
-     cc4:	fdf44703          	lbu	a4,-33(s0)
-     cc8:	000037b7          	lui	a5,0x3
-     ccc:	00271713          	slli	a4,a4,0x2
-     cd0:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-     cd4:	00f707b3          	add	a5,a4,a5
-     cd8:	0007a783          	lw	a5,0(a5)
-     cdc:	fef42423          	sw	a5,-24(s0)
-     ce0:	fe842783          	lw	a5,-24(s0)
-     ce4:	00079a63          	bnez	a5,cf8 <_Z13OSTaskSuspendh+0xb8>
-     ce8:	fffff097          	auipc	ra,0xfffff
-     cec:	644080e7          	jalr	1604(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-     cf0:	00400793          	li	a5,4
-     cf4:	0f00006f          	j	de4 <_Z13OSTaskSuspendh+0x1a4>
-     cf8:	fe842783          	lw	a5,-24(s0)
-     cfc:	0197c783          	lbu	a5,25(a5)
-     d00:	00078713          	mv	a4,a5
-     d04:	000027b7          	lui	a5,0x2
-     d08:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-     d0c:	00f707b3          	add	a5,a4,a5
-     d10:	0007c783          	lbu	a5,0(a5)
-     d14:	01879713          	slli	a4,a5,0x18
-     d18:	41875713          	srai	a4,a4,0x18
+00000be0 <_Z13OSTaskSuspendh>:
+     be0:	fd010113          	addi	sp,sp,-48
+     be4:	02112623          	sw	ra,44(sp)
+     be8:	02812423          	sw	s0,40(sp)
+     bec:	03010413          	addi	s0,sp,48
+     bf0:	00050793          	mv	a5,a0
+     bf4:	fcf40fa3          	sb	a5,-33(s0)
+     bf8:	fdf44703          	lbu	a4,-33(s0)
+     bfc:	03e00793          	li	a5,62
+     c00:	00e7fa63          	bgeu	a5,a4,c14 <_Z13OSTaskSuspendh+0x34>
+     c04:	fdf44783          	lbu	a5,-33(s0)
+     c08:	00078663          	beqz	a5,c14 <_Z13OSTaskSuspendh+0x34>
+     c0c:	00200793          	li	a5,2
+     c10:	1740006f          	j	d84 <_Z13OSTaskSuspendh+0x1a4>
+     c14:	fffff097          	auipc	ra,0xfffff
+     c18:	710080e7          	jalr	1808(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+     c1c:	fdf44783          	lbu	a5,-33(s0)
+     c20:	02079063          	bnez	a5,c40 <_Z13OSTaskSuspendh+0x60>
+     c24:	000027b7          	lui	a5,0x2
+     c28:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     c2c:	0177c783          	lbu	a5,23(a5)
+     c30:	fcf40fa3          	sb	a5,-33(s0)
+     c34:	00100793          	li	a5,1
+     c38:	fef407a3          	sb	a5,-17(s0)
+     c3c:	0280006f          	j	c64 <_Z13OSTaskSuspendh+0x84>
+     c40:	000027b7          	lui	a5,0x2
+     c44:	2e87a783          	lw	a5,744(a5) # 22e8 <OSTCBCur>
+     c48:	0177c783          	lbu	a5,23(a5)
+     c4c:	fdf44703          	lbu	a4,-33(s0)
+     c50:	00f71863          	bne	a4,a5,c60 <_Z13OSTaskSuspendh+0x80>
+     c54:	00100793          	li	a5,1
+     c58:	fef407a3          	sb	a5,-17(s0)
+     c5c:	0080006f          	j	c64 <_Z13OSTaskSuspendh+0x84>
+     c60:	fe0407a3          	sb	zero,-17(s0)
+     c64:	fdf44703          	lbu	a4,-33(s0)
+     c68:	000037b7          	lui	a5,0x3
+     c6c:	00271713          	slli	a4,a4,0x2
+     c70:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+     c74:	00f707b3          	add	a5,a4,a5
+     c78:	0007a783          	lw	a5,0(a5)
+     c7c:	fef42423          	sw	a5,-24(s0)
+     c80:	fe842783          	lw	a5,-24(s0)
+     c84:	00079a63          	bnez	a5,c98 <_Z13OSTaskSuspendh+0xb8>
+     c88:	fffff097          	auipc	ra,0xfffff
+     c8c:	6b8080e7          	jalr	1720(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+     c90:	00400793          	li	a5,4
+     c94:	0f00006f          	j	d84 <_Z13OSTaskSuspendh+0x1a4>
+     c98:	fe842783          	lw	a5,-24(s0)
+     c9c:	0197c783          	lbu	a5,25(a5)
+     ca0:	00078713          	mv	a4,a5
+     ca4:	000027b7          	lui	a5,0x2
+     ca8:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+     cac:	00f707b3          	add	a5,a4,a5
+     cb0:	0007c783          	lbu	a5,0(a5)
+     cb4:	01879713          	slli	a4,a5,0x18
+     cb8:	41875713          	srai	a4,a4,0x18
+     cbc:	fe842783          	lw	a5,-24(s0)
+     cc0:	01a7c783          	lbu	a5,26(a5)
+     cc4:	01879793          	slli	a5,a5,0x18
+     cc8:	4187d793          	srai	a5,a5,0x18
+     ccc:	fff7c793          	not	a5,a5
+     cd0:	01879793          	slli	a5,a5,0x18
+     cd4:	4187d793          	srai	a5,a5,0x18
+     cd8:	00f777b3          	and	a5,a4,a5
+     cdc:	01879713          	slli	a4,a5,0x18
+     ce0:	41875713          	srai	a4,a4,0x18
+     ce4:	fe842783          	lw	a5,-24(s0)
+     ce8:	0197c783          	lbu	a5,25(a5)
+     cec:	0ff77693          	andi	a3,a4,255
+     cf0:	00002737          	lui	a4,0x2
+     cf4:	2f470713          	addi	a4,a4,756 # 22f4 <OSRdyTbl>
+     cf8:	00e78733          	add	a4,a5,a4
+     cfc:	00d70023          	sb	a3,0(a4)
+     d00:	00002737          	lui	a4,0x2
+     d04:	2f470713          	addi	a4,a4,756 # 22f4 <OSRdyTbl>
+     d08:	00e787b3          	add	a5,a5,a4
+     d0c:	0007c783          	lbu	a5,0(a5)
+     d10:	0017b793          	seqz	a5,a5
+     d14:	0ff7f793          	andi	a5,a5,255
+     d18:	04078463          	beqz	a5,d60 <_Z13OSTaskSuspendh+0x180>
      d1c:	fe842783          	lw	a5,-24(s0)
-     d20:	01a7c783          	lbu	a5,26(a5)
+     d20:	01b7c783          	lbu	a5,27(a5)
      d24:	01879793          	slli	a5,a5,0x18
      d28:	4187d793          	srai	a5,a5,0x18
      d2c:	fff7c793          	not	a5,a5
-     d30:	01879793          	slli	a5,a5,0x18
-     d34:	4187d793          	srai	a5,a5,0x18
-     d38:	00f777b3          	and	a5,a4,a5
-     d3c:	01879713          	slli	a4,a5,0x18
-     d40:	41875713          	srai	a4,a4,0x18
-     d44:	fe842783          	lw	a5,-24(s0)
-     d48:	0197c783          	lbu	a5,25(a5)
-     d4c:	0ff77693          	andi	a3,a4,255
-     d50:	00002737          	lui	a4,0x2
-     d54:	35470713          	addi	a4,a4,852 # 2354 <OSRdyTbl>
-     d58:	00e78733          	add	a4,a5,a4
-     d5c:	00d70023          	sb	a3,0(a4)
-     d60:	00002737          	lui	a4,0x2
-     d64:	35470713          	addi	a4,a4,852 # 2354 <OSRdyTbl>
-     d68:	00e787b3          	add	a5,a5,a4
-     d6c:	0007c783          	lbu	a5,0(a5)
-     d70:	0017b793          	seqz	a5,a5
-     d74:	0ff7f793          	andi	a5,a5,255
-     d78:	04078463          	beqz	a5,dc0 <_Z13OSTaskSuspendh+0x180>
-     d7c:	fe842783          	lw	a5,-24(s0)
-     d80:	01b7c783          	lbu	a5,27(a5)
-     d84:	01879793          	slli	a5,a5,0x18
-     d88:	4187d793          	srai	a5,a5,0x18
-     d8c:	fff7c793          	not	a5,a5
-     d90:	01879713          	slli	a4,a5,0x18
-     d94:	41875713          	srai	a4,a4,0x18
-     d98:	000027b7          	lui	a5,0x2
-     d9c:	3517c783          	lbu	a5,849(a5) # 2351 <OSRdyGrp>
-     da0:	01879793          	slli	a5,a5,0x18
-     da4:	4187d793          	srai	a5,a5,0x18
-     da8:	00f777b3          	and	a5,a4,a5
-     dac:	01879793          	slli	a5,a5,0x18
-     db0:	4187d793          	srai	a5,a5,0x18
-     db4:	0ff7f713          	andi	a4,a5,255
-     db8:	000027b7          	lui	a5,0x2
-     dbc:	34e788a3          	sb	a4,849(a5) # 2351 <OSRdyGrp>
-     dc0:	fe842783          	lw	a5,-24(s0)
-     dc4:	0167c783          	lbu	a5,22(a5)
-     dc8:	0037e793          	ori	a5,a5,3
-     dcc:	0ff7f713          	andi	a4,a5,255
-     dd0:	fe842783          	lw	a5,-24(s0)
-     dd4:	00e78b23          	sb	a4,22(a5)
-     dd8:	fffff097          	auipc	ra,0xfffff
-     ddc:	554080e7          	jalr	1364(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-     de0:	00000793          	li	a5,0
-     de4:	00078513          	mv	a0,a5
-     de8:	02c12083          	lw	ra,44(sp)
-     dec:	02812403          	lw	s0,40(sp)
-     df0:	03010113          	addi	sp,sp,48
-     df4:	00008067          	ret
+     d30:	01879713          	slli	a4,a5,0x18
+     d34:	41875713          	srai	a4,a4,0x18
+     d38:	000027b7          	lui	a5,0x2
+     d3c:	2f17c783          	lbu	a5,753(a5) # 22f1 <OSRdyGrp>
+     d40:	01879793          	slli	a5,a5,0x18
+     d44:	4187d793          	srai	a5,a5,0x18
+     d48:	00f777b3          	and	a5,a4,a5
+     d4c:	01879793          	slli	a5,a5,0x18
+     d50:	4187d793          	srai	a5,a5,0x18
+     d54:	0ff7f713          	andi	a4,a5,255
+     d58:	000027b7          	lui	a5,0x2
+     d5c:	2ee788a3          	sb	a4,753(a5) # 22f1 <OSRdyGrp>
+     d60:	fe842783          	lw	a5,-24(s0)
+     d64:	0167c783          	lbu	a5,22(a5)
+     d68:	0037e793          	ori	a5,a5,3
+     d6c:	0ff7f713          	andi	a4,a5,255
+     d70:	fe842783          	lw	a5,-24(s0)
+     d74:	00e78b23          	sb	a4,22(a5)
+     d78:	fffff097          	auipc	ra,0xfffff
+     d7c:	5c8080e7          	jalr	1480(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+     d80:	00000793          	li	a5,0
+     d84:	00078513          	mv	a0,a5
+     d88:	02c12083          	lw	ra,44(sp)
+     d8c:	02812403          	lw	s0,40(sp)
+     d90:	03010113          	addi	sp,sp,48
+     d94:	00008067          	ret
 
-00000df8 <_Z11OSEventInitP17EventControlBlockh>:
-     df8:	fd010113          	addi	sp,sp,-48
-     dfc:	02812623          	sw	s0,44(sp)
-     e00:	03010413          	addi	s0,sp,48
-     e04:	fca42e23          	sw	a0,-36(s0)
-     e08:	00058793          	mv	a5,a1
-     e0c:	fcf40da3          	sb	a5,-37(s0)
-     e10:	fdc42783          	lw	a5,-36(s0)
-     e14:	fdb44703          	lbu	a4,-37(s0)
-     e18:	00e78223          	sb	a4,4(a5)
-     e1c:	fdc42783          	lw	a5,-36(s0)
-     e20:	000782a3          	sb	zero,5(a5)
-     e24:	fdc42783          	lw	a5,-36(s0)
-     e28:	0007a023          	sw	zero,0(a5)
-     e2c:	fe0407a3          	sb	zero,-17(s0)
-     e30:	fef44703          	lbu	a4,-17(s0)
-     e34:	01d00793          	li	a5,29
-     e38:	02e7e263          	bltu	a5,a4,e5c <_Z11OSEventInitP17EventControlBlockh+0x64>
-     e3c:	fef44783          	lbu	a5,-17(s0)
-     e40:	fdc42703          	lw	a4,-36(s0)
-     e44:	00f707b3          	add	a5,a4,a5
-     e48:	00078423          	sb	zero,8(a5)
-     e4c:	fef44783          	lbu	a5,-17(s0)
-     e50:	00178793          	addi	a5,a5,1
-     e54:	fef407a3          	sb	a5,-17(s0)
-     e58:	fd9ff06f          	j	e30 <_Z11OSEventInitP17EventControlBlockh+0x38>
-     e5c:	00000013          	nop
-     e60:	02c12403          	lw	s0,44(sp)
-     e64:	03010113          	addi	sp,sp,48
-     e68:	00008067          	ret
+00000d98 <_Z11OSEventInitP17EventControlBlockh>:
+     d98:	fd010113          	addi	sp,sp,-48
+     d9c:	02812623          	sw	s0,44(sp)
+     da0:	03010413          	addi	s0,sp,48
+     da4:	fca42e23          	sw	a0,-36(s0)
+     da8:	00058793          	mv	a5,a1
+     dac:	fcf40da3          	sb	a5,-37(s0)
+     db0:	fdc42783          	lw	a5,-36(s0)
+     db4:	fdb44703          	lbu	a4,-37(s0)
+     db8:	00e78223          	sb	a4,4(a5)
+     dbc:	fdc42783          	lw	a5,-36(s0)
+     dc0:	000782a3          	sb	zero,5(a5)
+     dc4:	fdc42783          	lw	a5,-36(s0)
+     dc8:	0007a023          	sw	zero,0(a5)
+     dcc:	fe0407a3          	sb	zero,-17(s0)
+     dd0:	fef44703          	lbu	a4,-17(s0)
+     dd4:	01d00793          	li	a5,29
+     dd8:	02e7e263          	bltu	a5,a4,dfc <_Z11OSEventInitP17EventControlBlockh+0x64>
+     ddc:	fef44783          	lbu	a5,-17(s0)
+     de0:	fdc42703          	lw	a4,-36(s0)
+     de4:	00f707b3          	add	a5,a4,a5
+     de8:	00078423          	sb	zero,8(a5)
+     dec:	fef44783          	lbu	a5,-17(s0)
+     df0:	00178793          	addi	a5,a5,1
+     df4:	fef407a3          	sb	a5,-17(s0)
+     df8:	fd9ff06f          	j	dd0 <_Z11OSEventInitP17EventControlBlockh+0x38>
+     dfc:	00000013          	nop
+     e00:	02c12403          	lw	s0,44(sp)
+     e04:	03010113          	addi	sp,sp,48
+     e08:	00008067          	ret
 
-00000e6c <_Z19appendToWaitingListP17EventControlBlockh>:
-     e6c:	fe010113          	addi	sp,sp,-32
-     e70:	00812e23          	sw	s0,28(sp)
-     e74:	02010413          	addi	s0,sp,32
-     e78:	fea42623          	sw	a0,-20(s0)
-     e7c:	00058793          	mv	a5,a1
-     e80:	fef405a3          	sb	a5,-21(s0)
-     e84:	fec42783          	lw	a5,-20(s0)
-     e88:	0057c703          	lbu	a4,5(a5)
-     e8c:	feb44783          	lbu	a5,-21(s0)
-     e90:	4037d693          	srai	a3,a5,0x3
-     e94:	000027b7          	lui	a5,0x2
-     e98:	2d878793          	addi	a5,a5,728 # 22d8 <_ZL8OSMapTbl>
-     e9c:	00f687b3          	add	a5,a3,a5
-     ea0:	0007c783          	lbu	a5,0(a5)
-     ea4:	00f767b3          	or	a5,a4,a5
-     ea8:	0ff7f713          	andi	a4,a5,255
-     eac:	fec42783          	lw	a5,-20(s0)
-     eb0:	00e782a3          	sb	a4,5(a5)
-     eb4:	feb44783          	lbu	a5,-21(s0)
-     eb8:	4037d793          	srai	a5,a5,0x3
-     ebc:	fec42703          	lw	a4,-20(s0)
-     ec0:	00f707b3          	add	a5,a4,a5
-     ec4:	0087c683          	lbu	a3,8(a5)
-     ec8:	feb44783          	lbu	a5,-21(s0)
-     ecc:	0077f713          	andi	a4,a5,7
-     ed0:	000027b7          	lui	a5,0x2
-     ed4:	2d878793          	addi	a5,a5,728 # 22d8 <_ZL8OSMapTbl>
-     ed8:	00f707b3          	add	a5,a4,a5
-     edc:	0007c703          	lbu	a4,0(a5)
-     ee0:	feb44783          	lbu	a5,-21(s0)
-     ee4:	4037d793          	srai	a5,a5,0x3
-     ee8:	00e6e733          	or	a4,a3,a4
-     eec:	0ff77713          	andi	a4,a4,255
-     ef0:	fec42683          	lw	a3,-20(s0)
-     ef4:	00f687b3          	add	a5,a3,a5
-     ef8:	00e78423          	sb	a4,8(a5)
-     efc:	00000013          	nop
-     f00:	01c12403          	lw	s0,28(sp)
-     f04:	02010113          	addi	sp,sp,32
-     f08:	00008067          	ret
+00000e0c <_Z19appendToWaitingListP17EventControlBlockh>:
+     e0c:	fe010113          	addi	sp,sp,-32
+     e10:	00812e23          	sw	s0,28(sp)
+     e14:	02010413          	addi	s0,sp,32
+     e18:	fea42623          	sw	a0,-20(s0)
+     e1c:	00058793          	mv	a5,a1
+     e20:	fef405a3          	sb	a5,-21(s0)
+     e24:	fec42783          	lw	a5,-20(s0)
+     e28:	0057c703          	lbu	a4,5(a5)
+     e2c:	feb44783          	lbu	a5,-21(s0)
+     e30:	4037d693          	srai	a3,a5,0x3
+     e34:	000027b7          	lui	a5,0x2
+     e38:	27878793          	addi	a5,a5,632 # 2278 <_ZL8OSMapTbl>
+     e3c:	00f687b3          	add	a5,a3,a5
+     e40:	0007c783          	lbu	a5,0(a5)
+     e44:	00f767b3          	or	a5,a4,a5
+     e48:	0ff7f713          	andi	a4,a5,255
+     e4c:	fec42783          	lw	a5,-20(s0)
+     e50:	00e782a3          	sb	a4,5(a5)
+     e54:	feb44783          	lbu	a5,-21(s0)
+     e58:	4037d793          	srai	a5,a5,0x3
+     e5c:	fec42703          	lw	a4,-20(s0)
+     e60:	00f707b3          	add	a5,a4,a5
+     e64:	0087c683          	lbu	a3,8(a5)
+     e68:	feb44783          	lbu	a5,-21(s0)
+     e6c:	0077f713          	andi	a4,a5,7
+     e70:	000027b7          	lui	a5,0x2
+     e74:	27878793          	addi	a5,a5,632 # 2278 <_ZL8OSMapTbl>
+     e78:	00f707b3          	add	a5,a4,a5
+     e7c:	0007c703          	lbu	a4,0(a5)
+     e80:	feb44783          	lbu	a5,-21(s0)
+     e84:	4037d793          	srai	a5,a5,0x3
+     e88:	00e6e733          	or	a4,a3,a4
+     e8c:	0ff77713          	andi	a4,a4,255
+     e90:	fec42683          	lw	a3,-20(s0)
+     e94:	00f687b3          	add	a5,a3,a5
+     e98:	00e78423          	sb	a4,8(a5)
+     e9c:	00000013          	nop
+     ea0:	01c12403          	lw	s0,28(sp)
+     ea4:	02010113          	addi	sp,sp,32
+     ea8:	00008067          	ret
 
-00000f0c <_Z20eraseFromWaitingListP17EventControlBlock>:
-     f0c:	fd010113          	addi	sp,sp,-48
-     f10:	02112623          	sw	ra,44(sp)
-     f14:	02812423          	sw	s0,40(sp)
-     f18:	03010413          	addi	s0,sp,48
-     f1c:	fca42e23          	sw	a0,-36(s0)
-     f20:	fdc42503          	lw	a0,-36(s0)
-     f24:	00000097          	auipc	ra,0x0
-     f28:	320080e7          	jalr	800(ra) # 1244 <_Z18getHighestPriorityP17EventControlBlock>
-     f2c:	00050793          	mv	a5,a0
-     f30:	fef407a3          	sb	a5,-17(s0)
-     f34:	fef44783          	lbu	a5,-17(s0)
-     f38:	4037d793          	srai	a5,a5,0x3
-     f3c:	fdc42703          	lw	a4,-36(s0)
-     f40:	00f707b3          	add	a5,a4,a5
-     f44:	0087c783          	lbu	a5,8(a5)
-     f48:	01879713          	slli	a4,a5,0x18
-     f4c:	41875713          	srai	a4,a4,0x18
-     f50:	fef44783          	lbu	a5,-17(s0)
-     f54:	0077f693          	andi	a3,a5,7
-     f58:	000027b7          	lui	a5,0x2
-     f5c:	2d878793          	addi	a5,a5,728 # 22d8 <_ZL8OSMapTbl>
-     f60:	00f687b3          	add	a5,a3,a5
-     f64:	0007c783          	lbu	a5,0(a5)
-     f68:	01879793          	slli	a5,a5,0x18
-     f6c:	4187d793          	srai	a5,a5,0x18
-     f70:	fff7c793          	not	a5,a5
-     f74:	01879793          	slli	a5,a5,0x18
-     f78:	4187d793          	srai	a5,a5,0x18
-     f7c:	00f777b3          	and	a5,a4,a5
-     f80:	01879713          	slli	a4,a5,0x18
-     f84:	41875713          	srai	a4,a4,0x18
-     f88:	fef44783          	lbu	a5,-17(s0)
-     f8c:	4037d793          	srai	a5,a5,0x3
-     f90:	0ff77693          	andi	a3,a4,255
-     f94:	fdc42703          	lw	a4,-36(s0)
-     f98:	00f70733          	add	a4,a4,a5
-     f9c:	00d70423          	sb	a3,8(a4)
-     fa0:	fdc42703          	lw	a4,-36(s0)
-     fa4:	00f707b3          	add	a5,a4,a5
-     fa8:	0087c783          	lbu	a5,8(a5)
-     fac:	0017b793          	seqz	a5,a5
-     fb0:	0ff7f793          	andi	a5,a5,255
-     fb4:	04078c63          	beqz	a5,100c <_Z20eraseFromWaitingListP17EventControlBlock+0x100>
-     fb8:	fdc42783          	lw	a5,-36(s0)
-     fbc:	0057c783          	lbu	a5,5(a5)
-     fc0:	01879713          	slli	a4,a5,0x18
-     fc4:	41875713          	srai	a4,a4,0x18
-     fc8:	fef44783          	lbu	a5,-17(s0)
-     fcc:	4037d693          	srai	a3,a5,0x3
-     fd0:	000027b7          	lui	a5,0x2
-     fd4:	2d878793          	addi	a5,a5,728 # 22d8 <_ZL8OSMapTbl>
-     fd8:	00f687b3          	add	a5,a3,a5
-     fdc:	0007c783          	lbu	a5,0(a5)
-     fe0:	01879793          	slli	a5,a5,0x18
-     fe4:	4187d793          	srai	a5,a5,0x18
-     fe8:	fff7c793          	not	a5,a5
-     fec:	01879793          	slli	a5,a5,0x18
-     ff0:	4187d793          	srai	a5,a5,0x18
-     ff4:	00f777b3          	and	a5,a4,a5
-     ff8:	01879793          	slli	a5,a5,0x18
-     ffc:	4187d793          	srai	a5,a5,0x18
-    1000:	0ff7f713          	andi	a4,a5,255
-    1004:	fdc42783          	lw	a5,-36(s0)
-    1008:	00e782a3          	sb	a4,5(a5)
-    100c:	00000013          	nop
-    1010:	02c12083          	lw	ra,44(sp)
-    1014:	02812403          	lw	s0,40(sp)
-    1018:	03010113          	addi	sp,sp,48
-    101c:	00008067          	ret
+00000eac <_Z20eraseFromWaitingListP17EventControlBlock>:
+     eac:	fd010113          	addi	sp,sp,-48
+     eb0:	02112623          	sw	ra,44(sp)
+     eb4:	02812423          	sw	s0,40(sp)
+     eb8:	03010413          	addi	s0,sp,48
+     ebc:	fca42e23          	sw	a0,-36(s0)
+     ec0:	fdc42503          	lw	a0,-36(s0)
+     ec4:	00000097          	auipc	ra,0x0
+     ec8:	320080e7          	jalr	800(ra) # 11e4 <_Z18getHighestPriorityP17EventControlBlock>
+     ecc:	00050793          	mv	a5,a0
+     ed0:	fef407a3          	sb	a5,-17(s0)
+     ed4:	fef44783          	lbu	a5,-17(s0)
+     ed8:	4037d793          	srai	a5,a5,0x3
+     edc:	fdc42703          	lw	a4,-36(s0)
+     ee0:	00f707b3          	add	a5,a4,a5
+     ee4:	0087c783          	lbu	a5,8(a5)
+     ee8:	01879713          	slli	a4,a5,0x18
+     eec:	41875713          	srai	a4,a4,0x18
+     ef0:	fef44783          	lbu	a5,-17(s0)
+     ef4:	0077f693          	andi	a3,a5,7
+     ef8:	000027b7          	lui	a5,0x2
+     efc:	27878793          	addi	a5,a5,632 # 2278 <_ZL8OSMapTbl>
+     f00:	00f687b3          	add	a5,a3,a5
+     f04:	0007c783          	lbu	a5,0(a5)
+     f08:	01879793          	slli	a5,a5,0x18
+     f0c:	4187d793          	srai	a5,a5,0x18
+     f10:	fff7c793          	not	a5,a5
+     f14:	01879793          	slli	a5,a5,0x18
+     f18:	4187d793          	srai	a5,a5,0x18
+     f1c:	00f777b3          	and	a5,a4,a5
+     f20:	01879713          	slli	a4,a5,0x18
+     f24:	41875713          	srai	a4,a4,0x18
+     f28:	fef44783          	lbu	a5,-17(s0)
+     f2c:	4037d793          	srai	a5,a5,0x3
+     f30:	0ff77693          	andi	a3,a4,255
+     f34:	fdc42703          	lw	a4,-36(s0)
+     f38:	00f70733          	add	a4,a4,a5
+     f3c:	00d70423          	sb	a3,8(a4)
+     f40:	fdc42703          	lw	a4,-36(s0)
+     f44:	00f707b3          	add	a5,a4,a5
+     f48:	0087c783          	lbu	a5,8(a5)
+     f4c:	0017b793          	seqz	a5,a5
+     f50:	0ff7f793          	andi	a5,a5,255
+     f54:	04078c63          	beqz	a5,fac <_Z20eraseFromWaitingListP17EventControlBlock+0x100>
+     f58:	fdc42783          	lw	a5,-36(s0)
+     f5c:	0057c783          	lbu	a5,5(a5)
+     f60:	01879713          	slli	a4,a5,0x18
+     f64:	41875713          	srai	a4,a4,0x18
+     f68:	fef44783          	lbu	a5,-17(s0)
+     f6c:	4037d693          	srai	a3,a5,0x3
+     f70:	000027b7          	lui	a5,0x2
+     f74:	27878793          	addi	a5,a5,632 # 2278 <_ZL8OSMapTbl>
+     f78:	00f687b3          	add	a5,a3,a5
+     f7c:	0007c783          	lbu	a5,0(a5)
+     f80:	01879793          	slli	a5,a5,0x18
+     f84:	4187d793          	srai	a5,a5,0x18
+     f88:	fff7c793          	not	a5,a5
+     f8c:	01879793          	slli	a5,a5,0x18
+     f90:	4187d793          	srai	a5,a5,0x18
+     f94:	00f777b3          	and	a5,a4,a5
+     f98:	01879793          	slli	a5,a5,0x18
+     f9c:	4187d793          	srai	a5,a5,0x18
+     fa0:	0ff7f713          	andi	a4,a5,255
+     fa4:	fdc42783          	lw	a5,-36(s0)
+     fa8:	00e782a3          	sb	a4,5(a5)
+     fac:	00000013          	nop
+     fb0:	02c12083          	lw	ra,44(sp)
+     fb4:	02812403          	lw	s0,40(sp)
+     fb8:	03010113          	addi	sp,sp,48
+     fbc:	00008067          	ret
 
-00001020 <_Z12EventTaskRdyP17EventControlBlockPvh>:
-    1020:	fd010113          	addi	sp,sp,-48
-    1024:	02812623          	sw	s0,44(sp)
-    1028:	03010413          	addi	s0,sp,48
-    102c:	fca42e23          	sw	a0,-36(s0)
-    1030:	fcb42c23          	sw	a1,-40(s0)
-    1034:	00060793          	mv	a5,a2
-    1038:	fcf40ba3          	sb	a5,-41(s0)
-    103c:	fdc42783          	lw	a5,-36(s0)
-    1040:	0057c783          	lbu	a5,5(a5)
-    1044:	00078713          	mv	a4,a5
-    1048:	000027b7          	lui	a5,0x2
-    104c:	b3078793          	addi	a5,a5,-1232 # 1b30 <_ZL10OSUnMapTbl>
-    1050:	00f707b3          	add	a5,a4,a5
-    1054:	0007c783          	lbu	a5,0(a5)
-    1058:	fef407a3          	sb	a5,-17(s0)
-    105c:	fef44703          	lbu	a4,-17(s0)
-    1060:	000027b7          	lui	a5,0x2
-    1064:	2d878793          	addi	a5,a5,728 # 22d8 <_ZL8OSMapTbl>
-    1068:	00f707b3          	add	a5,a4,a5
-    106c:	0007c783          	lbu	a5,0(a5)
-    1070:	fef40723          	sb	a5,-18(s0)
-    1074:	fef44783          	lbu	a5,-17(s0)
-    1078:	fdc42703          	lw	a4,-36(s0)
-    107c:	00f707b3          	add	a5,a4,a5
-    1080:	0087c783          	lbu	a5,8(a5)
-    1084:	00078713          	mv	a4,a5
-    1088:	000027b7          	lui	a5,0x2
-    108c:	b3078793          	addi	a5,a5,-1232 # 1b30 <_ZL10OSUnMapTbl>
-    1090:	00f707b3          	add	a5,a4,a5
-    1094:	0007c783          	lbu	a5,0(a5)
-    1098:	fef406a3          	sb	a5,-19(s0)
-    109c:	fed44703          	lbu	a4,-19(s0)
-    10a0:	000027b7          	lui	a5,0x2
-    10a4:	2d878793          	addi	a5,a5,728 # 22d8 <_ZL8OSMapTbl>
-    10a8:	00f707b3          	add	a5,a4,a5
-    10ac:	0007c783          	lbu	a5,0(a5)
-    10b0:	fef40623          	sb	a5,-20(s0)
-    10b4:	fef44783          	lbu	a5,-17(s0)
-    10b8:	00379793          	slli	a5,a5,0x3
-    10bc:	0ff7f713          	andi	a4,a5,255
-    10c0:	fed44783          	lbu	a5,-19(s0)
-    10c4:	00f707b3          	add	a5,a4,a5
+00000fc0 <_Z12EventTaskRdyP17EventControlBlockPvh>:
+     fc0:	fd010113          	addi	sp,sp,-48
+     fc4:	02812623          	sw	s0,44(sp)
+     fc8:	03010413          	addi	s0,sp,48
+     fcc:	fca42e23          	sw	a0,-36(s0)
+     fd0:	fcb42c23          	sw	a1,-40(s0)
+     fd4:	00060793          	mv	a5,a2
+     fd8:	fcf40ba3          	sb	a5,-41(s0)
+     fdc:	fdc42783          	lw	a5,-36(s0)
+     fe0:	0057c783          	lbu	a5,5(a5)
+     fe4:	00078713          	mv	a4,a5
+     fe8:	000027b7          	lui	a5,0x2
+     fec:	ad078793          	addi	a5,a5,-1328 # 1ad0 <_ZL10OSUnMapTbl>
+     ff0:	00f707b3          	add	a5,a4,a5
+     ff4:	0007c783          	lbu	a5,0(a5)
+     ff8:	fef407a3          	sb	a5,-17(s0)
+     ffc:	fef44703          	lbu	a4,-17(s0)
+    1000:	000027b7          	lui	a5,0x2
+    1004:	27878793          	addi	a5,a5,632 # 2278 <_ZL8OSMapTbl>
+    1008:	00f707b3          	add	a5,a4,a5
+    100c:	0007c783          	lbu	a5,0(a5)
+    1010:	fef40723          	sb	a5,-18(s0)
+    1014:	fef44783          	lbu	a5,-17(s0)
+    1018:	fdc42703          	lw	a4,-36(s0)
+    101c:	00f707b3          	add	a5,a4,a5
+    1020:	0087c783          	lbu	a5,8(a5)
+    1024:	00078713          	mv	a4,a5
+    1028:	000027b7          	lui	a5,0x2
+    102c:	ad078793          	addi	a5,a5,-1328 # 1ad0 <_ZL10OSUnMapTbl>
+    1030:	00f707b3          	add	a5,a4,a5
+    1034:	0007c783          	lbu	a5,0(a5)
+    1038:	fef406a3          	sb	a5,-19(s0)
+    103c:	fed44703          	lbu	a4,-19(s0)
+    1040:	000027b7          	lui	a5,0x2
+    1044:	27878793          	addi	a5,a5,632 # 2278 <_ZL8OSMapTbl>
+    1048:	00f707b3          	add	a5,a4,a5
+    104c:	0007c783          	lbu	a5,0(a5)
+    1050:	fef40623          	sb	a5,-20(s0)
+    1054:	fef44783          	lbu	a5,-17(s0)
+    1058:	00379793          	slli	a5,a5,0x3
+    105c:	0ff7f713          	andi	a4,a5,255
+    1060:	fed44783          	lbu	a5,-19(s0)
+    1064:	00f707b3          	add	a5,a4,a5
+    1068:	0ff7f793          	andi	a5,a5,255
+    106c:	fef403a3          	sb	a5,-25(s0)
+    1070:	fef44783          	lbu	a5,-17(s0)
+    1074:	fdc42703          	lw	a4,-36(s0)
+    1078:	00f707b3          	add	a5,a4,a5
+    107c:	0087c783          	lbu	a5,8(a5)
+    1080:	01879713          	slli	a4,a5,0x18
+    1084:	41875713          	srai	a4,a4,0x18
+    1088:	fec40783          	lb	a5,-20(s0)
+    108c:	fff7c793          	not	a5,a5
+    1090:	01879793          	slli	a5,a5,0x18
+    1094:	4187d793          	srai	a5,a5,0x18
+    1098:	00f777b3          	and	a5,a4,a5
+    109c:	01879713          	slli	a4,a5,0x18
+    10a0:	41875713          	srai	a4,a4,0x18
+    10a4:	fef44783          	lbu	a5,-17(s0)
+    10a8:	0ff77693          	andi	a3,a4,255
+    10ac:	fdc42703          	lw	a4,-36(s0)
+    10b0:	00f70733          	add	a4,a4,a5
+    10b4:	00d70423          	sb	a3,8(a4)
+    10b8:	fdc42703          	lw	a4,-36(s0)
+    10bc:	00f707b3          	add	a5,a4,a5
+    10c0:	0087c783          	lbu	a5,8(a5)
+    10c4:	0017b793          	seqz	a5,a5
     10c8:	0ff7f793          	andi	a5,a5,255
-    10cc:	fef403a3          	sb	a5,-25(s0)
-    10d0:	fef44783          	lbu	a5,-17(s0)
-    10d4:	fdc42703          	lw	a4,-36(s0)
-    10d8:	00f707b3          	add	a5,a4,a5
-    10dc:	0087c783          	lbu	a5,8(a5)
-    10e0:	01879713          	slli	a4,a5,0x18
-    10e4:	41875713          	srai	a4,a4,0x18
-    10e8:	fec40783          	lb	a5,-20(s0)
-    10ec:	fff7c793          	not	a5,a5
-    10f0:	01879793          	slli	a5,a5,0x18
-    10f4:	4187d793          	srai	a5,a5,0x18
-    10f8:	00f777b3          	and	a5,a4,a5
-    10fc:	01879713          	slli	a4,a5,0x18
-    1100:	41875713          	srai	a4,a4,0x18
-    1104:	fef44783          	lbu	a5,-17(s0)
-    1108:	0ff77693          	andi	a3,a4,255
-    110c:	fdc42703          	lw	a4,-36(s0)
-    1110:	00f70733          	add	a4,a4,a5
-    1114:	00d70423          	sb	a3,8(a4)
-    1118:	fdc42703          	lw	a4,-36(s0)
+    10cc:	02078e63          	beqz	a5,1108 <_Z12EventTaskRdyP17EventControlBlockPvh+0x148>
+    10d0:	fdc42783          	lw	a5,-36(s0)
+    10d4:	0057c783          	lbu	a5,5(a5)
+    10d8:	01879713          	slli	a4,a5,0x18
+    10dc:	41875713          	srai	a4,a4,0x18
+    10e0:	fee40783          	lb	a5,-18(s0)
+    10e4:	fff7c793          	not	a5,a5
+    10e8:	01879793          	slli	a5,a5,0x18
+    10ec:	4187d793          	srai	a5,a5,0x18
+    10f0:	00f777b3          	and	a5,a4,a5
+    10f4:	01879793          	slli	a5,a5,0x18
+    10f8:	4187d793          	srai	a5,a5,0x18
+    10fc:	0ff7f713          	andi	a4,a5,255
+    1100:	fdc42783          	lw	a5,-36(s0)
+    1104:	00e782a3          	sb	a4,5(a5)
+    1108:	fe744783          	lbu	a5,-25(s0)
+    110c:	00078713          	mv	a4,a5
+    1110:	000037b7          	lui	a5,0x3
+    1114:	00271713          	slli	a4,a4,0x2
+    1118:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
     111c:	00f707b3          	add	a5,a4,a5
-    1120:	0087c783          	lbu	a5,8(a5)
-    1124:	0017b793          	seqz	a5,a5
-    1128:	0ff7f793          	andi	a5,a5,255
-    112c:	02078e63          	beqz	a5,1168 <_Z12EventTaskRdyP17EventControlBlockPvh+0x148>
-    1130:	fdc42783          	lw	a5,-36(s0)
-    1134:	0057c783          	lbu	a5,5(a5)
-    1138:	01879713          	slli	a4,a5,0x18
-    113c:	41875713          	srai	a4,a4,0x18
-    1140:	fee40783          	lb	a5,-18(s0)
-    1144:	fff7c793          	not	a5,a5
-    1148:	01879793          	slli	a5,a5,0x18
-    114c:	4187d793          	srai	a5,a5,0x18
-    1150:	00f777b3          	and	a5,a4,a5
+    1120:	0007a783          	lw	a5,0(a5)
+    1124:	fef42423          	sw	a5,-24(s0)
+    1128:	fe842783          	lw	a5,-24(s0)
+    112c:	0007a623          	sw	zero,12(a5)
+    1130:	fe842783          	lw	a5,-24(s0)
+    1134:	fd842703          	lw	a4,-40(s0)
+    1138:	00e7a823          	sw	a4,16(a5)
+    113c:	fe842783          	lw	a5,-24(s0)
+    1140:	0167c783          	lbu	a5,22(a5)
+    1144:	01879713          	slli	a4,a5,0x18
+    1148:	41875713          	srai	a4,a4,0x18
+    114c:	fd740783          	lb	a5,-41(s0)
+    1150:	fff7c793          	not	a5,a5
     1154:	01879793          	slli	a5,a5,0x18
     1158:	4187d793          	srai	a5,a5,0x18
-    115c:	0ff7f713          	andi	a4,a5,255
-    1160:	fdc42783          	lw	a5,-36(s0)
-    1164:	00e782a3          	sb	a4,5(a5)
-    1168:	fe744783          	lbu	a5,-25(s0)
-    116c:	00078713          	mv	a4,a5
-    1170:	000037b7          	lui	a5,0x3
-    1174:	00271713          	slli	a4,a4,0x2
-    1178:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    117c:	00f707b3          	add	a5,a4,a5
-    1180:	0007a783          	lw	a5,0(a5)
-    1184:	fef42423          	sw	a5,-24(s0)
-    1188:	fe842783          	lw	a5,-24(s0)
-    118c:	0007a623          	sw	zero,12(a5)
-    1190:	fe842783          	lw	a5,-24(s0)
-    1194:	fd842703          	lw	a4,-40(s0)
-    1198:	00e7a823          	sw	a4,16(a5)
-    119c:	fe842783          	lw	a5,-24(s0)
-    11a0:	0167c783          	lbu	a5,22(a5)
-    11a4:	01879713          	slli	a4,a5,0x18
-    11a8:	41875713          	srai	a4,a4,0x18
-    11ac:	fd740783          	lb	a5,-41(s0)
-    11b0:	fff7c793          	not	a5,a5
-    11b4:	01879793          	slli	a5,a5,0x18
-    11b8:	4187d793          	srai	a5,a5,0x18
-    11bc:	00f777b3          	and	a5,a4,a5
-    11c0:	01879793          	slli	a5,a5,0x18
-    11c4:	4187d793          	srai	a5,a5,0x18
-    11c8:	0ff7f713          	andi	a4,a5,255
-    11cc:	fe842783          	lw	a5,-24(s0)
-    11d0:	00e78b23          	sb	a4,22(a5)
-    11d4:	fe842783          	lw	a5,-24(s0)
-    11d8:	0167c783          	lbu	a5,22(a5)
-    11dc:	04079a63          	bnez	a5,1230 <_Z12EventTaskRdyP17EventControlBlockPvh+0x210>
-    11e0:	000027b7          	lui	a5,0x2
-    11e4:	3517c703          	lbu	a4,849(a5) # 2351 <OSRdyGrp>
-    11e8:	fee44783          	lbu	a5,-18(s0)
-    11ec:	00f767b3          	or	a5,a4,a5
-    11f0:	0ff7f713          	andi	a4,a5,255
-    11f4:	000027b7          	lui	a5,0x2
-    11f8:	34e788a3          	sb	a4,849(a5) # 2351 <OSRdyGrp>
-    11fc:	fef44703          	lbu	a4,-17(s0)
+    115c:	00f777b3          	and	a5,a4,a5
+    1160:	01879793          	slli	a5,a5,0x18
+    1164:	4187d793          	srai	a5,a5,0x18
+    1168:	0ff7f713          	andi	a4,a5,255
+    116c:	fe842783          	lw	a5,-24(s0)
+    1170:	00e78b23          	sb	a4,22(a5)
+    1174:	fe842783          	lw	a5,-24(s0)
+    1178:	0167c783          	lbu	a5,22(a5)
+    117c:	04079a63          	bnez	a5,11d0 <_Z12EventTaskRdyP17EventControlBlockPvh+0x210>
+    1180:	000027b7          	lui	a5,0x2
+    1184:	2f17c703          	lbu	a4,753(a5) # 22f1 <OSRdyGrp>
+    1188:	fee44783          	lbu	a5,-18(s0)
+    118c:	00f767b3          	or	a5,a4,a5
+    1190:	0ff7f713          	andi	a4,a5,255
+    1194:	000027b7          	lui	a5,0x2
+    1198:	2ee788a3          	sb	a4,753(a5) # 22f1 <OSRdyGrp>
+    119c:	fef44703          	lbu	a4,-17(s0)
+    11a0:	000027b7          	lui	a5,0x2
+    11a4:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+    11a8:	00f707b3          	add	a5,a4,a5
+    11ac:	0007c703          	lbu	a4,0(a5)
+    11b0:	fef44683          	lbu	a3,-17(s0)
+    11b4:	fec44783          	lbu	a5,-20(s0)
+    11b8:	00f767b3          	or	a5,a4,a5
+    11bc:	0ff7f713          	andi	a4,a5,255
+    11c0:	000027b7          	lui	a5,0x2
+    11c4:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+    11c8:	00f687b3          	add	a5,a3,a5
+    11cc:	00e78023          	sb	a4,0(a5)
+    11d0:	fe744783          	lbu	a5,-25(s0)
+    11d4:	00078513          	mv	a0,a5
+    11d8:	02c12403          	lw	s0,44(sp)
+    11dc:	03010113          	addi	sp,sp,48
+    11e0:	00008067          	ret
+
+000011e4 <_Z18getHighestPriorityP17EventControlBlock>:
+    11e4:	fd010113          	addi	sp,sp,-48
+    11e8:	02812623          	sw	s0,44(sp)
+    11ec:	03010413          	addi	s0,sp,48
+    11f0:	fca42e23          	sw	a0,-36(s0)
+    11f4:	fdc42783          	lw	a5,-36(s0)
+    11f8:	0057c783          	lbu	a5,5(a5)
+    11fc:	00078713          	mv	a4,a5
     1200:	000027b7          	lui	a5,0x2
-    1204:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
+    1204:	ad078793          	addi	a5,a5,-1328 # 1ad0 <_ZL10OSUnMapTbl>
     1208:	00f707b3          	add	a5,a4,a5
-    120c:	0007c703          	lbu	a4,0(a5)
-    1210:	fef44683          	lbu	a3,-17(s0)
-    1214:	fec44783          	lbu	a5,-20(s0)
-    1218:	00f767b3          	or	a5,a4,a5
-    121c:	0ff7f713          	andi	a4,a5,255
-    1220:	000027b7          	lui	a5,0x2
-    1224:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-    1228:	00f687b3          	add	a5,a3,a5
-    122c:	00e78023          	sb	a4,0(a5)
-    1230:	fe744783          	lbu	a5,-25(s0)
-    1234:	00078513          	mv	a0,a5
-    1238:	02c12403          	lw	s0,44(sp)
-    123c:	03010113          	addi	sp,sp,48
-    1240:	00008067          	ret
+    120c:	0007c783          	lbu	a5,0(a5)
+    1210:	fef407a3          	sb	a5,-17(s0)
+    1214:	fef44783          	lbu	a5,-17(s0)
+    1218:	fdc42703          	lw	a4,-36(s0)
+    121c:	00f707b3          	add	a5,a4,a5
+    1220:	0087c783          	lbu	a5,8(a5)
+    1224:	00078713          	mv	a4,a5
+    1228:	000027b7          	lui	a5,0x2
+    122c:	ad078793          	addi	a5,a5,-1328 # 1ad0 <_ZL10OSUnMapTbl>
+    1230:	00f707b3          	add	a5,a4,a5
+    1234:	0007c783          	lbu	a5,0(a5)
+    1238:	fef40723          	sb	a5,-18(s0)
+    123c:	fef44783          	lbu	a5,-17(s0)
+    1240:	00379793          	slli	a5,a5,0x3
+    1244:	0ff7f713          	andi	a4,a5,255
+    1248:	fee44783          	lbu	a5,-18(s0)
+    124c:	00f707b3          	add	a5,a4,a5
+    1250:	fef406a3          	sb	a5,-19(s0)
+    1254:	fed44783          	lbu	a5,-19(s0)
+    1258:	00078513          	mv	a0,a5
+    125c:	02c12403          	lw	s0,44(sp)
+    1260:	03010113          	addi	sp,sp,48
+    1264:	00008067          	ret
 
-00001244 <_Z18getHighestPriorityP17EventControlBlock>:
-    1244:	fd010113          	addi	sp,sp,-48
-    1248:	02812623          	sw	s0,44(sp)
-    124c:	03010413          	addi	s0,sp,48
-    1250:	fca42e23          	sw	a0,-36(s0)
-    1254:	fdc42783          	lw	a5,-36(s0)
-    1258:	0057c783          	lbu	a5,5(a5)
-    125c:	00078713          	mv	a4,a5
-    1260:	000027b7          	lui	a5,0x2
-    1264:	b3078793          	addi	a5,a5,-1232 # 1b30 <_ZL10OSUnMapTbl>
-    1268:	00f707b3          	add	a5,a4,a5
-    126c:	0007c783          	lbu	a5,0(a5)
-    1270:	fef407a3          	sb	a5,-17(s0)
-    1274:	fef44783          	lbu	a5,-17(s0)
-    1278:	fdc42703          	lw	a4,-36(s0)
-    127c:	00f707b3          	add	a5,a4,a5
-    1280:	0087c783          	lbu	a5,8(a5)
-    1284:	00078713          	mv	a4,a5
-    1288:	000027b7          	lui	a5,0x2
-    128c:	b3078793          	addi	a5,a5,-1232 # 1b30 <_ZL10OSUnMapTbl>
-    1290:	00f707b3          	add	a5,a4,a5
-    1294:	0007c783          	lbu	a5,0(a5)
-    1298:	fef40723          	sb	a5,-18(s0)
-    129c:	fef44783          	lbu	a5,-17(s0)
-    12a0:	00379793          	slli	a5,a5,0x3
-    12a4:	0ff7f713          	andi	a4,a5,255
-    12a8:	fee44783          	lbu	a5,-18(s0)
-    12ac:	00f707b3          	add	a5,a4,a5
-    12b0:	fef406a3          	sb	a5,-19(s0)
-    12b4:	fed44783          	lbu	a5,-19(s0)
-    12b8:	00078513          	mv	a0,a5
-    12bc:	02c12403          	lw	s0,44(sp)
-    12c0:	03010113          	addi	sp,sp,48
-    12c4:	00008067          	ret
-
-000012c8 <_Z10OS_TCBInithPm>:
-    12c8:	fd010113          	addi	sp,sp,-48
-    12cc:	02112623          	sw	ra,44(sp)
-    12d0:	02812423          	sw	s0,40(sp)
-    12d4:	03010413          	addi	s0,sp,48
-    12d8:	00050793          	mv	a5,a0
-    12dc:	fcb42c23          	sw	a1,-40(s0)
-    12e0:	fcf40fa3          	sb	a5,-33(s0)
-    12e4:	fffff097          	auipc	ra,0xfffff
-    12e8:	02c080e7          	jalr	44(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-    12ec:	000027b7          	lui	a5,0x2
-    12f0:	3407a783          	lw	a5,832(a5) # 2340 <OSTCBFreeList>
-    12f4:	fef42623          	sw	a5,-20(s0)
-    12f8:	fec42783          	lw	a5,-20(s0)
-    12fc:	18078e63          	beqz	a5,1498 <_Z10OS_TCBInithPm+0x1d0>
-    1300:	fec42783          	lw	a5,-20(s0)
-    1304:	0047a703          	lw	a4,4(a5)
-    1308:	000027b7          	lui	a5,0x2
-    130c:	34e7a023          	sw	a4,832(a5) # 2340 <OSTCBFreeList>
-    1310:	fffff097          	auipc	ra,0xfffff
-    1314:	01c080e7          	jalr	28(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1318:	fec42783          	lw	a5,-20(s0)
-    131c:	fd842703          	lw	a4,-40(s0)
-    1320:	00e7a023          	sw	a4,0(a5)
+00001268 <_Z10OS_TCBInithPm>:
+    1268:	fd010113          	addi	sp,sp,-48
+    126c:	02112623          	sw	ra,44(sp)
+    1270:	02812423          	sw	s0,40(sp)
+    1274:	03010413          	addi	s0,sp,48
+    1278:	00050793          	mv	a5,a0
+    127c:	fcb42c23          	sw	a1,-40(s0)
+    1280:	fcf40fa3          	sb	a5,-33(s0)
+    1284:	fffff097          	auipc	ra,0xfffff
+    1288:	0a0080e7          	jalr	160(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+    128c:	000027b7          	lui	a5,0x2
+    1290:	2e07a783          	lw	a5,736(a5) # 22e0 <OSTCBFreeList>
+    1294:	fef42623          	sw	a5,-20(s0)
+    1298:	fec42783          	lw	a5,-20(s0)
+    129c:	18078e63          	beqz	a5,1438 <_Z10OS_TCBInithPm+0x1d0>
+    12a0:	fec42783          	lw	a5,-20(s0)
+    12a4:	0047a703          	lw	a4,4(a5)
+    12a8:	000027b7          	lui	a5,0x2
+    12ac:	2ee7a023          	sw	a4,736(a5) # 22e0 <OSTCBFreeList>
+    12b0:	fffff097          	auipc	ra,0xfffff
+    12b4:	090080e7          	jalr	144(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    12b8:	fec42783          	lw	a5,-20(s0)
+    12bc:	fd842703          	lw	a4,-40(s0)
+    12c0:	00e7a023          	sw	a4,0(a5)
+    12c4:	fec42783          	lw	a5,-20(s0)
+    12c8:	fdf44703          	lbu	a4,-33(s0)
+    12cc:	00e78ba3          	sb	a4,23(a5)
+    12d0:	fec42783          	lw	a5,-20(s0)
+    12d4:	00078b23          	sb	zero,22(a5)
+    12d8:	fec42783          	lw	a5,-20(s0)
+    12dc:	00079a23          	sh	zero,20(a5)
+    12e0:	fdf44783          	lbu	a5,-33(s0)
+    12e4:	4037d793          	srai	a5,a5,0x3
+    12e8:	0ff7f713          	andi	a4,a5,255
+    12ec:	fec42783          	lw	a5,-20(s0)
+    12f0:	00e78ca3          	sb	a4,25(a5)
+    12f4:	fec42783          	lw	a5,-20(s0)
+    12f8:	0197c783          	lbu	a5,25(a5)
+    12fc:	00078713          	mv	a4,a5
+    1300:	000027b7          	lui	a5,0x2
+    1304:	29c78793          	addi	a5,a5,668 # 229c <_ZL8OSMapTbl>
+    1308:	00f707b3          	add	a5,a4,a5
+    130c:	0007c703          	lbu	a4,0(a5)
+    1310:	fec42783          	lw	a5,-20(s0)
+    1314:	00e78da3          	sb	a4,27(a5)
+    1318:	fdf44783          	lbu	a5,-33(s0)
+    131c:	0077f793          	andi	a5,a5,7
+    1320:	0ff7f713          	andi	a4,a5,255
     1324:	fec42783          	lw	a5,-20(s0)
-    1328:	fdf44703          	lbu	a4,-33(s0)
-    132c:	00e78ba3          	sb	a4,23(a5)
-    1330:	fec42783          	lw	a5,-20(s0)
-    1334:	00078b23          	sb	zero,22(a5)
-    1338:	fec42783          	lw	a5,-20(s0)
-    133c:	00079a23          	sh	zero,20(a5)
-    1340:	fdf44783          	lbu	a5,-33(s0)
-    1344:	4037d793          	srai	a5,a5,0x3
-    1348:	0ff7f713          	andi	a4,a5,255
-    134c:	fec42783          	lw	a5,-20(s0)
-    1350:	00e78ca3          	sb	a4,25(a5)
-    1354:	fec42783          	lw	a5,-20(s0)
-    1358:	0197c783          	lbu	a5,25(a5)
-    135c:	00078713          	mv	a4,a5
-    1360:	000027b7          	lui	a5,0x2
-    1364:	2fc78793          	addi	a5,a5,764 # 22fc <_ZL8OSMapTbl>
-    1368:	00f707b3          	add	a5,a4,a5
-    136c:	0007c703          	lbu	a4,0(a5)
-    1370:	fec42783          	lw	a5,-20(s0)
-    1374:	00e78da3          	sb	a4,27(a5)
-    1378:	fdf44783          	lbu	a5,-33(s0)
-    137c:	0077f793          	andi	a5,a5,7
-    1380:	0ff7f713          	andi	a4,a5,255
-    1384:	fec42783          	lw	a5,-20(s0)
-    1388:	00e78c23          	sb	a4,24(a5)
+    1328:	00e78c23          	sb	a4,24(a5)
+    132c:	fec42783          	lw	a5,-20(s0)
+    1330:	0187c783          	lbu	a5,24(a5)
+    1334:	00078713          	mv	a4,a5
+    1338:	000027b7          	lui	a5,0x2
+    133c:	29c78793          	addi	a5,a5,668 # 229c <_ZL8OSMapTbl>
+    1340:	00f707b3          	add	a5,a4,a5
+    1344:	0007c703          	lbu	a4,0(a5)
+    1348:	fec42783          	lw	a5,-20(s0)
+    134c:	00e78d23          	sb	a4,26(a5)
+    1350:	fec42783          	lw	a5,-20(s0)
+    1354:	0007a623          	sw	zero,12(a5)
+    1358:	fec42783          	lw	a5,-20(s0)
+    135c:	0007a823          	sw	zero,16(a5)
+    1360:	fffff097          	auipc	ra,0xfffff
+    1364:	fc4080e7          	jalr	-60(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+    1368:	fdf44703          	lbu	a4,-33(s0)
+    136c:	000037b7          	lui	a5,0x3
+    1370:	00271713          	slli	a4,a4,0x2
+    1374:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+    1378:	00f707b3          	add	a5,a4,a5
+    137c:	fec42703          	lw	a4,-20(s0)
+    1380:	00e7a023          	sw	a4,0(a5)
+    1384:	000027b7          	lui	a5,0x2
+    1388:	2e47a703          	lw	a4,740(a5) # 22e4 <OSTCBList>
     138c:	fec42783          	lw	a5,-20(s0)
-    1390:	0187c783          	lbu	a5,24(a5)
-    1394:	00078713          	mv	a4,a5
-    1398:	000027b7          	lui	a5,0x2
-    139c:	2fc78793          	addi	a5,a5,764 # 22fc <_ZL8OSMapTbl>
-    13a0:	00f707b3          	add	a5,a4,a5
-    13a4:	0007c703          	lbu	a4,0(a5)
-    13a8:	fec42783          	lw	a5,-20(s0)
-    13ac:	00e78d23          	sb	a4,26(a5)
-    13b0:	fec42783          	lw	a5,-20(s0)
-    13b4:	0007a623          	sw	zero,12(a5)
-    13b8:	fec42783          	lw	a5,-20(s0)
-    13bc:	0007a823          	sw	zero,16(a5)
-    13c0:	fffff097          	auipc	ra,0xfffff
-    13c4:	f50080e7          	jalr	-176(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-    13c8:	fdf44703          	lbu	a4,-33(s0)
-    13cc:	000037b7          	lui	a5,0x3
-    13d0:	00271713          	slli	a4,a4,0x2
-    13d4:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    13d8:	00f707b3          	add	a5,a4,a5
-    13dc:	fec42703          	lw	a4,-20(s0)
-    13e0:	00e7a023          	sw	a4,0(a5)
-    13e4:	000027b7          	lui	a5,0x2
-    13e8:	3447a703          	lw	a4,836(a5) # 2344 <OSTCBList>
-    13ec:	fec42783          	lw	a5,-20(s0)
-    13f0:	00e7a223          	sw	a4,4(a5)
-    13f4:	fec42783          	lw	a5,-20(s0)
-    13f8:	0007a423          	sw	zero,8(a5)
-    13fc:	000027b7          	lui	a5,0x2
-    1400:	3447a783          	lw	a5,836(a5) # 2344 <OSTCBList>
-    1404:	00078a63          	beqz	a5,1418 <_Z10OS_TCBInithPm+0x150>
-    1408:	000027b7          	lui	a5,0x2
-    140c:	3447a783          	lw	a5,836(a5) # 2344 <OSTCBList>
-    1410:	fec42703          	lw	a4,-20(s0)
-    1414:	00e7a423          	sw	a4,8(a5)
+    1390:	00e7a223          	sw	a4,4(a5)
+    1394:	fec42783          	lw	a5,-20(s0)
+    1398:	0007a423          	sw	zero,8(a5)
+    139c:	000027b7          	lui	a5,0x2
+    13a0:	2e47a783          	lw	a5,740(a5) # 22e4 <OSTCBList>
+    13a4:	00078a63          	beqz	a5,13b8 <_Z10OS_TCBInithPm+0x150>
+    13a8:	000027b7          	lui	a5,0x2
+    13ac:	2e47a783          	lw	a5,740(a5) # 22e4 <OSTCBList>
+    13b0:	fec42703          	lw	a4,-20(s0)
+    13b4:	00e7a423          	sw	a4,8(a5)
+    13b8:	000027b7          	lui	a5,0x2
+    13bc:	fec42703          	lw	a4,-20(s0)
+    13c0:	2ee7a223          	sw	a4,740(a5) # 22e4 <OSTCBList>
+    13c4:	fec42783          	lw	a5,-20(s0)
+    13c8:	01b7c703          	lbu	a4,27(a5)
+    13cc:	000027b7          	lui	a5,0x2
+    13d0:	2f17c783          	lbu	a5,753(a5) # 22f1 <OSRdyGrp>
+    13d4:	00f767b3          	or	a5,a4,a5
+    13d8:	0ff7f713          	andi	a4,a5,255
+    13dc:	000027b7          	lui	a5,0x2
+    13e0:	2ee788a3          	sb	a4,753(a5) # 22f1 <OSRdyGrp>
+    13e4:	fec42783          	lw	a5,-20(s0)
+    13e8:	0197c783          	lbu	a5,25(a5)
+    13ec:	00078713          	mv	a4,a5
+    13f0:	000027b7          	lui	a5,0x2
+    13f4:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+    13f8:	00f707b3          	add	a5,a4,a5
+    13fc:	0007c703          	lbu	a4,0(a5)
+    1400:	fec42783          	lw	a5,-20(s0)
+    1404:	01a7c783          	lbu	a5,26(a5)
+    1408:	fec42683          	lw	a3,-20(s0)
+    140c:	0196c683          	lbu	a3,25(a3)
+    1410:	00f767b3          	or	a5,a4,a5
+    1414:	0ff7f713          	andi	a4,a5,255
     1418:	000027b7          	lui	a5,0x2
-    141c:	fec42703          	lw	a4,-20(s0)
-    1420:	34e7a223          	sw	a4,836(a5) # 2344 <OSTCBList>
-    1424:	fec42783          	lw	a5,-20(s0)
-    1428:	01b7c703          	lbu	a4,27(a5)
-    142c:	000027b7          	lui	a5,0x2
-    1430:	3517c783          	lbu	a5,849(a5) # 2351 <OSRdyGrp>
-    1434:	00f767b3          	or	a5,a4,a5
-    1438:	0ff7f713          	andi	a4,a5,255
-    143c:	000027b7          	lui	a5,0x2
-    1440:	34e788a3          	sb	a4,849(a5) # 2351 <OSRdyGrp>
-    1444:	fec42783          	lw	a5,-20(s0)
-    1448:	0197c783          	lbu	a5,25(a5)
-    144c:	00078713          	mv	a4,a5
-    1450:	000027b7          	lui	a5,0x2
-    1454:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-    1458:	00f707b3          	add	a5,a4,a5
-    145c:	0007c703          	lbu	a4,0(a5)
-    1460:	fec42783          	lw	a5,-20(s0)
-    1464:	01a7c783          	lbu	a5,26(a5)
-    1468:	fec42683          	lw	a3,-20(s0)
-    146c:	0196c683          	lbu	a3,25(a3)
-    1470:	00f767b3          	or	a5,a4,a5
-    1474:	0ff7f713          	andi	a4,a5,255
-    1478:	000027b7          	lui	a5,0x2
-    147c:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-    1480:	00f687b3          	add	a5,a3,a5
-    1484:	00e78023          	sb	a4,0(a5)
-    1488:	fffff097          	auipc	ra,0xfffff
-    148c:	ea4080e7          	jalr	-348(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1490:	00000793          	li	a5,0
-    1494:	0100006f          	j	14a4 <_Z10OS_TCBInithPm+0x1dc>
-    1498:	fffff097          	auipc	ra,0xfffff
-    149c:	e94080e7          	jalr	-364(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    14a0:	00100793          	li	a5,1
-    14a4:	00078513          	mv	a0,a5
-    14a8:	02c12083          	lw	ra,44(sp)
-    14ac:	02812403          	lw	s0,40(sp)
-    14b0:	03010113          	addi	sp,sp,48
-    14b4:	00008067          	ret
+    141c:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+    1420:	00f687b3          	add	a5,a3,a5
+    1424:	00e78023          	sb	a4,0(a5)
+    1428:	fffff097          	auipc	ra,0xfffff
+    142c:	f18080e7          	jalr	-232(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    1430:	00000793          	li	a5,0
+    1434:	0100006f          	j	1444 <_Z10OS_TCBInithPm+0x1dc>
+    1438:	fffff097          	auipc	ra,0xfffff
+    143c:	f08080e7          	jalr	-248(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    1440:	00100793          	li	a5,1
+    1444:	00078513          	mv	a0,a5
+    1448:	02c12083          	lw	ra,44(sp)
+    144c:	02812403          	lw	s0,40(sp)
+    1450:	03010113          	addi	sp,sp,48
+    1454:	00008067          	ret
 
-000014b8 <_Z12OSTaskCreatePFvPvES_Pmh>:
-    14b8:	fd010113          	addi	sp,sp,-48
-    14bc:	02112623          	sw	ra,44(sp)
-    14c0:	02812423          	sw	s0,40(sp)
-    14c4:	03010413          	addi	s0,sp,48
-    14c8:	fca42e23          	sw	a0,-36(s0)
-    14cc:	fcb42c23          	sw	a1,-40(s0)
-    14d0:	fcc42a23          	sw	a2,-44(s0)
-    14d4:	00068793          	mv	a5,a3
-    14d8:	fcf409a3          	sb	a5,-45(s0)
-    14dc:	fd344703          	lbu	a4,-45(s0)
-    14e0:	03f00793          	li	a5,63
-    14e4:	00e7f663          	bgeu	a5,a4,14f0 <_Z12OSTaskCreatePFvPvES_Pmh+0x38>
-    14e8:	00200793          	li	a5,2
-    14ec:	1200006f          	j	160c <_Z12OSTaskCreatePFvPvES_Pmh+0x154>
-    14f0:	fffff097          	auipc	ra,0xfffff
-    14f4:	e20080e7          	jalr	-480(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-    14f8:	fd344703          	lbu	a4,-45(s0)
-    14fc:	000037b7          	lui	a5,0x3
-    1500:	00271713          	slli	a4,a4,0x2
-    1504:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    1508:	00f707b3          	add	a5,a4,a5
-    150c:	0007a783          	lw	a5,0(a5)
-    1510:	0e079863          	bnez	a5,1600 <_Z12OSTaskCreatePFvPvES_Pmh+0x148>
-    1514:	fd344703          	lbu	a4,-45(s0)
-    1518:	000037b7          	lui	a5,0x3
-    151c:	00271713          	slli	a4,a4,0x2
-    1520:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    1524:	00f707b3          	add	a5,a4,a5
-    1528:	00100713          	li	a4,1
-    152c:	00e7a023          	sw	a4,0(a5)
-    1530:	fffff097          	auipc	ra,0xfffff
-    1534:	dfc080e7          	jalr	-516(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1538:	00000693          	li	a3,0
-    153c:	fd442603          	lw	a2,-44(s0)
-    1540:	fd842583          	lw	a1,-40(s0)
-    1544:	fdc42503          	lw	a0,-36(s0)
-    1548:	fffff097          	auipc	ra,0xfffff
-    154c:	e00080e7          	jalr	-512(ra) # 348 <_Z13OSTaskStkInitPFvPvES_Pmt>
-    1550:	00050793          	mv	a5,a0
-    1554:	fef42623          	sw	a5,-20(s0)
-    1558:	fd344783          	lbu	a5,-45(s0)
-    155c:	fec42583          	lw	a1,-20(s0)
-    1560:	00078513          	mv	a0,a5
-    1564:	00000097          	auipc	ra,0x0
-    1568:	d64080e7          	jalr	-668(ra) # 12c8 <_Z10OS_TCBInithPm>
-    156c:	00050793          	mv	a5,a0
-    1570:	fef403a3          	sb	a5,-25(s0)
-    1574:	fe744783          	lbu	a5,-25(s0)
-    1578:	04079c63          	bnez	a5,15d0 <_Z12OSTaskCreatePFvPvES_Pmh+0x118>
-    157c:	fffff097          	auipc	ra,0xfffff
-    1580:	d94080e7          	jalr	-620(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-    1584:	000027b7          	lui	a5,0x2
-    1588:	35c7c783          	lbu	a5,860(a5) # 235c <OSTaskCtr>
-    158c:	00178793          	addi	a5,a5,1
-    1590:	0ff7f713          	andi	a4,a5,255
-    1594:	000027b7          	lui	a5,0x2
-    1598:	34e78e23          	sb	a4,860(a5) # 235c <OSTaskCtr>
-    159c:	fffff097          	auipc	ra,0xfffff
-    15a0:	d90080e7          	jalr	-624(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    15a4:	fdc42783          	lw	a5,-36(s0)
-    15a8:	fef42423          	sw	a5,-24(s0)
-    15ac:	fd344703          	lbu	a4,-45(s0)
-    15b0:	000037b7          	lui	a5,0x3
-    15b4:	00271713          	slli	a4,a4,0x2
-    15b8:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    15bc:	00f707b3          	add	a5,a4,a5
-    15c0:	0007a783          	lw	a5,0(a5)
-    15c4:	fe842703          	lw	a4,-24(s0)
-    15c8:	02e7a023          	sw	a4,32(a5)
-    15cc:	02c0006f          	j	15f8 <_Z12OSTaskCreatePFvPvES_Pmh+0x140>
-    15d0:	fffff097          	auipc	ra,0xfffff
-    15d4:	d40080e7          	jalr	-704(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-    15d8:	fd344703          	lbu	a4,-45(s0)
-    15dc:	000037b7          	lui	a5,0x3
-    15e0:	00271713          	slli	a4,a4,0x2
-    15e4:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    15e8:	00f707b3          	add	a5,a4,a5
-    15ec:	0007a023          	sw	zero,0(a5)
-    15f0:	fffff097          	auipc	ra,0xfffff
-    15f4:	d3c080e7          	jalr	-708(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    15f8:	fe744783          	lbu	a5,-25(s0)
-    15fc:	0100006f          	j	160c <_Z12OSTaskCreatePFvPvES_Pmh+0x154>
-    1600:	fffff097          	auipc	ra,0xfffff
-    1604:	d2c080e7          	jalr	-724(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1608:	00500793          	li	a5,5
-    160c:	00078513          	mv	a0,a5
-    1610:	02c12083          	lw	ra,44(sp)
-    1614:	02812403          	lw	s0,40(sp)
-    1618:	03010113          	addi	sp,sp,48
-    161c:	00008067          	ret
+00001458 <_Z12OSTaskCreatePFvPvES_Pmh>:
+    1458:	fd010113          	addi	sp,sp,-48
+    145c:	02112623          	sw	ra,44(sp)
+    1460:	02812423          	sw	s0,40(sp)
+    1464:	03010413          	addi	s0,sp,48
+    1468:	fca42e23          	sw	a0,-36(s0)
+    146c:	fcb42c23          	sw	a1,-40(s0)
+    1470:	fcc42a23          	sw	a2,-44(s0)
+    1474:	00068793          	mv	a5,a3
+    1478:	fcf409a3          	sb	a5,-45(s0)
+    147c:	fd344703          	lbu	a4,-45(s0)
+    1480:	03f00793          	li	a5,63
+    1484:	00e7f663          	bgeu	a5,a4,1490 <_Z12OSTaskCreatePFvPvES_Pmh+0x38>
+    1488:	00200793          	li	a5,2
+    148c:	1200006f          	j	15ac <_Z12OSTaskCreatePFvPvES_Pmh+0x154>
+    1490:	fffff097          	auipc	ra,0xfffff
+    1494:	e94080e7          	jalr	-364(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+    1498:	fd344703          	lbu	a4,-45(s0)
+    149c:	000037b7          	lui	a5,0x3
+    14a0:	00271713          	slli	a4,a4,0x2
+    14a4:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+    14a8:	00f707b3          	add	a5,a4,a5
+    14ac:	0007a783          	lw	a5,0(a5)
+    14b0:	0e079863          	bnez	a5,15a0 <_Z12OSTaskCreatePFvPvES_Pmh+0x148>
+    14b4:	fd344703          	lbu	a4,-45(s0)
+    14b8:	000037b7          	lui	a5,0x3
+    14bc:	00271713          	slli	a4,a4,0x2
+    14c0:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+    14c4:	00f707b3          	add	a5,a4,a5
+    14c8:	00100713          	li	a4,1
+    14cc:	00e7a023          	sw	a4,0(a5)
+    14d0:	fffff097          	auipc	ra,0xfffff
+    14d4:	e70080e7          	jalr	-400(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    14d8:	00000693          	li	a3,0
+    14dc:	fd442603          	lw	a2,-44(s0)
+    14e0:	fd842583          	lw	a1,-40(s0)
+    14e4:	fdc42503          	lw	a0,-36(s0)
+    14e8:	fffff097          	auipc	ra,0xfffff
+    14ec:	e74080e7          	jalr	-396(ra) # 35c <_Z13OSTaskStkInitPFvPvES_Pmt>
+    14f0:	00050793          	mv	a5,a0
+    14f4:	fef42623          	sw	a5,-20(s0)
+    14f8:	fd344783          	lbu	a5,-45(s0)
+    14fc:	fec42583          	lw	a1,-20(s0)
+    1500:	00078513          	mv	a0,a5
+    1504:	00000097          	auipc	ra,0x0
+    1508:	d64080e7          	jalr	-668(ra) # 1268 <_Z10OS_TCBInithPm>
+    150c:	00050793          	mv	a5,a0
+    1510:	fef403a3          	sb	a5,-25(s0)
+    1514:	fe744783          	lbu	a5,-25(s0)
+    1518:	04079c63          	bnez	a5,1570 <_Z12OSTaskCreatePFvPvES_Pmh+0x118>
+    151c:	fffff097          	auipc	ra,0xfffff
+    1520:	e08080e7          	jalr	-504(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+    1524:	000027b7          	lui	a5,0x2
+    1528:	2fc7c783          	lbu	a5,764(a5) # 22fc <OSTaskCtr>
+    152c:	00178793          	addi	a5,a5,1
+    1530:	0ff7f713          	andi	a4,a5,255
+    1534:	000027b7          	lui	a5,0x2
+    1538:	2ee78e23          	sb	a4,764(a5) # 22fc <OSTaskCtr>
+    153c:	fffff097          	auipc	ra,0xfffff
+    1540:	e04080e7          	jalr	-508(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    1544:	fdc42783          	lw	a5,-36(s0)
+    1548:	fef42423          	sw	a5,-24(s0)
+    154c:	fd344703          	lbu	a4,-45(s0)
+    1550:	000037b7          	lui	a5,0x3
+    1554:	00271713          	slli	a4,a4,0x2
+    1558:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+    155c:	00f707b3          	add	a5,a4,a5
+    1560:	0007a783          	lw	a5,0(a5)
+    1564:	fe842703          	lw	a4,-24(s0)
+    1568:	02e7a023          	sw	a4,32(a5)
+    156c:	02c0006f          	j	1598 <_Z12OSTaskCreatePFvPvES_Pmh+0x140>
+    1570:	fffff097          	auipc	ra,0xfffff
+    1574:	db4080e7          	jalr	-588(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+    1578:	fd344703          	lbu	a4,-45(s0)
+    157c:	000037b7          	lui	a5,0x3
+    1580:	00271713          	slli	a4,a4,0x2
+    1584:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+    1588:	00f707b3          	add	a5,a4,a5
+    158c:	0007a023          	sw	zero,0(a5)
+    1590:	fffff097          	auipc	ra,0xfffff
+    1594:	db0080e7          	jalr	-592(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    1598:	fe744783          	lbu	a5,-25(s0)
+    159c:	0100006f          	j	15ac <_Z12OSTaskCreatePFvPvES_Pmh+0x154>
+    15a0:	fffff097          	auipc	ra,0xfffff
+    15a4:	da0080e7          	jalr	-608(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    15a8:	00500793          	li	a5,5
+    15ac:	00078513          	mv	a0,a5
+    15b0:	02c12083          	lw	ra,44(sp)
+    15b4:	02812403          	lw	s0,40(sp)
+    15b8:	03010113          	addi	sp,sp,48
+    15bc:	00008067          	ret
 
-00001620 <_Z12OSTaskResumeh>:
-    1620:	fd010113          	addi	sp,sp,-48
-    1624:	02112623          	sw	ra,44(sp)
-    1628:	02812423          	sw	s0,40(sp)
-    162c:	03010413          	addi	s0,sp,48
-    1630:	00050793          	mv	a5,a0
-    1634:	fcf40fa3          	sb	a5,-33(s0)
-    1638:	fdf44703          	lbu	a4,-33(s0)
-    163c:	03e00793          	li	a5,62
-    1640:	00e7f663          	bgeu	a5,a4,164c <_Z12OSTaskResumeh+0x2c>
-    1644:	00200793          	li	a5,2
-    1648:	11c0006f          	j	1764 <_Z12OSTaskResumeh+0x144>
-    164c:	fffff097          	auipc	ra,0xfffff
-    1650:	cc4080e7          	jalr	-828(ra) # 310 <_Z17OS_ENTER_CRITICALv>
-    1654:	fdf44703          	lbu	a4,-33(s0)
-    1658:	000037b7          	lui	a5,0x3
-    165c:	00271713          	slli	a4,a4,0x2
-    1660:	f9478793          	addi	a5,a5,-108 # 2f94 <OSTCBPrioTbl>
-    1664:	00f707b3          	add	a5,a4,a5
-    1668:	0007a783          	lw	a5,0(a5)
-    166c:	fef42623          	sw	a5,-20(s0)
-    1670:	fec42783          	lw	a5,-20(s0)
-    1674:	00079a63          	bnez	a5,1688 <_Z12OSTaskResumeh+0x68>
-    1678:	fffff097          	auipc	ra,0xfffff
-    167c:	cb4080e7          	jalr	-844(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1680:	00600793          	li	a5,6
-    1684:	0e00006f          	j	1764 <_Z12OSTaskResumeh+0x144>
-    1688:	fec42783          	lw	a5,-20(s0)
-    168c:	0167c783          	lbu	a5,22(a5)
-    1690:	0037f793          	andi	a5,a5,3
-    1694:	0c078263          	beqz	a5,1758 <_Z12OSTaskResumeh+0x138>
+000015c0 <_Z12OSTaskResumeh>:
+    15c0:	fd010113          	addi	sp,sp,-48
+    15c4:	02112623          	sw	ra,44(sp)
+    15c8:	02812423          	sw	s0,40(sp)
+    15cc:	03010413          	addi	s0,sp,48
+    15d0:	00050793          	mv	a5,a0
+    15d4:	fcf40fa3          	sb	a5,-33(s0)
+    15d8:	fdf44703          	lbu	a4,-33(s0)
+    15dc:	03e00793          	li	a5,62
+    15e0:	00e7f663          	bgeu	a5,a4,15ec <_Z12OSTaskResumeh+0x2c>
+    15e4:	00200793          	li	a5,2
+    15e8:	11c0006f          	j	1704 <_Z12OSTaskResumeh+0x144>
+    15ec:	fffff097          	auipc	ra,0xfffff
+    15f0:	d38080e7          	jalr	-712(ra) # 324 <_Z17OS_ENTER_CRITICALv>
+    15f4:	fdf44703          	lbu	a4,-33(s0)
+    15f8:	000037b7          	lui	a5,0x3
+    15fc:	00271713          	slli	a4,a4,0x2
+    1600:	f3478793          	addi	a5,a5,-204 # 2f34 <OSTCBPrioTbl>
+    1604:	00f707b3          	add	a5,a4,a5
+    1608:	0007a783          	lw	a5,0(a5)
+    160c:	fef42623          	sw	a5,-20(s0)
+    1610:	fec42783          	lw	a5,-20(s0)
+    1614:	00079a63          	bnez	a5,1628 <_Z12OSTaskResumeh+0x68>
+    1618:	fffff097          	auipc	ra,0xfffff
+    161c:	d28080e7          	jalr	-728(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    1620:	00600793          	li	a5,6
+    1624:	0e00006f          	j	1704 <_Z12OSTaskResumeh+0x144>
+    1628:	fec42783          	lw	a5,-20(s0)
+    162c:	0167c783          	lbu	a5,22(a5)
+    1630:	0037f793          	andi	a5,a5,3
+    1634:	0c078263          	beqz	a5,16f8 <_Z12OSTaskResumeh+0x138>
+    1638:	fec42783          	lw	a5,-20(s0)
+    163c:	0167c783          	lbu	a5,22(a5)
+    1640:	ffc7f793          	andi	a5,a5,-4
+    1644:	0ff7f713          	andi	a4,a5,255
+    1648:	fec42783          	lw	a5,-20(s0)
+    164c:	00e78b23          	sb	a4,22(a5)
+    1650:	fec42783          	lw	a5,-20(s0)
+    1654:	0167c783          	lbu	a5,22(a5)
+    1658:	00079c63          	bnez	a5,1670 <_Z12OSTaskResumeh+0xb0>
+    165c:	fec42783          	lw	a5,-20(s0)
+    1660:	0147d783          	lhu	a5,20(a5)
+    1664:	00079663          	bnez	a5,1670 <_Z12OSTaskResumeh+0xb0>
+    1668:	00100793          	li	a5,1
+    166c:	0080006f          	j	1674 <_Z12OSTaskResumeh+0xb4>
+    1670:	00000793          	li	a5,0
+    1674:	06078a63          	beqz	a5,16e8 <_Z12OSTaskResumeh+0x128>
+    1678:	fec42783          	lw	a5,-20(s0)
+    167c:	01b7c703          	lbu	a4,27(a5)
+    1680:	000027b7          	lui	a5,0x2
+    1684:	2f17c783          	lbu	a5,753(a5) # 22f1 <OSRdyGrp>
+    1688:	00f767b3          	or	a5,a4,a5
+    168c:	0ff7f713          	andi	a4,a5,255
+    1690:	000027b7          	lui	a5,0x2
+    1694:	2ee788a3          	sb	a4,753(a5) # 22f1 <OSRdyGrp>
     1698:	fec42783          	lw	a5,-20(s0)
-    169c:	0167c783          	lbu	a5,22(a5)
-    16a0:	ffc7f793          	andi	a5,a5,-4
-    16a4:	0ff7f713          	andi	a4,a5,255
-    16a8:	fec42783          	lw	a5,-20(s0)
-    16ac:	00e78b23          	sb	a4,22(a5)
-    16b0:	fec42783          	lw	a5,-20(s0)
-    16b4:	0167c783          	lbu	a5,22(a5)
-    16b8:	00079c63          	bnez	a5,16d0 <_Z12OSTaskResumeh+0xb0>
-    16bc:	fec42783          	lw	a5,-20(s0)
-    16c0:	0147d783          	lhu	a5,20(a5)
-    16c4:	00079663          	bnez	a5,16d0 <_Z12OSTaskResumeh+0xb0>
-    16c8:	00100793          	li	a5,1
-    16cc:	0080006f          	j	16d4 <_Z12OSTaskResumeh+0xb4>
-    16d0:	00000793          	li	a5,0
-    16d4:	06078a63          	beqz	a5,1748 <_Z12OSTaskResumeh+0x128>
-    16d8:	fec42783          	lw	a5,-20(s0)
-    16dc:	01b7c703          	lbu	a4,27(a5)
-    16e0:	000027b7          	lui	a5,0x2
-    16e4:	3517c783          	lbu	a5,849(a5) # 2351 <OSRdyGrp>
-    16e8:	00f767b3          	or	a5,a4,a5
-    16ec:	0ff7f713          	andi	a4,a5,255
-    16f0:	000027b7          	lui	a5,0x2
-    16f4:	34e788a3          	sb	a4,849(a5) # 2351 <OSRdyGrp>
-    16f8:	fec42783          	lw	a5,-20(s0)
-    16fc:	0197c783          	lbu	a5,25(a5)
-    1700:	00078713          	mv	a4,a5
-    1704:	000027b7          	lui	a5,0x2
-    1708:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-    170c:	00f707b3          	add	a5,a4,a5
-    1710:	0007c703          	lbu	a4,0(a5)
-    1714:	fec42783          	lw	a5,-20(s0)
-    1718:	01a7c783          	lbu	a5,26(a5)
-    171c:	fec42683          	lw	a3,-20(s0)
-    1720:	0196c683          	lbu	a3,25(a3)
-    1724:	00f767b3          	or	a5,a4,a5
-    1728:	0ff7f713          	andi	a4,a5,255
-    172c:	000027b7          	lui	a5,0x2
-    1730:	35478793          	addi	a5,a5,852 # 2354 <OSRdyTbl>
-    1734:	00f687b3          	add	a5,a3,a5
-    1738:	00e78023          	sb	a4,0(a5)
-    173c:	fffff097          	auipc	ra,0xfffff
-    1740:	bf0080e7          	jalr	-1040(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1744:	00c0006f          	j	1750 <_Z12OSTaskResumeh+0x130>
-    1748:	fffff097          	auipc	ra,0xfffff
-    174c:	be4080e7          	jalr	-1052(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1750:	00000793          	li	a5,0
-    1754:	0100006f          	j	1764 <_Z12OSTaskResumeh+0x144>
-    1758:	fffff097          	auipc	ra,0xfffff
-    175c:	bd4080e7          	jalr	-1068(ra) # 32c <_Z16OS_EXIT_CRITICALv>
-    1760:	00700793          	li	a5,7
-    1764:	00078513          	mv	a0,a5
-    1768:	02c12083          	lw	ra,44(sp)
-    176c:	02812403          	lw	s0,40(sp)
-    1770:	03010113          	addi	sp,sp,48
-    1774:	00008067          	ret
+    169c:	0197c783          	lbu	a5,25(a5)
+    16a0:	00078713          	mv	a4,a5
+    16a4:	000027b7          	lui	a5,0x2
+    16a8:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+    16ac:	00f707b3          	add	a5,a4,a5
+    16b0:	0007c703          	lbu	a4,0(a5)
+    16b4:	fec42783          	lw	a5,-20(s0)
+    16b8:	01a7c783          	lbu	a5,26(a5)
+    16bc:	fec42683          	lw	a3,-20(s0)
+    16c0:	0196c683          	lbu	a3,25(a3)
+    16c4:	00f767b3          	or	a5,a4,a5
+    16c8:	0ff7f713          	andi	a4,a5,255
+    16cc:	000027b7          	lui	a5,0x2
+    16d0:	2f478793          	addi	a5,a5,756 # 22f4 <OSRdyTbl>
+    16d4:	00f687b3          	add	a5,a3,a5
+    16d8:	00e78023          	sb	a4,0(a5)
+    16dc:	fffff097          	auipc	ra,0xfffff
+    16e0:	c64080e7          	jalr	-924(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    16e4:	00c0006f          	j	16f0 <_Z12OSTaskResumeh+0x130>
+    16e8:	fffff097          	auipc	ra,0xfffff
+    16ec:	c58080e7          	jalr	-936(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    16f0:	00000793          	li	a5,0
+    16f4:	0100006f          	j	1704 <_Z12OSTaskResumeh+0x144>
+    16f8:	fffff097          	auipc	ra,0xfffff
+    16fc:	c48080e7          	jalr	-952(ra) # 340 <_Z16OS_EXIT_CRITICALv>
+    1700:	00700793          	li	a5,7
+    1704:	00078513          	mv	a0,a5
+    1708:	02c12083          	lw	ra,44(sp)
+    170c:	02812403          	lw	s0,40(sp)
+    1710:	03010113          	addi	sp,sp,48
+    1714:	00008067          	ret
