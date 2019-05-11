@@ -1,0 +1,55 @@
+About to create tasks:
+Created Task
+Entered Task1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Pausing Task1
+entered Task2
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+0
+hi
+Resuming Task1
+returned from OSSemPend 10
+
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+Finished Task1
+0
+Sum in task2: 190
+
+Finished Task2
