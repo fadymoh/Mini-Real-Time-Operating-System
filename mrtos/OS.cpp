@@ -353,6 +353,90 @@ void OSSemPend(EventControlBlock* pevent, INT8U* err)
 	*err = OS_NO_ERR;
 	// printf("came here!\n");
 }
+
+EventControlBlock* OSMboxCreate(void* msg)
+{
+	EventControlBlock* pevent;
+	pevent = OSEventFreeList;
+	if (OSEventFreeList != (EventControlBlock*) 0)
+		OSEventFreeList = (EventControlBlock*) OSEventFreeList->OSEventPtr;
+	if (pevent != (EventControlBlock*) 0)
+	{
+		pevent->OSEventType = OS_EVENT_TYPE_MBOX;
+		pevent->OSEventCnt = 0;
+		pevent->OSEventPtr = msg;
+		pevent->OSEventGrp = 0x00;
+	}
+	return (pevent);
+}
+
+void* OSMboxPend (EventControlBlock* pevent, INT8U* err)
+{
+	void* msg;
+	register int ra asm("x1");
+	OSTCBCur->returnAddress = (void *)ra;
+	if (pevent == (EventControlBlock*) 0)
+	{
+		*err = OS_ERR_PEVENT_NULL;
+		return ((void*)0);
+	}
+	if (pevent->OSEventType != OS_EVENT_TYPE_MBOX)
+	{
+		*err = OS_ERR_EVENT_TYPE;
+		return ((void*)0);
+	}
+	msg = pevent->OSEventPtr;
+	if (msg != (void*)0)
+	{
+		pevent->OSEventPtr = (void*) 0;
+		*err = OS_NO_ERR;
+		return (msg);
+	}
+	OSTCBCur->OSTCBStat |= OS_STAT_MBOX;
+	OS_EventTaskWait(pevent);
+	OS_Sched();
+	msg = OSTCBCur->OSTCBMsg;
+	OSTCBCur->OSTCBMsg = (void*)0;
+	OSTCBCur->OSTCBStat = OS_STAT_RDY;
+	OSTCBCur->OSTCBEventPtr = (EventControlBlock*)0;
+	*err = OS_NO_ERR;
+	return (msg);
+}
+
+INT8U OSMboxPost(EventControlBlock* pevent, void* msg)
+{
+		register int ra asm("x1");
+	OSTCBCur->returnAddress = (void *)ra;
+	if(pevent == (EventControlBlock*)0)
+	{
+		return(OS_ERR_PEVENT_NULL);
+	}
+	if (msg==(void*)0){
+		return (OS_ERR_POST_NULL_PTR);
+	}
+	if(pevent->OSEventType != OS_EVENT_TYPE_MBOX)
+	{
+		return(OS_ERR_EVENT_TYPE);
+	}
+	if(pevent->OSEventGrp != 0x00)
+	{
+		EventTaskRdy(pevent,msg,OS_STAT_MBOX);
+		OS_Sched();
+		return(OS_NO_ERR);
+	}
+	if(pevent->OSEventPtr != (void*)0)
+	{
+		return(OS_MBOX_FULL);
+	}
+	pevent->OSEventPtr =msg;
+	return(OS_NO_ERR);
+}
+
+void* getMessage(EventControlBlock* pevent)
+{
+	return OSTCBCur->OSTCBMsg;
+}
+
 void OSStartHighRdy()
 {
 	OSRunning = TRUE;
@@ -427,9 +511,7 @@ INT8U OSTaskSuspend (INT8U prio){
 
    ptcb->OSTCBStat |= OS_STAT_SUSPEND;
    OS_EXIT_CRITICAL();
-  //  if (self == TRUE) {
-  //    OS_Sched();
-  // }
+  OS_Sched();
 
   return (OS_NO_ERR);
 }

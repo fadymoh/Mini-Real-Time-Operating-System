@@ -43,9 +43,9 @@ INT8U EventTaskRdy(EventControlBlock* pevent, void* msg, INT8U msk)
 	prio = (INT8)((y << 3) + x);
 	if ((pevent->OSEventTbl[y] &= ~bitx) == 0x00)
 		pevent->OSEventGrp &= ~bity;
-	ptcb = OSTCBPrioTbl[prio]; // not declared yet
+	ptcb = OSTCBPrioTbl[prio]; 
 	ptcb->OSTCBEventPtr = (EventControlBlock *)0;
-	ptcb->OSTCBMsg = static_cast<message*> (msg);
+	ptcb->OSTCBMsg = msg;
 	/*
 		The mask argument contains the apprioriate bit mask
 		to clear the bit in OSTCBStat, which corresponds

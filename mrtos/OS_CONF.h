@@ -29,6 +29,7 @@ const INT8U OS_IDLE_PRIO = 1;
 
 const INT8U OS_STAT_RDY = 0;
 const INT8U OS_STAT_SEM = 10;
+const INT8U OS_STAT_MBOX = 20;
 
 const INT8U OS_NO_ERR =  0;
 const INT8U OS_NO_MORE_TCB = 1; 
@@ -36,6 +37,8 @@ const INT8U OS_PRIO_INVALID =  2;
 const INT8U OS_ERR_PEVENT_NULL = 3;
 const INT8U OS_ERR_EVENT_TYPE = 4;
 const INT8U OS_SEM_OVERFLOW = 5;
+const INT8U OS_ERR_POST_NULL_PTR=6;
+const INT8U OS_MBOX_FULL=7;
 
 const INT8U OS_TASK_SUSPEND_IDLE = 2;
 const INT8U OS_STAT_SUSPEND = 3;
@@ -46,6 +49,7 @@ const INT8U OS_TASK_RESUME_PRIO = 6;
 const INT8U OS_TASK_NOT_SUSPENDED = 7;
 
 const INT8U OS_EVENT_TYPE_SEM = 8;
+const INT8U OS_EVENT_TYPE_MBOX = 9;
 
 const INT8U OSUnMapTbl[16 * 16] = {
 	0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x00 to 0x0F */
@@ -102,10 +106,7 @@ struct OS_TCB
 		void (*functionAddress) (void*);
 		void* returnAddress;
 };
-struct message
-{
-	char* msg;
-};
+
 extern struct EventControlBlock * OSEventFreeList ;
 extern struct OS_TCB* OSTCBFreeList ; 
 extern struct OS_TCB* OSTCBList ;
@@ -139,6 +140,11 @@ extern void OSTaskCreateHook();
 extern void OS_Sched();
 extern void OSSemPend(EventControlBlock* pevent, INT8U* err);
 extern INT8U OSSemPost(EventControlBlock* pevent);
+
+extern INT8U OSMboxPost(EventControlBlock* pevent, void* msg);
+extern void* OSMboxPend (EventControlBlock* pevent, INT8U* err);
+extern EventControlBlock* OSMboxCreate(void* msg);
+extern void* getMessage(EventControlBlock*);
 
 void TCB_INIT_FreeList(OS_TCB*, int n);
 INT8U OS_TCBInit (INT8U prio, OS_STK *ptos, OS_STK *pbos, INT16U id, INT32U stk_size, void *pext, INT16U opt);

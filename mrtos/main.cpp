@@ -7,7 +7,7 @@ static void* returnAddress3 = 0x0;
 static void (*myTask22) (void*);
 // register int esp2 asm("%esp");
 static EventControlBlock* mySemaphore;
-
+static EventControlBlock* myMailBox;
 
 const char* s1 = (const char *)"entered Task2\n";
 const char* s2 = (const char *)"Finished Task2\n";
@@ -52,7 +52,17 @@ void myTaskOther(void* pdata){
 		printInteger(ll);
 		fx += ll;
 	}
-		
+	register int x10 asm("x10");
+	register int x17 asm("x17");
+	x17 = 7;
+	x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
+	asm volatile(
+		"ECALL\n\t"
+	) ;
+	INT8U err = OSMboxPost(myMailBox, (void*)"hi\n");
+	printInteger(err);
+	//OSMboxPost(myMailBox, (void*)"hi4\n");
+	//printInteger(err);
 	printString((const char*)"Sum in task2: ");
 	printInteger(fx);
 	printString("\n");
@@ -62,12 +72,19 @@ void myTaskOther(void* pdata){
 	//printf("exiting task2\n");
 	//printf("signaled the semaphore, it can be acquired now!\n");
 
-	OSSemPost(mySemaphore);
+	//OSSemPost(mySemaphore);
+	//register int x17 asm("x17");
+    x17 = 10;
+	asm volatile(
+        "ECALL\n\t"
+    ) ;
 }
 
 INT8U* err;
 void myTask(void* pdata)
 {
+	register int x10 asm("x10");
+			register int x17 asm("x17");
 	printString(s3);
 
 	//printf("Entered first task\n");
@@ -76,35 +93,41 @@ void myTask(void* pdata)
 		{
 			printString(s4);
 
-			register int x10 asm("x10");
-			register int x17 asm("x17");
+			
 			x17 = 7;
 			x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
 			asm volatile(
 				"ECALL\n\t"
 			) ;
 
-			OSSemPend(mySemaphore, err);
+			//OSSemPend(mySemaphore, err);
+			//INT8U* err;
+			OSMboxPend(myMailBox, err);
+			void* msg = getMessage(myMailBox);
+			printInteger((int)err);
+			printString((const char*) msg);
 			printString(s5);
 			printString((const char*) "returned from OSSemPend ");
 			printInteger(i);
-			printString("\n");
-			// if (err == OS_NO_ERR)
-			// 	printf("acquired with no error\n");
-			// else
-			// 	printf("got an error number: %d\n", err);			
+			printString("\n");		
 		}
 		printInteger(i);
 
 	}
 
 	printString(s6);
-
-	register int x17 asm("x17");
+	x17 = 7;
+	x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
+	asm volatile(
+		"ECALL\n\t"
+	) ;
+	OSTaskSuspend(10);
+	//OS_Sched();
+	/*register int x17 asm("x17");
     x17 = 10;
 	asm volatile(
         "ECALL\n\t"
-    ) ;
+    ) ;*/
 	// printf("exiting first task\n");
 }
 
@@ -123,7 +146,7 @@ int main()
 	OSTaskCreate(myTask, (void*)0, &Task1Stk[255], 10);
 	OSTaskCreate(myTaskOther, (void*)0, &Task2Stk[255], 20);
 	mySemaphore = OSCreateSemaphore();
-
+	myMailBox = OSMboxCreate((void*)0);
 	printString(s7);
 	OS_Start();
 
