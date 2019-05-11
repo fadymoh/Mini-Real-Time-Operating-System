@@ -74,7 +74,8 @@ void OS_TASK_SW()
 }
 void OS_Sched()
 {
-	
+	register int ra asm("x1");
+	OSTCBCur->returnAddress = (void *)ra;
 	INT8U y;
 	OS_ENTER_CRITICAL();
 	y = OSUnMapTbl[OSRdyGrp];
@@ -84,7 +85,8 @@ void OS_Sched()
 	if (1)
 	{
 		// Do all the pushes for the current task
-		register int rsp asm("sp");
+		register int rsp asm("x2");
+
 		// INT32U *stk;
 		// stk = (INT32U *) rsp;
 		// stk--;
@@ -180,7 +182,7 @@ void OS_Sched()
 		// Restore stack pointer
 	// asm volatile(
 		
-	// 	"movq %0, %%rsp;\n\t"
+	/* 	"movq %0, %%rsp;\n\t"
 
 	// 	"popq %%r15;\n\t" 
 	// 	"popq %%r14;\n\t" 
@@ -201,13 +203,6 @@ void OS_Sched()
 
 		//OSTCBCur->OSTCBStkPtr = 
 		//OS_TASK_SW();
-		/*
-			PUSH R1, R2, R3 and R4 onto the current stack; See F3.6(2)
-			OSTCBCur->OSTCBStkPtr = SP; See F3.6(3)
-			OSTCBCur = OSTCBHighRdy; See F3.7(1)
-			SP = OSTCBHighRdy->OSTCBStkPtr; See F3.7(2)
-			POP R4, R3, R2 and R1 from the new stack; See F3.7(3)
-			Execute a return from interrupt instruction; See F3.7(4)
 		*/
 	}
 	OS_EXIT_CRITICAL();
@@ -373,8 +368,7 @@ EventControlBlock* OSMboxCreate(void* msg)
 void* OSMboxPend (EventControlBlock* pevent, INT8U* err)
 {
 	void* msg;
-	register int ra asm("x1");
-	OSTCBCur->returnAddress = (void *)ra;
+	
 	if (pevent == (EventControlBlock*) 0)
 	{
 		*err = OS_ERR_PEVENT_NULL;
@@ -394,6 +388,14 @@ void* OSMboxPend (EventControlBlock* pevent, INT8U* err)
 	}
 	OSTCBCur->OSTCBStat |= OS_STAT_MBOX;
 	OS_EventTaskWait(pevent);
+
+	register int x10 asm("x10");
+	register int x17 asm("x17");
+	x17 = 7;
+	x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
+	asm volatile(
+		"ECALL\n\t"
+	) ;
 	OS_Sched();
 	msg = OSTCBCur->OSTCBMsg;
 	OSTCBCur->OSTCBMsg = (void*)0;
@@ -405,8 +407,6 @@ void* OSMboxPend (EventControlBlock* pevent, INT8U* err)
 
 INT8U OSMboxPost(EventControlBlock* pevent, void* msg)
 {
-		register int ra asm("x1");
-	OSTCBCur->returnAddress = (void *)ra;
 	if(pevent == (EventControlBlock*)0)
 	{
 		return(OS_ERR_PEVENT_NULL);
@@ -421,6 +421,13 @@ INT8U OSMboxPost(EventControlBlock* pevent, void* msg)
 	if(pevent->OSEventGrp != 0x00)
 	{
 		EventTaskRdy(pevent,msg,OS_STAT_MBOX);
+		register int x10 asm("x10");
+		register int x17 asm("x17");
+		x17 = 7;
+		x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
+		asm volatile(
+			"ECALL\n\t"
+		) ;
 		OS_Sched();
 		return(OS_NO_ERR);
 	}
@@ -460,10 +467,8 @@ void OS_Start(void)
 	{
 		y = OSUnMapTbl[OSRdyGrp];
 		x = OSUnMapTbl[OSRdyTbl[y]];
-		// printf("OSPrioHighRdy before: %d\n", OSPrioHighRdy);
 
 		OSPrioHighRdy = (INT8U)((y << 3) + x);
-		// printf("OSPrioHighRdy after: %d\n", OSPrioHighRdy);
 
 		OSPrioCur = OSPrioHighRdy;
 		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
@@ -511,6 +516,13 @@ INT8U OSTaskSuspend (INT8U prio){
 
    ptcb->OSTCBStat |= OS_STAT_SUSPEND;
    OS_EXIT_CRITICAL();
+	/*register int x10 asm("x10");
+	register int x17 asm("x17");
+	x17 = 7;
+	x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
+	asm volatile(
+		"ECALL\n\t"
+	);*/
   OS_Sched();
 
   return (OS_NO_ERR);

@@ -43,37 +43,20 @@ void printInteger(int x){
 }
 
 void myTaskOther(void* pdata){
-	//printf("entered task2\n");
+
 	printString(s1);
-
-
 	int fx = 0;
 	for(int ll= 0;ll < 20; ll++){
 		printInteger(ll);
 		fx += ll;
 	}
-	register int x10 asm("x10");
-	register int x17 asm("x17");
-	x17 = 7;
-	x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
-	asm volatile(
-		"ECALL\n\t"
-	) ;
 	INT8U err = OSMboxPost(myMailBox, (void*)"hi\n");
 	printInteger(err);
-	//OSMboxPost(myMailBox, (void*)"hi4\n");
-	//printInteger(err);
 	printString((const char*)"Sum in task2: ");
 	printInteger(fx);
 	printString("\n");
-
 	printString(s2);
-
-	//printf("exiting task2\n");
-	//printf("signaled the semaphore, it can be acquired now!\n");
-
-	//OSSemPost(mySemaphore);
-	//register int x17 asm("x17");
+	register int x17 asm ("x17");
     x17 = 10;
 	asm volatile(
         "ECALL\n\t"
@@ -83,8 +66,6 @@ void myTaskOther(void* pdata){
 INT8U* err;
 void myTask(void* pdata)
 {
-	register int x10 asm("x10");
-			register int x17 asm("x17");
 	printString(s3);
 
 	//printf("Entered first task\n");
@@ -93,17 +74,7 @@ void myTask(void* pdata)
 		{
 			printString(s4);
 
-			
-			x17 = 7;
-			x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
-			asm volatile(
-				"ECALL\n\t"
-			) ;
-
-			//OSSemPend(mySemaphore, err);
-			//INT8U* err;
-			OSMboxPend(myMailBox, err);
-			void* msg = getMessage(myMailBox);
+			void* msg = OSMboxPend(myMailBox, err);
 			printInteger((int)err);
 			printString((const char*) msg);
 			printString(s5);
@@ -112,23 +83,11 @@ void myTask(void* pdata)
 			printString("\n");		
 		}
 		printInteger(i);
-
 	}
 
 	printString(s6);
-	x17 = 7;
-	x10 = (int)(&(OSTCBCur->OSTCBStkPtr));
-	asm volatile(
-		"ECALL\n\t"
-	) ;
+
 	OSTaskSuspend(10);
-	//OS_Sched();
-	/*register int x17 asm("x17");
-    x17 = 10;
-	asm volatile(
-        "ECALL\n\t"
-    ) ;*/
-	// printf("exiting first task\n");
 }
 
 // Stack pointer for first task!
@@ -149,6 +108,10 @@ int main()
 	myMailBox = OSMboxCreate((void*)0);
 	printString(s7);
 	OS_Start();
-
+  register int x17 asm("x17");
+  x17 = 10;
+	asm volatile(
+        "ECALL\n\t"
+    ) ;
 	return 0;
 }
