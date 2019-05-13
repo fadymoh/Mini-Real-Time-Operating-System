@@ -16,6 +16,10 @@ typedef signed int INT32;
 #define FP_SEG(x) (INT16U)((INT32U)(x) >> 16) /* grab 16 most significant bits */ 
 #define FP_OFF(x) (INT16U)((INT32U)(x)) /* grab 16 least significant bits */
 
+#define OSTSKSW() asm volatile("addi x17, x0, 12;\n\tecall;\n\t");
+#define IRET() asm volatile("addi x17, x0, 13;\n\tecall;\n\t");
+
+
 const INT8U OS_LOWEST_PRIO = 63;
 const INT8U OS_EVENT_TBL_SIZE = 30;
 const INT8U OS_MAX_EVENTS = 20;
@@ -138,6 +142,7 @@ extern void OS_EXIT_CRITICAL();
 extern OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt);
 extern void OSTaskCreateHook();
 extern void OS_Sched();
+// extern void OS_CTX_SW();
 extern void OSSemPend(EventControlBlock* pevent, INT8U* err);
 extern INT8U OSSemPost(EventControlBlock* pevent);
 

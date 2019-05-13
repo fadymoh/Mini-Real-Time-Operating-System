@@ -6,6 +6,9 @@
 using namespace std;
 
 
+
+const unsigned int CONTEXT_SWITCH_ISR = 0x18;
+
 const int regCount = 32;
 int regs[regCount] = {0};
 unsigned int pc = 0x0;
@@ -96,6 +99,8 @@ void printString();
 void readInteger();
 void terminateExecution();
 void save_context();
+void CONTEXT_SWITCH_INT();
+void IRET();
 
 
 ofstream out;
@@ -841,9 +846,55 @@ void ECALL()
         case 10:
             terminateExecution();
             break;
+            
+        case 12: // PUSH PC && JUMP TO CONTEXT SWITCH HANDLER
+            CONTEXT_SWITCH_INT();
+            break;
+        case 13: // POP PC && JUMP TO THAT PC
+            IRET();
+            break;
         default:
             cout << "\tUnknown Environment Instruction" << endl;
     }
+}
+
+
+void CONTEXT_SWITCH_INT(){
+    
+    regs[2] -= 4; // addi sp, sp, -4
+    
+
+    unsigned int sp = regs[2];
+    
+    // SW PC, 0(sp)
+    memory[sp] = pc & 0xFF;
+    memory[sp + 1] = (pc >> 8) & 0xFF;
+    memory[sp + 2] = (pc >> 16) & 0xFF;
+    memory[sp + 3] = (pc >> 24) & 0xFF;
+    
+    // SET PC TO CONTEXT_SWITCH HANDLER
+    pc = CONTEXT_SWITCH_ISR;
+    
+    
+}
+
+void IRET(){
+    
+    unsigned int sp = regs[2];
+    
+    // LW PC, 0(SP)
+    pc = (unsigned char)memory[sp+3];
+    pc = pc << 8;
+    pc = pc | (unsigned char)memory[sp+2];
+    pc = pc << 8;
+    pc = pc | (unsigned char)memory[sp+1];
+    pc = pc << 8;
+    pc = pc | (unsigned char)memory[sp];
+    
+    
+    regs[2] += 4; // addi sp, sp, 4
+    
+    
 }
 
 void save_context(){

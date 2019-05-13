@@ -70,7 +70,7 @@ void myTask(void* pdata)
 
 	//printf("Entered first task\n");
 	for(int i= 0;i < 20; i++){
-		if(i == 10) 
+		if(i == 10)
 		{
 			printString(s4);
 
@@ -80,7 +80,7 @@ void myTask(void* pdata)
 			printString(s5);
 			printString((const char*) "returned from OSSemPend ");
 			printInteger(i);
-			printString("\n");		
+			printString("\n");
 		}
 		printInteger(i);
 	}
@@ -93,7 +93,7 @@ void myTask(void* pdata)
 // Stack pointer for first task!
 // RF[02]=013fffb4
 // 0x013fffe8
-// 
+//
 int main()
 {
 	OS_Init();
