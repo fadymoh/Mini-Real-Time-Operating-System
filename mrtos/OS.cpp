@@ -3,26 +3,8 @@
 
 EventControlBlock freeEvents[OS_MAX_EVENTS];
 OS_TCB freeTCBs[OS_MAX_TASKS];
+OS_Q FreeOSQ[OS_MAX_EVENTS];
 
-// void printString2(const char * str){
-// 	register int x10 asm("x10");
-// 	register int x17 asm("x17");
-// 	x17 = 4;
-// 	x10 = (int) str;
-// 	 asm volatile(
-//         "ECALL\n\t"
-//     ) ;
-// }
-
-// void printInteger2(int x){
-// 	register int x10 asm("x10");
-// 	register int x17 asm("x17");
-// 	x17 = 1;
-// 	x10 = x;
-// 	 asm volatile(
-//         "ECALL\n\t"
-//     ) ;
-// }
 
 void OS_ENTER_CRITICAL() {}
 void OS_EXIT_CRITICAL() {}
@@ -49,7 +31,6 @@ OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U o
 
 	stk = (INT32U *)ptos;
 
-	//printf("stk pointer: %p\n", stk);
 	*stk-- = (INT32U)task;
 	*stk-- = (INT32U)0x0;
 	*stk-- = (INT32U)0x0;
@@ -104,12 +85,18 @@ void OS_TASK_SW()
 // 	rsp = (int)OSTCBCur->OSTCBStkPtr;
 
 // 	// pop all register values and restore PC and jump to it
-// 	asm volatile(
-// 		"lw x8, 44(sp);\n\t"
-// 		"lw x9, 40(sp);\n\t"
-// 		"lw x18, 36(sp);\n\t"
-// 		"lw x19, 32(sp);\n\t"
-// 		"lw x20, 28(sp);\n\t"
+// 	asm volatile(	//printf("stk pointer: %p\n", stk);
+
+// 		"lw x8, 44(	//printf("stk pointer: %p\n", stk);
+
+// 		"lw x9, 40(	//printf("stk pointer: %p\n", stk);
+
+// 		"lw x18, 36	//printf("stk pointer: %p\n", stk);
+
+// 		"lw x19, 32	//printf("stk pointer: %p\n", stk);
+
+// 		"lw x20, 28	//printf("stk pointer: %p\n", stk);
+
 // 		"lw x21, 24(sp);\n\t"
 // 		"lw x22, 20(sp);\n\t"
 // 		"lw x23, 16(sp);\n\t"
@@ -156,11 +143,6 @@ void OS_Sched()
 
 	y = OSUnMapTbl[OSRdyGrp];
 	OSPrioHighRdy = (INT8U) ((y << 3) + OSUnMapTbl[OSRdyTbl[y]]);
-
-	// printString2("\nOld Priority: ");
-	// printInteger2(OSPrioCur);
-	// printString2("\nNew Priority: ");
-	// printInteger2(OSPrioHighRdy);
 
 	if(OSPrioHighRdy != OSPrioCur){
 		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
@@ -308,17 +290,15 @@ void OS_Sched()
 
 void OS_Init()
 {
-	//printf("eventHead before: %p\n",OSEventFreeList);
 	OS_EventWaitListInit();
-	// printf("eventHead after: %p\n",OSEventFreeList);
-	// printf("tcbhead before: %p\n",OSTCBFreeList);
 	OS_TaskFreePool();
-	// printf("tcbhead after: %p\n",OSTCBFreeList);
+	OS_QFreePool();
 }
 
 
-void OS_TaskFreePool(){
 
+void OS_TaskFreePool()
+{
   OSTCBFreeList = freeTCBs;
   OS_TCB* temp = OSTCBFreeList;
 
@@ -332,7 +312,16 @@ void OS_TaskFreePool(){
 
 }
 
-
+void OS_QFreePool()
+{
+	OSQFreeList = FreeOSQ;
+	OS_Q* curr = OSQFreeList;
+	for (INT8U i = 1; i < OS_MAX_EVENTS; ++i)
+	{
+		curr->OSQPtr = &FreeOSQ[i];
+		curr = static_cast<OS_Q*> (curr->OSQPtr);
+	}
+}
 void OS_EventWaitListInit()
 {
 	OSEventFreeList = freeEvents;
@@ -385,6 +374,19 @@ INT8U OSSemPost(EventControlBlock* pevent)
 		return OS_NO_ERR;
 	}
 	return OS_SEM_OVERFLOW;
+}
+INT16U OSSemAccept(EventControlBlock* pevent)
+{
+	INT16U cnt = pevent->OSEventCnt;
+	if (cnt > 0)
+	{
+			pevent->OSEventCnt--;
+	}
+	else
+	{
+		OS_EventTaskWait(pevent);
+	}
+	return (cnt);
 }
 void OSSemPend(EventControlBlock* pevent, INT8U* err)
 {
@@ -634,4 +636,268 @@ INT8U OSTaskSuspend (INT8U prio){
   OS_Sched();
 
   return (OS_NO_ERR);
+}
+EventControlBlock* OSQCreate(void** start, INT16U size)
+{
+	EventControlBlock* pevent;
+	OS_Q *pq;
+	pevent = OSEventFreeList;
+	if (OSEventFreeList != (EventControlBlock*)0)
+		OSEventFreeList = (EventControlBlock*) OSEventFreeList->OSEventPtr;
+	if (pevent != (EventControlBlock*)0)
+	{
+		pq = OSQFreeList;
+		if (pq != (OS_Q*) 0)
+		{
+			
+			OSQFreeList = OSQFreeList->OSQPtr;
+			pq->OSQStart = start;
+			pq->OSQEnd = &start[size];
+			pq->OSQIn = start;
+			pq->OSQOut = start;
+			pq->OSQSize = size;
+			pq->OSQEntries = 0;
+			pevent->OSEventType = OS_EVENT_TYPE_Q;
+			pevent->OSEventCnt = 0;
+			pevent->OSEventPtr = pq;
+			pevent->OSEventGrp = 0x00;
+		} else {
+			pevent->OSEventPtr = (void *)OSEventFreeList;
+			OSEventFreeList = pevent;
+			pevent = (EventControlBlock *)0;
+		}
+	}
+	return (pevent);
+}
+
+void* OSQPend(EventControlBlock* pevent, INT8U* err)
+{
+	void* msg;
+	OS_Q* pq;
+	if (pevent == (EventControlBlock*)0)
+	{
+		*err = OS_ERR_PEVENT_NULL;
+		return ((void*)0);
+	}
+	if (pevent->OSEventType != OS_EVENT_TYPE_Q)
+	{
+		*err = OS_ERR_EVENT_TYPE;
+		return ((void*)0);
+	}
+	pq = (OS_Q*) pevent->OSEventPtr;
+	if (pq->OSQEntries > 0)
+	{
+		msg = *pq->OSQOut++;
+		pq->OSQEntries--;
+		if (pq->OSQOut == pq->OSQEnd)
+		{
+			pq->OSQOut = pq->OSQStart;
+		}
+		*err = OS_NO_ERR;
+		return (msg);
+	}
+	OSTCBCur->OSTCBStat |= OS_STAT_Q;
+	OS_EventTaskWait(pevent);
+	OS_Sched();
+	msg = OSTCBCur->OSTCBMsg;
+	if (msg != (void *)0) 
+	{
+		OSTCBCur->OSTCBMsg = (void *)0;
+		OSTCBCur->OSTCBStat = OS_STAT_RDY;
+		OSTCBCur->OSTCBEventPtr = (EventControlBlock *)0;
+		*err = OS_NO_ERR;
+		return (msg);
+	}
+	return ((void *)0);
+}
+
+INT8U OSQPost (EventControlBlock* pevent, void* msg)
+{
+	OS_Q* pq;
+	
+	if (pevent == (EventControlBlock*)0)
+	{
+		return (OS_ERR_PEVENT_NULL);
+	}
+	if (msg == (void *)0) 
+	{
+		return (OS_ERR_POST_NULL_PTR);
+	}
+	if (pevent->OSEventType != OS_EVENT_TYPE_Q) 
+	{
+		return (OS_ERR_EVENT_TYPE);
+	}
+	if (pevent->OSEventGrp != 0x00) 
+	{
+		EventTaskRdy(pevent, msg, OS_STAT_Q);
+		OS_Sched();
+		return (OS_NO_ERR);
+	}
+	pq = (OS_Q*) pevent->OSEventPtr;
+	if (pq->OSQEntries >= pq->OSQSize) 
+	{
+		return (OS_Q_FULL);
+	}
+	*pq->OSQIn++ = msg;
+	pq->OSQEntries++;
+	if (pq->OSQIn == pq->OSQEnd)
+	{
+		pq->OSQIn = pq->OSQStart;
+	}
+	return (OS_NO_ERR);
+}
+
+EventControlBlock* OSMutexCreate(INT8U prio, INT8U *err)
+{
+	 /* Within valid range */
+	if (prio >= OS_LOWEST_PRIO)
+	{
+		*err = OS_PRIO_INVALID;
+		return ((EventControlBlock*)0);
+	}
+	EventControlBlock* pevent;
+	/* if an entry is available with this prio then reserve it */
+	if (OSTCBPrioTbl[prio] != (OS_TCB*)0)
+	{
+		*err = OS_PRIO_EXIST;
+		return ((EventControlBlock*)0);
+	}
+	OSTCBPrioTbl[prio] = (OS_TCB*) 1;
+
+	/* obtain event and initialize it */
+	pevent = OSEventFreeList;
+	if (pevent == (EventControlBlock*)0)
+	{
+		OSTCBPrioTbl[prio] = (OS_TCB*)0;
+		*err = OS_ERR_PEVENT_NULL;
+		return (pevent);
+	}
+	OSEventFreeList = (EventControlBlock*) OSEventFreeList->OSEventPtr;
+	pevent->OSEventType = OS_EVENT_TYPE_MUTEX;
+	/* 
+		upper 8 bits for priority and lower for value of mutex when the
+		resource is available or the priority of the task owning the mutex
+		which saved RAM
+	 */
+	pevent->OSEventCnt = (prio << 8) | OS_MUTEX_AVAILABLE;
+	pevent->OSEventPtr =  (void*)0;
+	pevent->OSEventGrp = 0;
+	*err = OS_NO_ERR;
+	return (pevent);
+}
+
+void OSMutexPend (EventControlBlock* pevent, INT8U* err)
+{
+	INT8U myPrio;
+	/* priority inheritance priority */
+	INT8U pip;
+	BOOLEAN rdy;
+	OS_TCB* ptcb;
+	/* check if invalid event */
+	if (pevent == (EventControlBlock*)0)
+	{
+		*err = OS_ERR_PEVENT_NULL;
+		return;
+	}
+	/* check on type */
+	if (pevent->OSEventType != OS_EVENT_TYPE_MUTEX)
+	{
+		*err = OS_ERR_EVENT_TYPE;
+		return;
+	}
+	/* grant access if the lower 8 bits are 0xff */
+	if ((INT8U)(pevent->OSEventCnt & 0x00ff) == OS_MUTEX_AVAILABLE)
+	{
+		pevent->OSEventCnt &= 0xff00;
+		pevent->OSEventCnt |= OSTCBCur->OSTCBPrio;
+		pevent->OSEventPtr = (void*)OSTCBCur;
+		*err = OS_NO_ERR;
+		return;
+	}
+	/* upper 8 bits is the pip */
+	pip = (INT8U)(pevent->OSEventCnt >> 8);
+	myPrio = (INT8U) (pevent->OSEventCnt & 0x00ff);
+	/* task that owns the mutex */
+	ptcb = (OS_TCB*)(pevent->OSEventPtr);
+
+	if (ptcb->OSTCBPrio != pip && myPrio > OSTCBCur->OSTCBPrio)
+	{
+		/* determine if the task that owns the mutex is ready to run */
+		if ((OSRdyTbl[ptcb->OSTCBY] & ptcb->OSTCBBitX) != 0x00)
+		{
+			if ((OSRdyTbl[ptcb->OSTCBBitY] &= ~ptcb->OSTCBBitX) == 0x00)
+			{
+				/* no longer ready to run at the owner's priority */
+				OSRdyGrp &= ~ptcb->OSTCBBitY;
+			}
+			rdy = TRUE;
+		} else
+		{
+			rdy = FALSE;
+		}
+		/* recompute elements with new priority */
+		ptcb->OSTCBPrio = pip;
+		ptcb->OSTCBY = ptcb->OSTCBPrio >> 3;
+		ptcb->OSTCBBitY = OSMapTbl[ptcb->OSTCBY];
+		ptcb->OSTCBX = ptcb->OSTCBPrio & 0x07;
+		ptcb->OSTCBBitX = OSMapTbl[ptcb->OSTCBX];
+		if (rdy == TRUE)
+		{
+			OSRdyGrp  						 |= ptcb ->OSTCBBitY;
+			OSRdyTbl[ptcb->OSTCBY] |= ptcb->OSTCBBitX;
+		}
+		OSTCBPrioTbl[pip] = (OS_TCB*) ptcb;
+	}
+	OSTCBCur->OSTCBStat |=  OS_STAT_MUTEX;
+	OS_EventTaskWait(pevent);
+	OS_Sched();
+	OSTCBCur->OSTCBEventPtr = (EventControlBlock*)0;
+	*err = OS_NO_ERR;
+}
+INT8U OSMutexPost(EventControlBlock* pevent)
+{
+	INT8U pip;
+	INT8U prio;
+	if (pevent == (EventControlBlock*)0)
+	{
+		return (OS_ERR_PEVENT_NULL);
+	}
+	pip = (INT8U) (pevent->OSEventCnt >> 8);
+	prio = (INT8U)(pevent->OSEventCnt & 0x00ff);
+	if (pevent->OSEventType != OS_EVENT_TYPE_MUTEX)
+	{
+		return (OS_ERR_EVENT_TYPE);
+	}
+	if (OSTCBCur->OSTCBPrio != pip || OSTCBCur->OSTCBPrio != prio)
+	{
+		return (OS_ERR_NOT_MUTEX_OWNER);
+	}
+	if (OSTCBCur->OSTCBPrio == pip)
+	{
+		if ((OSRdyTbl[OSTCBCur->OSTCBY] &= ~OSTCBCur->OSTCBBitX) == 0)
+		{
+			OSRdyGrp &= ~OSTCBCur->OSTCBBitY;
+		}
+		OSTCBCur->OSTCBPrio = prio;
+		OSTCBCur->OSTCBY = prio >> 3;
+		OSTCBCur->OSTCBBitY = OSMapTbl[OSTCBCur->OSTCBY];
+		OSTCBCur->OSTCBX = prio & 0x07;
+		OSTCBCur->OSTCBBitX = OSMapTbl[OSTCBCur->OSTCBX];
+		OSRdyGrp |= OSTCBCur->OSTCBBitY;
+		OSRdyTbl[OSTCBCur->OSTCBY] |= OSTCBCur->OSTCBBitX;
+		OSTCBPrioTbl[prio] = (OS_TCB *)OSTCBCur;
+	}
+	OSTCBPrioTbl[pip] = (OS_TCB*)1;
+	if (pevent->OSEventGrp != 0x00)
+	{
+		prio = EventTaskRdy(pevent, (void*)0, OS_STAT_MUTEX);
+		pevent->OSEventCnt &= 0xff00;
+		pevent->OSEventCnt |= prio;
+		pevent->OSEventPtr = OSTCBPrioTbl[prio];
+		OS_Sched();
+		return (OS_NO_ERR);
+	}
+	pevent->OSEventCnt |= 0x00ff;
+	pevent->OSEventPtr = (void*)0;
+	return (OS_NO_ERR);
 }

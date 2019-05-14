@@ -34,6 +34,8 @@ const INT8U OS_IDLE_PRIO = 1;
 const INT8U OS_STAT_RDY = 0;
 const INT8U OS_STAT_SEM = 10;
 const INT8U OS_STAT_MBOX = 20;
+const INT8U OS_STAT_Q = 30;
+const INT8U OS_STAT_MUTEX = 40;
 
 const INT8U OS_NO_ERR =  0;
 const INT8U OS_NO_MORE_TCB = 1; 
@@ -43,10 +45,14 @@ const INT8U OS_ERR_EVENT_TYPE = 4;
 const INT8U OS_SEM_OVERFLOW = 5;
 const INT8U OS_ERR_POST_NULL_PTR=6;
 const INT8U OS_MBOX_FULL=7;
+const INT8U OS_Q_FULL = 8;
+const INT8U OS_ERR_NOT_MUTEX_OWNER = 9;
 
 const INT8U OS_TASK_SUSPEND_IDLE = 2;
 const INT8U OS_STAT_SUSPEND = 3;
 const INT8U OS_TASK_SUSPEND_PRIO = 4;
+
+const INT8U OS_MUTEX_AVAILABLE = 0xff;
 
 const INT8U OS_PRIO_EXIST = 5;
 const INT8U OS_TASK_RESUME_PRIO = 6;
@@ -54,7 +60,8 @@ const INT8U OS_TASK_NOT_SUSPENDED = 7;
 
 const INT8U OS_EVENT_TYPE_SEM = 8;
 const INT8U OS_EVENT_TYPE_MBOX = 9;
-
+const INT8U OS_EVENT_TYPE_Q = 10;
+const INT8U OS_EVENT_TYPE_MUTEX = 11;
 const INT8U OSUnMapTbl[16 * 16] = {
 	0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x00 to 0x0F */
 	4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, /* 0x10 to 0x1F */
@@ -110,9 +117,25 @@ struct OS_TCB
 		void (*functionAddress) (void*);
 		void* returnAddress;
 };
+struct OS_Q {                       /* QUEUE CONTROL BLOCK                                     */
+    struct OS_Q   *OSQPtr;                  /* Link to next queue control block in list of free blocks */
+    void         **OSQStart;                /* Ptr to start of queue data                              */
+    void         **OSQEnd;                  /* Ptr to end   of queue data                              */
+    void         **OSQIn;                   /* Ptr to where next message will be inserted  in   the Q  */
+    void         **OSQOut;                  /* Ptr to where next message will be extracted from the Q  */
+    INT16U         OSQSize;                 /* Size of queue (maximum number of entries)               */
+    INT16U         OSQEntries;              /* Current number of entries in the queue                  */
+};
 
-extern struct EventControlBlock * OSEventFreeList ;
-extern struct OS_TCB* OSTCBFreeList ; 
+
+struct OS_Q_DATA {
+    void          *OSMsg;                   /* Pointer to next message to be extracted from queue      */
+    INT16U         OSNMsgs;                 /* Number of messages in message queue                     */
+    INT16U         OSQSize;                 /* Size of message queue                                   */
+    INT8U        OSEventTbl[OS_EVENT_TBL_SIZE];  /* List of tasks waiting for event to occur         */
+    INT8U        OSEventGrp;              /* Group corresponding to tasks waiting for event to occur */
+};
+
 extern struct OS_TCB* OSTCBList ;
 extern struct OS_TCB* OSTCBPrioTbl[OS_MAX_TASKS];
 extern struct OS_TCB* OSTCBCur ;
@@ -124,8 +147,15 @@ extern INT8U OSPrioHighRdy ;
 extern INT8U OSTaskCtr ;
 extern BOOLEAN OSRunning ;
 extern BOOLEAN OSStatRdy ;
+
 extern EventControlBlock freeEvents[OS_MAX_EVENTS];
-extern OS_TCB freeTCBs[OS_MAX_TASKS]; 
+extern struct EventControlBlock * OSEventFreeList ;
+
+extern OS_TCB freeTCBs[OS_MAX_TASKS];
+extern struct OS_TCB* OSTCBFreeList ; 
+
+extern OS_Q FreeOSQ[OS_MAX_EVENTS];
+static struct OS_Q* OSQFreeList;
 
 enum taskStatus {READY, RUNNING, WAITING};
 
@@ -133,6 +163,7 @@ void OS_Init();
 void OS_Start();
 void OS_EventWaitListInit();
 void OS_TaskFreePool();
+extern void OS_QFreePool();
 
 struct EventControlBlock* OSCreateSemaphore();
 void OS_TaskWaitListInit();
@@ -142,7 +173,7 @@ extern void OS_EXIT_CRITICAL();
 extern OS_STK* OSTaskStkInit(void (*task)(void *pd),void* pdata ,OS_STK* ptos, INT16U opt);
 extern void OSTaskCreateHook();
 extern void OS_Sched();
-// extern void OS_CTX_SW();
+
 extern void OSSemPend(EventControlBlock* pevent, INT8U* err);
 extern INT8U OSSemPost(EventControlBlock* pevent);
 
@@ -151,6 +182,10 @@ extern void* OSMboxPend (EventControlBlock* pevent, INT8U* err);
 extern EventControlBlock* OSMboxCreate(void* msg);
 extern void* getMessage(EventControlBlock*);
 
+extern INT8U OSMutexPost(EventControlBlock* pevent);
+extern void OSMutexPend (EventControlBlock* pevent, INT8U* err);
+extern EventControlBlock* OSMutexCreate(INT8U prio, INT8U *err);
+
 void TCB_INIT_FreeList(OS_TCB*, int n);
 INT8U OS_TCBInit (INT8U prio, OS_STK *ptos, OS_STK *pbos, INT16U id, INT32U stk_size, void *pext, INT16U opt);
 INT8U OSTaskCreate(void (*task)(void *pd), void *pdata, OS_STK *ptos, INT8U prio);
@@ -158,6 +193,9 @@ INT8U OSTaskSuspend (INT8U prio);
 INT8U OSTaskResume (INT8U prio);
 INT8U OSTaskQuery (INT8U prio, OS_TCB *pdata);
 
+extern INT8U OSQPost (EventControlBlock* pevent, void* msg);
+extern EventControlBlock* OSQCreate(void** start, INT16U size);
+extern void* OSQPend(EventControlBlock* pevent, INT8U* err);
 
 void OSEventInit(EventControlBlock*, INT8U);
 void appendToWaitingList(EventControlBlock*,INT8U);
