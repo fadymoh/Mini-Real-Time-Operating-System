@@ -44,7 +44,7 @@ void printInteger(int x){
         "ECALL\n\t"
     ) ;
 }
-/*
+
 void myTaskOther(void* pdata){
 
 	printString(s1);
@@ -90,12 +90,12 @@ void myTask(void* pdata)
         "ECALL\n\t"
     ) ;
 }
-*/
+
 // Stack pointer for first task!
 // RF[02]=013fffb4
 // 0x013fffe8
 //
-
+/*
 void TaskPrio10 (void* pdata)
 {
 	INT8U err;
@@ -134,6 +134,42 @@ void TaskPrio20 (void* pdata)
 		OSMutexPost(myMutex);
 		printString((const char*) "In task 20: after\n");
 	}
+}*/
+void TaskTestOne(void* pdata)
+{
+	for (int i = 0; i < 20; ++i)
+	{
+		if (i == 10)
+		{
+			INT8U* err;
+			OSSemPend(mySemaphore, err);
+
+			OSMboxPend(myMailBox, err);
+
+		}
+	}
+	register int x17 asm ("x17");
+    x17 = 10;
+	asm volatile(
+        "ECALL\n\t"
+    ) ;
+}
+void TaskTestTwo(void* pdata)
+{
+	for (int i = 0; i < 20; ++i)
+	{
+		if (i == 10)
+		{
+			INT8U* err;
+			OSSemPost(mySemaphore);
+		}
+	}
+	OSTaskSuspend(20);
+}
+void TaskTestThree(void* pdata)
+{
+	OSMboxPost(myMailBox, (void*) "WE ARE DONE!\n");
+	OSTaskSuspend(30);
 }
 int main()
 {
@@ -146,7 +182,14 @@ int main()
 	//OSTaskCreate(myTask, (void*)0, &Task1Stk[255], 10);
 	//OSTaskCreate(myTaskOther, (void*)0, &Task2Stk[255], 20);
 
-	OS_STK TaskPrio10Stk[256];
+	OS_STK TestOneStack[256]; /* stack table for task 1 */
+	OS_STK TestTwoStack[256]; /* stack table for task 2 */
+	OS_STK TestThreeStack[256]; /* stack table for task 3 */
+
+	OSTaskCreate(TaskTestOne, (void*)0, &TestOneStack[255], 10);
+	OSTaskCreate(TaskTestTwo, (void*)0, &TestTwoStack[255], 20);
+	OSTaskCreate(TaskTestThree, (void*)0, &TestThreeStack[255], 30);
+	/*OS_STK TaskPrio10Stk[256];
 	OS_STK TaskPrio15Stk[256];
 	OS_STK TaskPrio20Stk[256];
 	OSTaskCreate(TaskPrio10, (void*)0, &TaskPrio10Stk[255], 10);
@@ -154,7 +197,7 @@ int main()
 	OSTaskCreate(TaskPrio15, (void*)0, &TaskPrio15Stk[255], 15);
 
 	OSTaskCreate(TaskPrio20, (void*)0, &TaskPrio20Stk[255], 20);
-
+*/
 	mySemaphore = OSCreateSemaphore();
 	myMailBox = OSMboxCreate((void*)0);
 	myQueue = OSQCreate(&CommMsg[0], 10);
