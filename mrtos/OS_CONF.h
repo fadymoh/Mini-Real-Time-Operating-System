@@ -18,6 +18,7 @@ typedef signed int INT32;
 
 #define OSTSKSW() asm volatile("addi x17, x0, 12;\n\tecall;\n\t");
 #define IRET() asm volatile("addi x17, x0, 13;\n\tecall;\n\t");
+#define SIGNAL_TRACER() asm volatile("addi x17, x0, 14;\n\tecall;\n\t");
 
 
 const INT8U OS_LOWEST_PRIO = 63;

@@ -101,10 +101,11 @@ void terminateExecution();
 void save_context();
 void CONTEXT_SWITCH_INT();
 void IRET();
-
+void tracer_monitor();
 
 ofstream out;
-
+ofstream tracer;
+unsigned int timer;
 
 int main(int argc, char* argv[]) {
     unsigned int instWord = 0;
@@ -116,6 +117,7 @@ int main(int argc, char* argv[]) {
 //
     inFile.open("final.bin", ios::in | ios::binary | ios::ate);
     out.open("prints.txt");
+    tracer.open("tracer.txt");
     
     if(inFile.is_open()) {
         long long fsize = inFile.tellg();
@@ -125,7 +127,10 @@ int main(int argc, char* argv[]) {
             emitError("Cannot read from input file");
         }
         
+        timer = 0;
+        
         while(!terminated) {
+            timer++;
             instWord =     readInstruction();  // read next instruction
             pc += 4;    // increment pc by 4
             instDecExec(instWord);
@@ -142,6 +147,8 @@ int main(int argc, char* argv[]) {
             if(pc == 0x1bc){
                 int ll =4;
             }
+            
+            tracer.flush();
         }
         
         // check if terminated correcctly
@@ -156,6 +163,7 @@ int main(int argc, char* argv[]) {
         }
         
         out.close();
+        tracer.close();
         exit(0);
         
     } else {
@@ -853,6 +861,9 @@ void ECALL()
         case 13: // POP PC && JUMP TO THAT PC
             IRET();
             break;
+        case 14:
+            tracer_monitor();
+            break;
         default:
             cout << "\tUnknown Environment Instruction" << endl;
     }
@@ -924,6 +935,12 @@ void save_context(){
     regs[0] = 0;
     
 
+}
+
+
+void tracer_monitor(){
+    
+    tracer << "TASK " << regs[10] << ":" << timer << endl;
 }
 void printInteger()
 {

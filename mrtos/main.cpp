@@ -163,8 +163,9 @@ int main()
 	
 	printString(s7);
 	OS_Start();
-  register int x17 asm("x17");
-  x17 = 10;
+	register int x17 asm("x17");
+	x17 = 10;
+	
 	asm volatile(
         "ECALL\n\t"
     ) ;

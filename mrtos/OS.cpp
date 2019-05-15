@@ -147,6 +147,11 @@ void OS_Sched()
 	if(OSPrioHighRdy != OSPrioCur){
 		OSTCBHighRdy = OSTCBPrioTbl[OSPrioHighRdy];
 		OSPrioCur = OSPrioHighRdy;
+		
+		register int x10 asm("x10");
+		x10 = OSPrioCur;
+		SIGNAL_TRACER();
+
 		OSTSKSW();
 	}
 
@@ -563,6 +568,10 @@ void OSStartHighRdy()
 	// 	"jalr x0, x28, 0 ;\n\t"
 	// 	);
 		
+		register int x10 asm("x10");
+		x10 = OSPrioCur;
+		SIGNAL_TRACER();
+
 		asm volatile(
 		"addi	x2,x2, 48;\n\t" // simulate loading registers 
 		"addi x17, x0, 13;\n\t" // issue an IRET instruction to load the new PC
